@@ -1,0 +1,11 @@
+- Customer
+	- id
+	- email
+	- firstName
+	- lastName
+	- birthdate
+	- Address
+		- street
+		- city
+		- zipcode
+		- state

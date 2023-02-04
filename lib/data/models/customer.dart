@@ -1,40 +1,35 @@
 class Customer {
-  final int? id;
-  final String? email;
-  final String? firstName;
-  final String? lastName;
-  final DateTime? birthDate;
-
   const Customer({
-    this.id,
-    this.email,
-    this.firstName,
-    this.lastName,
-    this.birthDate,
+    this.id = 0,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
   });
+
+  final int id;
+  final String firstName;
+  final String lastName;
+  final String email;
+
+  String get name => "$firstName $lastName";
 
   Customer copyWith({
     int? id,
-    String? email,
     String? firstName,
     String? lastName,
-    DateTime? birthDate,
+    String? email,
   }) =>
       Customer(
         id: id ?? this.id,
-        email: email ?? this.email,
         firstName: firstName ?? this.firstName,
         lastName: lastName ?? this.lastName,
-        birthDate: birthDate ?? this.birthDate,
+        email: email ?? this.email,
       );
 
-  factory Customer.fromJSON(Map<String, dynamic> json) {
-    return Customer(
-      id: json["id"],
-      email: json["email"],
-      firstName: json["first_name"],
-      lastName: json["last_name"],
-      birthDate: DateTime.parse(json["birth_date"]),
-    );
-  }
+  factory Customer.fromJSON(Map<String, dynamic> json) => Customer(
+        id: json["id"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        email: json["email"],
+      );
 }

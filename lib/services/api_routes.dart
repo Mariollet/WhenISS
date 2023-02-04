@@ -1,10 +1,19 @@
-class AppApi {
-  // Base URLs
-  static const String baseUrlLocal = "127.0.0.1:8000";
-  static const String baseUrlLocalMac = "192.168.10.129:8000";
-  static const String baseUrlDev = "inst-starter.abtel.fr";
-  static const String baseUrlProd = "starter.app";
+class BaseURL {
+  /// Base URL of the localhost site.
+  static const String local = "localhost:8000";
 
+  /// Base URL of the Mac localhost site.
+  /// Type `ifconfig | grep 192` on the Mac to get its current local IP.
+  static const String localMac = "192.168.10.___:8000";
+
+  /// Base URL of the pre-production site.
+  static const String preprod = "inst-_____.abtel.fr";
+
+  /// Base URL of the production site.
+  static const String prod = "_____.app";
+}
+
+class APIRoutes {
   // Security
   static const String loginCheck = "/api/login_check";
   static const String forgotPassword = "/api/security/forgot-password";

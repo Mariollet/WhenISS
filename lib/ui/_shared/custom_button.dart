@@ -1,6 +1,6 @@
-import "package:fl_starter/services/app_colors.dart";
-import "package:fl_starter/services/app_text_styles.dart";
-import "package:fl_starter/ui/_shared/custom_loader.dart";
+import "package:keole/services/app_colors.dart";
+import "package:keole/services/app_text_styles.dart";
+import "package:keole/ui/_shared/custom_loader.dart";
 import "package:flutter/cupertino.dart";
 
 const double fixedHeight = 56;

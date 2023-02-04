@@ -1,28 +1,37 @@
 import "dart:io";
 import "package:context_holder/context_holder.dart";
-import "package:fl_starter/services/app_colors.dart";
-import "package:fl_starter/services/app_routes.dart";
-import "package:fl_starter/ui/view/start_view.dart";
+import "package:keole/services/app_colors.dart";
+import "package:keole/services/app_routes.dart";
+// import "package:keole/ui/view/start_view.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
-import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:flutter_dotenv/flutter_dotenv.dart";
+// import "package:flutter_riverpod/flutter_riverpod.dart";
 
-void main() {
+// TODO: API rework
+// TODO: repository rework
+
+void main() async {
+  await dotenv.load(fileName: ".env");
+
+  print(dotenv.env["APP_NAME"]);
+
   WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  if (kDebugMode) HttpOverrides.global = MyHttpOverrides();
+  if (kDebugMode) HttpOverrides.global = DebugHttpOverrides();
 
-  runApp(
+  /* runApp(
     /// This is where the state of our providers will be stored.
     const ProviderScope(
       child: App(),
     ),
-  );
+  ); */
 }
 
 class App extends StatelessWidget {
@@ -30,29 +39,27 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: "Flutter Starter",
-        debugShowCheckedModeBanner: false,
         navigatorKey: ContextHolder.key,
+        // home: const StartView(),
+        onGenerateRoute: AppRoutes.onGenerateRoute,
+        title: "Keole", // TODO: move to .env
         theme: ThemeData(
           brightness: Brightness.dark,
-          scaffoldBackgroundColor: AppColors.grey.shade600,
-          fontFamily: "Montserrat",
           colorScheme: const ColorScheme.dark(
             primary: AppColors.black,
             secondary: AppColors.grey,
           ),
+          scaffoldBackgroundColor: AppColors.grey.shade600,
           unselectedWidgetColor: AppColors.grey[425],
+          fontFamily: "Montserrat",
         ),
-        onGenerateRoute: AppRoutes.onGenerateRoute,
-        home: const StartView(),
+        debugShowCheckedModeBanner: false,
       );
 }
 
-class MyHttpOverrides extends HttpOverrides {
+class DebugHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
+  HttpClient createHttpClient(SecurityContext? context) =>
+      super.createHttpClient(context)
+        ..badCertificateCallback = (_, __, ___) => true;
 }

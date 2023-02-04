@@ -1,12 +1,12 @@
-import 'package:fl_starter/ui/_shared/custom_rich_text.dart';
+/* import 'package:keole/ui/_shared/custom_rich_text.dart';
 import "package:flutter/material.dart";
-import "package:fl_starter/data/repository/login_repository.dart";
-import 'package:fl_starter/services/app_images.dart';
-import "package:fl_starter/services/app_routes.dart";
-import "package:fl_starter/services/app_text_styles.dart";
-import "package:fl_starter/ui/_shared/custom_button.dart";
-import "package:fl_starter/ui/_shared/custom_scaffold.dart";
-import "package:fl_starter/ui/view_model/login_view_model.dart";
+import "package:keole/data/repository/login_repository.dart";
+import 'package:keole/services/app_images.dart';
+import "package:keole/services/app_routes.dart";
+import "package:keole/services/app_text_styles.dart";
+import "package:keole/ui/_shared/custom_button.dart";
+import "package:keole/ui/_shared/custom_scaffold.dart";
+import "package:keole/ui/view_model/login_view_model.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 class StartView extends StatelessWidget {
@@ -71,3 +71,4 @@ class StartView extends StatelessWidget {
         ),
       );
 }
+ */

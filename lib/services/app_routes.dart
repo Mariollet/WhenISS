@@ -1,6 +1,6 @@
-import 'package:fl_starter/ui/view/security/login_view.dart';
-import 'package:fl_starter/ui/view/security/reset_password_view.dart';
-import 'package:fl_starter/ui/view/welcome_view.dart';
+import 'package:keole/ui/view/security/login_view.dart';
+import 'package:keole/ui/view/security/reset_password_view.dart';
+import 'package:keole/ui/view/welcome_view.dart';
 import "package:flutter/material.dart";
 
 class AppRoutes {
@@ -13,7 +13,7 @@ class AppRoutes {
     Widget? screen;
 
     switch (settings.name) {
-      case AppRoutes.login:
+      /* case AppRoutes.login:
         screen = const LoginView();
         break;
       case AppRoutes.resetPassword:
@@ -21,7 +21,7 @@ class AppRoutes {
         break;
       case AppRoutes.welcome:
         screen = const WelcomeView();
-        break;
+        break; */
     }
 
     if (screen == null) return null;

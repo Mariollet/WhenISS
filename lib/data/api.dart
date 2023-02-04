@@ -1,112 +1,120 @@
 import "dart:convert";
 import "dart:io";
-import "package:fl_starter/services/api_routes.dart";
-import 'package:fl_starter/services/app_error.dart';
-import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:http/http.dart" as http;
+import "package:keole/services/api_routes.dart";
+import "package:keole/services/snack_bar.dart";
 
-final apiProvider = StateNotifierProvider<ApiNotifier, Api>((ref) {
-  final AppError appError = ref.read(appErrorProvider);
+final API api = API();
 
-  return ApiNotifier(appError: appError);
-});
+class API {
+  static final String baseUrl = dotenv.env["BASE_URL"]!;
 
-class ApiNotifier extends StateNotifier<Api> {
-  final AppError appError;
-
-  ApiNotifier({
-    required this.appError,
-  }) : super(Api(appError: appError));
-}
-
-class Api {
-  /// This is the current base URL for the API.
-  /// You can select one from the [AppApi] module.
-  static const String baseUrl = AppApi.baseUrlLocal;
+  final String unknownErrorMessage = "Une erreur est survenue.";
 
   final FlutterSecureStorage storage = const FlutterSecureStorage();
-  final AppError appError;
   String? token;
 
-  Api({
-    required this.appError,
-  });
+  Future<void> getToken() async => token ??= await storage.read(key: "token");
 
-  Future<String> getToken(Map<String, dynamic> parameters) async {
+  String getResponseErrorMessage(Map<String, dynamic> response) =>
+      response["message"] ?? unknownErrorMessage;
+
+  Future<String> authenticate(Map<String, dynamic> body) async {
     final response = await http.post(
-      Uri.https(Api.baseUrl, AppApi.loginCheck),
+      Uri.https(baseUrl, APIRoutes.loginCheck),
       headers: {
         HttpHeaders.contentTypeHeader: "application/json",
       },
-      body: json.encode(parameters),
+      body: jsonEncode(body),
     );
+
+    body = jsonDecode(response.body);
 
     if (response.statusCode != 200) {
-      appError.showSnackBarError();
+      final String message = body["message"] ?? unknownErrorMessage;
 
-      return jsonDecode(response.body)["message"];
+      showSnackBar(message);
+
+      return message;
     }
 
-    // Save token
-    token = jsonDecode(response.body)["token"];
+    token = body["token"];
 
-    await storage.write(
-      key: "token",
-      value: token,
-    );
+    await storage.write(key: "token", value: token);
 
     return "true";
   }
 
-  Future<dynamic> get(String endpoint) async {
-    token ??= await storage.read(key: "token");
+  Future get(String endpoint) async {
+    await getToken();
 
     final response = await http.get(
-      Uri.https(Api.baseUrl, endpoint),
+      Uri.https(baseUrl, endpoint),
       headers: {
         HttpHeaders.authorizationHeader: "Bearer $token",
         HttpHeaders.contentTypeHeader: "application/json",
       },
     );
 
-    if (response.statusCode == 200) return jsonDecode(response.body);
+    final Map<String, dynamic> body = jsonDecode(response.body);
 
-    appError.showSnackBarError();
+    if (response.statusCode != 200) {
+      final String message = getResponseErrorMessage(body);
+
+      showSnackBar(message);
+
+      return;
+    }
+
+    return body;
   }
 
-  Future<dynamic> post(
-      String endpoint, Map<String, dynamic> params, bool hasToken) async {
-    token ??= await storage.read(key: "token");
+  Future post(String endpoint, Map<String, dynamic> body,
+      [bool includeToken = true]) async {
+    // token ??= await storage.read(key: "token");
 
     final response = await http.post(
-      Uri.https(Api.baseUrl, endpoint),
+      Uri.https(baseUrl, endpoint),
       headers: {
-        HttpHeaders.authorizationHeader: hasToken ? "Bearer $token" : '',
+        HttpHeaders.authorizationHeader: includeToken ? "Bearer $token" : '',
         HttpHeaders.contentTypeHeader: "application/json",
       },
-      body: json.encode(params),
+      body: jsonEncode(body),
     );
 
-    if (response.statusCode != 200) appError.showSnackBarError();
+    body = jsonDecode(response.body);
 
-    return jsonDecode(response.body);
+    if (response.statusCode != 200) {
+      showSnackBar("todo");
+
+      return;
+    }
+
+    return body;
   }
 
-  Future<dynamic> patch(String endpoint, Map<String, dynamic> params) async {
-    token ??= await storage.read(key: "token");
+  Future patch(String endpoint, Map<String, dynamic> body) async {
+    // token ??= await storage.read(key: "token");
 
     final response = await http.patch(
-      Uri.https(Api.baseUrl, endpoint),
+      Uri.https(baseUrl, endpoint),
       headers: {
         HttpHeaders.authorizationHeader: "Bearer $token",
         HttpHeaders.contentTypeHeader: "application/json",
       },
-      body: json.encode(params),
+      body: jsonEncode(body),
     );
 
-    if (response.statusCode != 200) appError.showSnackBarError();
+    body = jsonDecode(response.body);
 
-    return jsonDecode(response.body);
+    if (response.statusCode != 200) {
+      // appError.showSnackBarError();
+
+      return;
+    }
+
+    return body;
   }
 }

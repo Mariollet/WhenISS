@@ -1,5 +1,5 @@
-import "package:fl_starter/data/models/customer.dart";
-import "package:fl_starter/data/repository/customer_repository.dart";
+/* import "package:keole/data/models/customer.dart";
+import "package:keole/data/repository/customer_repository.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 // Customer Provider
@@ -71,3 +71,4 @@ class GetCustomerLoginNotifier extends StateNotifier<Map<String, dynamic>?> {
 
   void setResponse(Map<String, dynamic> response) => state = response;
 }
+ */

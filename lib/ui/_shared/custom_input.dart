@@ -1,5 +1,5 @@
-import 'package:fl_starter/services/app_colors.dart';
-import 'package:fl_starter/services/app_text_styles.dart';
+import 'package:keole/services/app_colors.dart';
+import 'package:keole/services/app_text_styles.dart';
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 

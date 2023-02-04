@@ -1,15 +1,15 @@
-import 'package:fl_starter/services/app_images.dart';
-import 'package:fl_starter/ui/_shared/error_message.dart';
+/* import 'package:keole/services/app_images.dart';
+import 'package:keole/ui/_shared/error_message.dart';
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:fl_starter/extensions/validator.dart";
-import "package:fl_starter/services/app_routes.dart";
-import "package:fl_starter/services/app_text_styles.dart";
-import "package:fl_starter/ui/_shared/custom_button.dart";
-import "package:fl_starter/ui/_shared/custom_input.dart";
-import "package:fl_starter/ui/_shared/custom_link.dart";
-import "package:fl_starter/ui/_shared/custom_scaffold.dart";
-import "package:fl_starter/ui/view_model/login_view_model.dart";
+import "package:keole/extensions/validator.dart";
+import "package:keole/services/app_routes.dart";
+import "package:keole/services/app_text_styles.dart";
+import "package:keole/ui/_shared/custom_button.dart";
+import "package:keole/ui/_shared/custom_input.dart";
+import "package:keole/ui/_shared/custom_link.dart";
+import "package:keole/ui/_shared/custom_scaffold.dart";
+import "package:keole/ui/view_model/login_view_model.dart";
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
@@ -151,3 +151,4 @@ class LoginState extends ConsumerState<LoginView> {
     return null;
   }
 }
+ */

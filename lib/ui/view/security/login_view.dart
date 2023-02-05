@@ -23,72 +23,79 @@ class LoginState extends ConsumerState<LoginView> {
   bool loading = false;
 
   @override
-  Widget build(BuildContext context) => CustomScaffold(
-        body: SizedBox(
-          width: 300,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Connexion à votre espace personnel",
-                style: AppTextStyles.h1,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 30),
-              const Text(
-                "Saisissez votre e-mail et votre mot de passe pour accéder à l'application.",
-                style: AppTextStyles.p,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 30),
-              Form(
-                key: loginFormKey,
-                child: Column(
-                  children: [
-                    TextInput.email(
-                      controller: emailController,
-                      disabled: loading,
-                    ),
-                    const SizedBox(height: 30),
-                    TextInput.password(
-                      controller: passwordController,
-                      disabled: loading,
-                      obscured: true,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 15),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Button(
-                  text: "Mot de passe oublié",
-                  onPressed: () => Navigator.of(context).pushNamed(
-                    AppRoutes.forgotPassword,
+  Widget build(BuildContext context) {
+    print(loginResponse.runtimeType);
+
+    return CustomScaffold(
+      body: SizedBox(
+        width: 300,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Connexion à votre espace personnel",
+              style: AppTextStyles.h1,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            const Text(
+              "Saisissez votre e-mail et votre mot de passe pour accéder à l'application.",
+              style: AppTextStyles.p,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            Form(
+              key: loginFormKey,
+              child: Column(
+                children: [
+                  TextInput.email(
+                    controller: emailController,
+                    disabled: loading,
                   ),
+                  const SizedBox(height: 30),
+                  TextInput.password(
+                    controller: passwordController,
+                    disabled: loading,
+                    obscured: true,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 15),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Button(
+                text: "Mot de passe oublié",
+                onPressed: () => Navigator.of(context).pushNamed(
+                  AppRoutes.forgotPassword,
                 ),
               ),
-              const SizedBox(height: 15),
-              if (loginResponse is String) FormError(loginResponse),
-              const SizedBox(height: 15),
-              Button(
-                text: "Se connecter",
-                loading: loading,
-                onPressed: () {
-                  if (!loginFormKey.currentState!.validate()) return;
-
-                  loginResponse = null;
-                  loading = true;
-
-                  setState(() {});
-
-                  login(emailController.text, passwordController.text);
-                },
-              ),
+            ),
+            const SizedBox(height: 15),
+            if (loginResponse is String) ...[
+              const Text("ksdof"),
+              FormError(loginResponse),
             ],
-          ),
+            const SizedBox(height: 15),
+            Button(
+              text: "Se connecter",
+              loading: loading,
+              onPressed: () {
+                if (!loginFormKey.currentState!.validate()) return;
+
+                loginResponse = null;
+                loading = true;
+
+                setState(() {});
+
+                login(emailController.text, passwordController.text);
+              },
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
   @override
   void dispose() {

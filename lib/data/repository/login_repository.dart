@@ -5,13 +5,8 @@ final loginRepository = FutureProvider.autoDispose
     .family<dynamic, Map<String, dynamic>>(
         (ref, request) async => await api.authenticate(request));
 
-final getTokenRepository = FutureProvider.autoDispose<bool>((ref) async {
-  final String? token = await api.storage.read(key: "token");
-
-  print("Token: '$token', type: ${token.runtimeType}");
-
-  return token != null;
-});
+final getTokenRepository = FutureProvider.autoDispose<bool>(
+    (ref) async => await api.storage.read(key: "token") != null);
 
 final clearSecureStorageRepository =
     FutureProvider.autoDispose<bool>((ref) async {
@@ -20,12 +15,7 @@ final clearSecureStorageRepository =
   return true;
 });
 
-/* import "package:keole/data/api.dart";
-import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:flutter_secure_storage/flutter_secure_storage.dart";
-import "package:keole/services/api_routes.dart";
-
-final checkTokenRepositoryProvider = FutureProvider<bool>((ref) async {
+/* final checkTokenRepositoryProvider = FutureProvider<bool>((ref) async {
   const FlutterSecureStorage storage = FlutterSecureStorage();
 
   String? token = await storage.read(key: "token");
@@ -48,12 +38,5 @@ final forgotPasswordRepositoryProvider = FutureProvider.autoDispose
   if (response["code"] != 400 && response["success"]) return null;
 
   return response;
-});
-
-final clearSecureStorageRepository =
-    FutureProvider.autoDispose<bool>((_) async {
-  await api.storage.deleteAll();
-
-  return true;
 });
  */

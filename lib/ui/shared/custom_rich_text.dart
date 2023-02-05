@@ -1,12 +1,7 @@
-import 'package:keole/services/app_text_styles.dart';
-import "package:flutter/material.dart";
+/* import "package:flutter/material.dart";
+import "package:keole/services/app_text_styles.dart";
 
 class CustomRichText extends StatelessWidget {
-  final List<RichString>? text;
-  final TextStyle? style;
-  final TextAlign textAlign;
-  final bool upperCase;
-
   const CustomRichText({
     super.key,
     this.text,
@@ -14,6 +9,11 @@ class CustomRichText extends StatelessWidget {
     this.textAlign = TextAlign.center,
     this.upperCase = false,
   });
+
+  final List<RichString>? text;
+  final TextStyle? style;
+  final TextAlign textAlign;
+  final bool upperCase;
 
   @override
   Widget build(BuildContext context) => text == null
@@ -47,3 +47,4 @@ class RichString {
     this.bolder = false,
   });
 }
+ */

@@ -1,15 +1,8 @@
-import 'package:keole/services/app_colors.dart';
-import 'package:keole/services/app_text_styles.dart';
-import "package:flutter/material.dart";
+/* import "package:flutter/material.dart";
+import "package:keole/services/app_colors.dart";
+import "package:keole/services/app_text_styles.dart";
 
 class CustomSelect extends StatefulWidget {
-  final String label;
-  final List<dynamic> items;
-  final dynamic value;
-  final String Function(dynamic) translator;
-  final void Function(dynamic)? onChanged;
-  final void Function(dynamic)? onSaved;
-
   const CustomSelect({
     super.key,
     required this.label,
@@ -19,6 +12,13 @@ class CustomSelect extends StatefulWidget {
     this.onChanged,
     this.onSaved,
   });
+
+  final String label;
+  final List<dynamic> items;
+  final dynamic value;
+  final String Function(dynamic) translator;
+  final void Function(dynamic)? onChanged;
+  final void Function(dynamic)? onSaved;
 
   @override
   CustomSelectState createState() => CustomSelectState();
@@ -69,3 +69,4 @@ class CustomSelectState extends State<CustomSelect> {
         ),
       );
 }
+ */

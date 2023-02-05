@@ -1,13 +1,10 @@
-/* import 'package:keole/ui/_shared/custom_rich_text.dart';
 import "package:flutter/material.dart";
-import "package:keole/data/repository/login_repository.dart";
-import 'package:keole/services/app_images.dart';
-import "package:keole/services/app_routes.dart";
-import "package:keole/services/app_text_styles.dart";
-import "package:keole/ui/_shared/custom_button.dart";
-import "package:keole/ui/_shared/custom_scaffold.dart";
-import "package:keole/ui/view_model/login_view_model.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:keole/services/app_images.dart";
+import "package:keole/services/app_routes.dart";
+import "package:keole/ui/shared/button.dart";
+import "package:keole/ui/shared/custom_scaffold.dart";
+import "package:keole/ui/view_model/login_view_model.dart";
 
 class StartView extends StatelessWidget {
   const StartView({super.key});
@@ -20,36 +17,35 @@ class StartView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              AppImages.logo,
+              AppImages.placeholder,
               height: 140,
             ),
-            const SizedBox(height: 180),
+            /* const SizedBox(height: 180),
             CustomRichText(
               text: const [
                 RichString("Bienvenue sur le Fl_Starter\n"),
                 RichString("KEOLE.NET", bolder: true),
               ],
               style: AppTextStyles.h2,
-            ),
+            ), */
             const SizedBox(height: 180),
             Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                final bool hasLoginToken =
-                    ref.watch(hasLoginTokenViewModelProvider) ?? false;
+                final bool isLogged = ref.watch(isLoggedProvider);
 
-                if (hasLoginToken) {
+                if (isLogged) {
                   return Column(
                     children: [
-                      CustomButton(
+                      Button(
                         text: "Continuer",
                         onPressed: () => Navigator.of(context)
-                            .pushReplacementNamed(AppRoutes.welcome),
+                            .pushReplacementNamed(AppRoutes.home),
                       ),
                       child!,
-                      CustomButton(
+                      Button(
                         text: "Déconnexion",
                         onPressed: () {
-                          ref.read(clearSecureStorageRepositoryProvider);
+                          ref.read(clearSecureStorageProvider);
 
                           Navigator.of(context)
                               .pushReplacementNamed(AppRoutes.login);
@@ -59,7 +55,7 @@ class StartView extends StatelessWidget {
                   );
                 }
 
-                return CustomButton(
+                return Button(
                   text: "Connexion",
                   onPressed: () => Navigator.of(context)
                       .pushReplacementNamed(AppRoutes.login),
@@ -71,4 +67,3 @@ class StartView extends StatelessWidget {
         ),
       );
 }
- */

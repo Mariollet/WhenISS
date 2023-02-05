@@ -1,16 +1,10 @@
 import "package:context_holder/context_holder.dart";
 import "package:flutter/material.dart";
+import "package:keole/services/app_text_styles.dart";
 
 void showSnackBar(String message) {
   final SnackBar snackBar = SnackBar(
-    content: Text(message),
-    elevation: 0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-    behavior: SnackBarBehavior.floating,
-    showCloseIcon: true,
-    closeIconColor: Colors.orange,
+    content: Text(message, style: AppTextStyles.snackBar),
     duration: const Duration(seconds: 6),
   );
 

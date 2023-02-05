@@ -1,21 +1,16 @@
 import "dart:io";
 import "package:context_holder/context_holder.dart";
-import "package:keole/services/app_colors.dart";
-import "package:keole/services/app_routes.dart";
-// import "package:keole/ui/view/start_view.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_dotenv/flutter_dotenv.dart";
-// import "package:flutter_riverpod/flutter_riverpod.dart";
-
-// TODO: API rework
-// TODO: repository rework
+import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:keole/services/app_colors.dart";
+import "package:keole/services/app_routes.dart";
+import "package:keole/ui/view/start_view.dart";
 
 void main() async {
   await dotenv.load(fileName: ".env");
-
-  print(dotenv.env["APP_NAME"]);
 
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -26,12 +21,11 @@ void main() async {
 
   if (kDebugMode) HttpOverrides.global = DebugHttpOverrides();
 
-  /* runApp(
-    /// This is where the state of our providers will be stored.
+  runApp(
     const ProviderScope(
       child: App(),
     ),
-  ); */
+  );
 }
 
 class App extends StatelessWidget {
@@ -40,17 +34,16 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         navigatorKey: ContextHolder.key,
-        // home: const StartView(),
+        home: const StartView(),
         onGenerateRoute: AppRoutes.onGenerateRoute,
-        title: "Keole", // TODO: move to .env
+        title: dotenv.env["APP_NAME"]!,
         theme: ThemeData(
-          brightness: Brightness.dark,
-          colorScheme: const ColorScheme.dark(
-            primary: AppColors.black,
-            secondary: AppColors.grey,
+          colorScheme: const ColorScheme.light(
+            primary: AppColors.primary,
+            secondary: AppColors.secondary,
           ),
-          scaffoldBackgroundColor: AppColors.grey.shade600,
-          unselectedWidgetColor: AppColors.grey[425],
+          // scaffoldBackgroundColor: AppColors.white,
+          // unselectedWidgetColor: AppColors.grey[425],
           fontFamily: "Montserrat",
         ),
         debugShowCheckedModeBanner: false,

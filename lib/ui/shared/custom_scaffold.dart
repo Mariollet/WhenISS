@@ -1,10 +1,9 @@
-import 'package:keole/services/app_colors.dart';
-import "package:keole/services/app_images.dart";
-import 'package:keole/services/app_routes.dart';
-import 'package:keole/services/app_text_styles.dart';
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:keole/services/app_colors.dart";
+import "package:keole/services/app_images.dart";
+import "package:keole/services/app_routes.dart";
 
 enum BottomBarType {
   copyright,
@@ -12,15 +11,6 @@ enum BottomBarType {
 }
 
 class CustomScaffold extends StatelessWidget {
-  final EdgeInsets padding;
-  final bool verticallyCentered;
-  final bool opaqueHeader;
-  final bool appBarLogo;
-  final bool isModal;
-  final BottomBarType? bottomBarType;
-  final bool inView;
-  final Widget body;
-
   const CustomScaffold({
     super.key,
     this.padding = EdgeInsets.zero,
@@ -32,6 +22,15 @@ class CustomScaffold extends StatelessWidget {
     this.inView = false,
     required this.body,
   });
+
+  final EdgeInsets padding;
+  final bool verticallyCentered;
+  final bool opaqueHeader;
+  final bool appBarLogo;
+  final bool isModal;
+  final BottomBarType? bottomBarType;
+  final bool inView;
+  final Widget body;
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +48,9 @@ class CustomScaffold extends StatelessWidget {
       title: !appBarLogo
           ? null
           : InkWell(
-              onTap: () => Navigator.of(context).pushNamed(AppRoutes.welcome),
+              onTap: () => Navigator.of(context).pushNamed(AppRoutes.home),
               child: Image.asset(
-                AppImages.logo,
+                AppImages.placeholder,
                 width: 230,
               ),
             ),
@@ -90,21 +89,7 @@ class CustomScaffold extends StatelessWidget {
     return Scaffold(
       appBar: appBar,
       body: Container(
-        // Setting an alignment expands vertically the background image
-        alignment: Alignment.topLeft,
         padding: padding,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: const AssetImage(AppImages.background),
-            fit: BoxFit.cover,
-            alignment: Alignment.center,
-            repeat: ImageRepeat.noRepeat,
-            colorFilter: ColorFilter.mode(
-              AppColors.black.withOpacity(0.8),
-              BlendMode.darken,
-            ),
-          ),
-        ),
         child: verticallyCentered ? Center(child: body) : SafeArea(child: body),
       ),
       bottomNavigationBar: bottomBarType == null
@@ -124,18 +109,15 @@ class _Copyright extends StatelessWidget {
   const _Copyright();
 
   @override
-  Widget build(BuildContext context) => Text(
-        "© Keole Flutter Starter",
-        style: AppTextStyles.copyright,
-      );
+  Widget build(BuildContext context) => const Text("© 2023 Keole");
 }
 
 class _CustomViewLink extends StatelessWidget {
-  final bool inView;
-
   const _CustomViewLink({
     this.inView = false,
   });
+
+  final bool inView;
 
   @override
   Widget build(BuildContext context) => IconButton(
@@ -146,7 +128,7 @@ class _CustomViewLink extends StatelessWidget {
         onPressed: () {
           if (inView) return Navigator.of(context).pop();
 
-          Navigator.of(context).pushNamed(AppRoutes.welcome);
+          Navigator.of(context).pushNamed(AppRoutes.home);
         },
       );
 }

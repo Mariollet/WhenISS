@@ -1,6 +1,6 @@
-/* import "package:keole/data/models/customer.dart";
+/* import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:keole/data/models/customer.dart";
 import "package:keole/data/repository/customer_repository.dart";
-import "package:flutter_riverpod/flutter_riverpod.dart";
 
 // Customer Provider
 final customerProvider = StateNotifierProvider<CustomerNotifier, Customer>(

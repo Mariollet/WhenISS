@@ -1,7 +1,30 @@
-/* import "package:keole/data/repository/login_repository.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:keole/data/repository/login_repository.dart";
 
-final hasLoginTokenViewModelProvider =
+final loginProvider = Provider.autoDispose.family<Future, Map<String, dynamic>>(
+    (ref, request) => ref.watch(loginRepository(request).future));
+
+final isLoggedProvider = Provider.autoDispose<bool>((ref) {
+  final AsyncValue<bool> response = ref.watch(getTokenRepository);
+
+  return response.when(
+    data: (bool isLogged) => isLogged,
+    error: (error, _) => throw Exception(error),
+    loading: () => false,
+  );
+});
+
+final clearSecureStorageProvider = Provider.autoDispose<bool>((ref) {
+  final AsyncValue<bool> response = ref.watch(clearSecureStorageRepository);
+
+  return response.when(
+    data: (bool done) => done,
+    error: (error, _) => throw Exception(error),
+    loading: () => false,
+  );
+});
+
+/* final hasLoginTokenViewModelProvider =
     StateNotifierProvider<CheckTokenLoginViewModelNotifier, bool?>((ref) {
   final AsyncValue<bool> checkToken = ref.watch(checkTokenRepositoryProvider);
 
@@ -77,5 +100,4 @@ class ResetPasswordViewModelNotifier extends StateNotifier<String?> {
   }
 
   void setError(String error) => state = error;
-}
- */
+} */

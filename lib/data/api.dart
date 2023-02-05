@@ -9,10 +9,8 @@ import "package:keole/services/snack_bar.dart";
 final API api = API();
 
 class API {
-  static final String baseUrl = dotenv.env["BASE_URL"]!;
-
+  final String baseUrl = dotenv.env["APP_BASE_URL"]!;
   final String unknownErrorMessage = "Une erreur est survenue.";
-
   final FlutterSecureStorage storage = const FlutterSecureStorage();
   String? token;
 
@@ -21,7 +19,7 @@ class API {
   String getResponseErrorMessage(Map<String, dynamic> response) =>
       response["message"] ?? unknownErrorMessage;
 
-  Future<String> authenticate(Map<String, dynamic> body) async {
+  Future authenticate(Map<String, dynamic> body) async {
     final response = await http.post(
       Uri.https(baseUrl, APIRoutes.loginCheck),
       headers: {
@@ -40,11 +38,9 @@ class API {
       return message;
     }
 
-    token = body["token"];
+    await storage.write(key: "token", value: token = body["token"]);
 
-    await storage.write(key: "token", value: token);
-
-    return "true";
+    return true;
   }
 
   Future get(String endpoint) async {

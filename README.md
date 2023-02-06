@@ -5,5 +5,6 @@
 - [Flutter packages](https://pub.dev)
 - [Riverpod](https://riverpod.dev/docs/getting_started)
 
-@todo: info about base urls
-@todo: info about debug mode
+> @todo: info about ENV and base urls  
+> @todo: info about debug mode  
+> @todo: flutter good practices

@@ -16,10 +16,7 @@ class StartView extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              AppImages.placeholder,
-              height: 140,
-            ),
+            const Image(image: AssetImage(AppImages.placeholder)),
             /* const SizedBox(height: 180),
             CustomRichText(
               text: const [

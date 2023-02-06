@@ -1,9 +1,9 @@
 class Customer {
   const Customer({
     this.id = 0,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
+    this.firstName = '',
+    this.lastName = '',
+    this.email = '',
   });
 
   final int id;

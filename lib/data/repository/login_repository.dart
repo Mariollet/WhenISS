@@ -1,12 +1,15 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/data/api.dart";
+import "package:keole/services/api_routes.dart";
 
-final loginRepository = FutureProvider.autoDispose
-    .family<dynamic, Map<String, dynamic>>(
-        (ref, request) async => await api.authenticate(request));
+final loginRepository =
+    FutureProvider.autoDispose.family<dynamic, Map<String, dynamic>>(
+  (ref, request) async => await api.authenticate(request),
+);
 
 final getTokenRepository = FutureProvider.autoDispose<bool>(
-    (ref) async => await api.storage.read(key: "token") != null);
+  (ref) async => await api.storage.read(key: "token") != null,
+);
 
 final clearSecureStorageRepository =
     FutureProvider.autoDispose<bool>((ref) async {
@@ -14,6 +17,17 @@ final clearSecureStorageRepository =
 
   return true;
 });
+
+final sendResetPasswordRequestRepository =
+    FutureProvider.autoDispose.family<Map<String, dynamic>, String>(
+  (ref, email) async => await api.post(
+    APIRoutes.forgotPassword,
+    {
+      "email": email,
+    },
+    false,
+  ),
+);
 
 /* final checkTokenRepositoryProvider = FutureProvider<bool>((ref) async {
   const FlutterSecureStorage storage = FlutterSecureStorage();

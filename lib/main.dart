@@ -9,6 +9,9 @@ import "package:keole/services/app_colors.dart";
 import "package:keole/services/app_routes.dart";
 import "package:keole/ui/view/start_view.dart";
 
+// TODO: add l10n
+// TODO: debug mode
+
 void main() async {
   await dotenv.load(fileName: ".env");
 

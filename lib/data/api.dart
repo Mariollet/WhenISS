@@ -16,8 +16,8 @@ class API {
 
   Future<void> getToken() async => token ??= await storage.read(key: "token");
 
-  String getResponseErrorMessage(Map<String, dynamic> response) =>
-      response["message"] ?? unknownErrorMessage;
+  void showError(String? message) =>
+      showSnackBar(message ?? unknownErrorMessage);
 
   Future authenticate(Map<String, dynamic> body) async {
     final response = await http.post(
@@ -31,11 +31,9 @@ class API {
     body = jsonDecode(response.body);
 
     if (response.statusCode != 200) {
-      final String message = body["message"] ?? unknownErrorMessage;
+      showError(body["message"]);
 
-      showSnackBar(message);
-
-      return message;
+      return body["message"] ?? unknownErrorMessage;
     }
 
     await storage.write(key: "token", value: token = body["token"]);
@@ -56,20 +54,14 @@ class API {
 
     final Map<String, dynamic> body = jsonDecode(response.body);
 
-    if (response.statusCode != 200) {
-      final String message = getResponseErrorMessage(body);
-
-      showSnackBar(message);
-
-      return;
-    }
+    if (response.statusCode != 200) showError(body["message"]);
 
     return body;
   }
 
   Future post(String endpoint, Map<String, dynamic> body,
       [bool includeToken = true]) async {
-    // token ??= await storage.read(key: "token");
+    await getToken();
 
     final response = await http.post(
       Uri.https(baseUrl, endpoint),
@@ -82,17 +74,13 @@ class API {
 
     body = jsonDecode(response.body);
 
-    if (response.statusCode != 200) {
-      showSnackBar("todo");
-
-      return;
-    }
+    if (response.statusCode != 200) showError(body["message"]);
 
     return body;
   }
 
   Future patch(String endpoint, Map<String, dynamic> body) async {
-    // token ??= await storage.read(key: "token");
+    await getToken();
 
     final response = await http.patch(
       Uri.https(baseUrl, endpoint),
@@ -105,11 +93,7 @@ class API {
 
     body = jsonDecode(response.body);
 
-    if (response.statusCode != 200) {
-      // appError.showSnackBarError();
-
-      return;
-    }
+    if (response.statusCode != 200) showError(body["message"]);
 
     return body;
   }

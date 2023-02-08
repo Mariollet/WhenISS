@@ -2,7 +2,7 @@
 # following page: https://dart.dev/tools/pub/pubspec
 
 name: keole
-description: Flutter starter
+description: "Keole starter kit for Flutter projects"
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 

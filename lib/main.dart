@@ -14,6 +14,11 @@ import "package:keole/ui/view/start_view.dart";
 
 void main() async {
   await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".env.local", mergeWith: {...dotenv.env});
+
+  print(dotenv.env);
+
+  return;
 
   WidgetsFlutterBinding.ensureInitialized();
 

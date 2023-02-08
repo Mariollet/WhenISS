@@ -22,15 +22,10 @@ const Map<String, dynamic> clientExceptionResponse = {
 final API api = API();
 
 class API {
-  final String baseUrl = dotenv.env["APP_BASE_URL"]!;
-  final FlutterSecureStorage storage = const FlutterSecureStorage();
   final Client client = Client();
+  final FlutterSecureStorage storage = const FlutterSecureStorage();
+  final String baseUrl = dotenv.env["APP_BASE_URL"]!;
   String? token;
-
-  Future<void> getToken() async => token ??= await storage.read(key: "token");
-
-  void showError(String? message) =>
-      showSnackBar(message ?? unknownErrorMessage);
 
   Future authenticate(Map<String, dynamic> body) async {
     final Response response = await client.post(
@@ -113,5 +108,13 @@ class API {
     if (response.statusCode != 200) showError(body["message"]);
 
     return body;
+  }
+
+  // TODO: rework
+  Future<void> getToken() async => token ??= await storage.read(key: "token");
+
+  // TODO: rework
+  void showError(String? message) {
+    showSnackBar(message ?? unknownErrorMessage);
   }
 }

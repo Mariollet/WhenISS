@@ -1,9 +1,9 @@
 class Customer {
   const Customer({
-    this.id = 0,
-    this.firstName = '',
-    this.lastName = '',
-    this.email = '',
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
   });
 
   final int id;
@@ -24,6 +24,13 @@ class Customer {
         firstName: firstName ?? this.firstName,
         lastName: lastName ?? this.lastName,
         email: email ?? this.email,
+      );
+
+  factory Customer.empty() => const Customer(
+        id: 0,
+        firstName: '',
+        lastName: '',
+        email: '',
       );
 
   factory Customer.fromJSON(Map<String, dynamic> json) => Customer(

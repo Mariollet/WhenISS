@@ -12,7 +12,6 @@ class StartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => CustomScaffold(
         appBarLogo: false,
-        bottomBarType: BottomBarType.copyright,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -34,12 +33,14 @@ class StartView extends StatelessWidget {
                   return Column(
                     children: [
                       Button(
+                        width: 300,
                         text: "Continuer",
                         onPressed: () => Navigator.of(context)
                             .pushReplacementNamed(AppRoutes.home),
                       ),
                       child!,
                       Button(
+                        width: 300,
                         text: "Déconnexion",
                         onPressed: () {
                           ref.read(clearSecureStorageProvider);
@@ -53,6 +54,7 @@ class StartView extends StatelessWidget {
                 }
 
                 return Button(
+                  width: 300,
                   text: "Connexion",
                   onPressed: () => Navigator.of(context)
                       .pushReplacementNamed(AppRoutes.login),

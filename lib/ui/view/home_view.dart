@@ -16,20 +16,11 @@ class HomeState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) => CustomScaffold(
         appBarLogo: false,
-        bottomBarType: BottomBarType.copyright,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /* const SizedBox(height: 38),
-            const CustomRichText(
-              text: const [
-                RichString("Bienvenue sur le Flutter_Starter\n"),
-                RichString("Keole", bolder: true),
-              ],
-              style: AppTextStyles.title,
-            ),
-            const SizedBox(height: 48), */
             Button(
+              width: 300,
               text: "Déconnexion",
               onPressed: () {
                 ref.read(clearSecureStorageProvider);

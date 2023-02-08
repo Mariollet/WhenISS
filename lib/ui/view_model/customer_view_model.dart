@@ -5,5 +5,5 @@ final customerProvider = StateNotifierProvider<CustomerNotifier, Customer>(
     (ref) => CustomerNotifier());
 
 class CustomerNotifier extends StateNotifier<Customer> {
-  CustomerNotifier() : super(const Customer());
+  CustomerNotifier() : super(Customer.empty());
 }

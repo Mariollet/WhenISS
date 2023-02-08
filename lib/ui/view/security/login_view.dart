@@ -72,6 +72,7 @@ class LoginState extends ConsumerState<LoginView> {
               if (loginResponse is String) FormError(loginResponse),
               const SizedBox(height: 15),
               Button(
+                width: 300,
                 text: "Se connecter",
                 loading: loading,
                 onPressed: () {

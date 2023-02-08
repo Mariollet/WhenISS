@@ -1,16 +1,21 @@
-import "package:flutter/material.dart";
+import "package:flutter/cupertino.dart";
 import "package:keole/services/app_colors.dart";
+import "package:keole/services/app_text_styles.dart";
 import "package:keole/ui/shared/loader.dart";
 
-/// Generic button based on the [TextButton] widget.
+/// Generic button based on the [CupertinoButton] widget.
 class Button extends StatelessWidget {
   const Button({
     super.key,
+    this.width,
     required this.text,
     this.disabled = false,
     this.loading = false,
     this.onPressed,
   });
+
+  /// An optional width for the button.
+  final double? width;
 
   /// The text to display on the button.
   final String text;
@@ -24,8 +29,9 @@ class Button extends StatelessWidget {
   final VoidCallback? onPressed;
 
   @override
-  Widget build(BuildContext context) => TextButton(
-        onPressed: disabled || loading ? null : onPressed,
+  Widget build(BuildContext context) {
+    final Widget button = CupertinoButton.filled(
+      /* onPressed: disabled || loading ? null : onPressed,
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(AppColors.primary),
           foregroundColor: MaterialStateProperty.all<Color>(AppColors.white),
@@ -37,6 +43,17 @@ class Button extends StatelessWidget {
                   color: AppColors.white,
                 ),
               )
-            : Text(text),
-      );
+            : Text(text), */
+      disabledColor: AppColors.secondary,
+      borderRadius: BorderRadius.circular(27),
+      onPressed: disabled || loading ? null : onPressed,
+      child: loading
+          ? const Loader(color: AppColors.white)
+          : Text(text, style: AppTextStyles.button),
+    );
+
+    if (width == null) return button;
+
+    return SizedBox(width: width!, child: button);
+  }
 }

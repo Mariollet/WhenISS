@@ -10,7 +10,7 @@ class AppColors {
     // 700: Color(0xFF008FA1),
   });
 
-  static const int _secondary = 0xffde1818;
+  static const int _secondary = 0xff9f3c56;
   static const MaterialColor secondary = MaterialColor(_secondary, <int, Color>{
     // 300: Color(0xFFFFFFFF),
     // 400: Color(0xFF93F2FF),

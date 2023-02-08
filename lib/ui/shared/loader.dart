@@ -1,18 +1,22 @@
-import "package:flutter/material.dart";
+import "package:flutter/cupertino.dart";
 
-/// Loader based on the [CircularProgressIndicator] widget.
+/// Loader based on the [CupertinoActivityIndicator] widget.
 class Loader extends StatelessWidget {
   const Loader({
     super.key,
+    this.radius,
     this.color,
   });
+
+  /// Loader radius. Defaults to 12.
+  final double? radius;
 
   /// Loader color.
   final Color? color;
 
   @override
-  Widget build(BuildContext context) => CircularProgressIndicator(
+  Widget build(BuildContext context) => CupertinoActivityIndicator(
         color: color,
-        strokeWidth: 2,
+        radius: radius ?? 12,
       );
 }

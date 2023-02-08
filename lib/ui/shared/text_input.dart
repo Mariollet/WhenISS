@@ -4,6 +4,17 @@ import "package:keole/extensions/validator.dart";
 
 /// Custom text input based on the [TextFormField] widget.
 class TextInput extends StatefulWidget {
+  const TextInput({
+    super.key,
+    required this.controller,
+    required this.validator,
+    required this.placeholder,
+    this.keyboardType,
+    this.disabled = false,
+    this.obscured = false,
+    this.maxLength,
+  });
+
   // final TextInputType
   final TextEditingController controller;
 
@@ -24,59 +35,42 @@ class TextInput extends StatefulWidget {
   /// Displays a character counter below the input.
   final int? maxLength;
 
-  const TextInput({
-    super.key,
-    required this.controller,
-    required this.validator,
-    required this.placeholder,
-    this.keyboardType,
-    this.disabled = false,
-    this.obscured = false,
-    this.maxLength,
-  });
-
   @override
   TextInputState createState() => TextInputState();
 
   factory TextInput.email({
     required TextEditingController controller,
     bool disabled = false,
-  }) {
-    String? validator(String? value) {
-      if (value!.isEmpty) return "Ce champ est requis.";
-      if (!value.isValidEmail()) return "Veuillez saisir un e-mail valide.";
+  }) =>
+      TextInput(
+        controller: controller,
+        validator: (String? value) {
+          if (value!.isEmpty) return "Ce champ est requis.";
+          if (!value.isValidEmail()) return "Veuillez saisir un e-mail valide.";
 
-      return null;
-    }
-
-    return TextInput(
-      controller: controller,
-      validator: validator,
-      placeholder: "E-mail",
-      keyboardType: TextInputType.emailAddress,
-      disabled: disabled,
-    );
-  }
+          return null;
+        },
+        placeholder: "E-mail",
+        keyboardType: TextInputType.emailAddress,
+        disabled: disabled,
+      );
 
   factory TextInput.password({
     required TextEditingController controller,
     bool disabled = false,
     bool obscured = false,
-  }) {
-    String? validator(String? value) {
-      if (value!.isEmpty) return "Ce champ est requis.";
+  }) =>
+      TextInput(
+        controller: controller,
+        validator: (String? value) {
+          if (value!.isEmpty) return "Ce champ est requis.";
 
-      return null;
-    }
-
-    return TextInput(
-      controller: controller,
-      validator: validator,
-      placeholder: "Mot de passe",
-      disabled: disabled,
-      obscured: obscured,
-    );
-  }
+          return null;
+        },
+        placeholder: "Mot de passe",
+        disabled: disabled,
+        obscured: obscured,
+      );
 }
 
 class TextInputState extends State<TextInput> {

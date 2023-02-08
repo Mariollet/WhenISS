@@ -28,7 +28,11 @@ class ForgotPasswordState extends ConsumerState<ForgotPasswordView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("Mot de passe oublié ?", style: AppTextStyles.h1),
+              const Text(
+                "Mot de passe oublié ?",
+                style: AppTextStyles.h1,
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: 30),
               const Text(
                 "Si votre e-mail est reconnu, un lien pour renouveler votre mot de passe vous sera envoyé.",
@@ -47,6 +51,7 @@ class ForgotPasswordState extends ConsumerState<ForgotPasswordView> {
                 FormError(forgotPasswordResponse!["message"]),
               const SizedBox(height: 15),
               Button(
+                width: 300,
                 text: "Envoyer",
                 loading: loading,
                 onPressed: () {

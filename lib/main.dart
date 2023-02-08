@@ -1,5 +1,6 @@
 import "dart:io";
 import "package:context_holder/context_holder.dart";
+import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
@@ -9,16 +10,9 @@ import "package:keole/services/app_colors.dart";
 import "package:keole/services/app_routes.dart";
 import "package:keole/ui/view/start_view.dart";
 
-// TODO: add l10n
-// TODO: debug mode
-
 void main() async {
   await dotenv.load(fileName: ".env");
   await dotenv.load(fileName: ".env.local", mergeWith: {...dotenv.env});
-
-  print(dotenv.env);
-
-  return;
 
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -29,11 +23,7 @@ void main() async {
 
   if (kDebugMode) HttpOverrides.global = DebugHttpOverrides();
 
-  runApp(
-    const ProviderScope(
-      child: App(),
-    ),
-  );
+  runApp(const ProviderScope(child: App()));
 }
 
 class App extends StatelessWidget {
@@ -46,6 +36,9 @@ class App extends StatelessWidget {
         onGenerateRoute: AppRoutes.onGenerateRoute,
         title: dotenv.env["APP_NAME"]!,
         theme: ThemeData(
+          cupertinoOverrideTheme: const CupertinoThemeData(
+            primaryColor: AppColors.secondary,
+          ),
           colorScheme: const ColorScheme.light(
             primary: AppColors.primary,
             secondary: AppColors.secondary,

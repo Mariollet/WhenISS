@@ -9,6 +9,11 @@ import "package:keole/services/snack_bar.dart";
 
 const String unknownErrorMessage = "Une erreur inconnue est survenue.";
 
+/// 0x01 possible causes:
+/// - Connection refused
+/// - CORS error
+/// - Server timeout?
+
 const Map<String, dynamic> clientExceptionResponse = {
   "success": false,
   "message": "Une erreur est survenue (0x01).",
@@ -50,7 +55,7 @@ class API {
   }
 
   Future get(String endpoint) async {
-    await getToken();
+    // await getToken();
 
     final Response response = await client.get(
       Uri.https(baseUrl, endpoint),
@@ -69,7 +74,7 @@ class API {
 
   Future post(String endpoint, Map<String, dynamic> body,
       [bool includeToken = true]) async {
-    await getToken();
+    // await getToken();
 
     try {
       final Response response = await client.post(
@@ -92,7 +97,7 @@ class API {
   }
 
   Future patch(String endpoint, Map<String, dynamic> body) async {
-    await getToken();
+    // await getToken();
 
     final Response response = await client.patch(
       Uri.https(baseUrl, endpoint),

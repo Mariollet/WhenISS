@@ -4,28 +4,24 @@ import "package:keole/ui/view/security/login_view.dart";
 import "package:keole/ui/view/security/forgot_password_view.dart";
 
 class AppRoutes {
-  // Security Routes
+  // Security
   static const String login = "/login";
   static const String forgotPassword = "/forgot-password";
   static const String home = "/home";
 
   static Route? onGenerateRoute(RouteSettings settings) {
-    Widget? screen;
-
     switch (settings.name) {
       case AppRoutes.login:
-        screen = const LoginView();
-        break;
+        return getRoute(const LoginView());
       case AppRoutes.forgotPassword:
-        screen = const ForgotPasswordView();
-        break;
+        return getRoute(const ForgotPasswordView());
       case AppRoutes.home:
-        screen = const HomeView();
-        break;
+        return getRoute(const HomeView());
+      default:
+        return null;
     }
-
-    if (screen == null) return null;
-
-    return MaterialPageRoute(builder: (_) => screen!);
   }
+
+  static MaterialPageRoute getRoute(Widget view) =>
+      MaterialPageRoute(builder: (_) => view);
 }

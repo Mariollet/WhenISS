@@ -26,6 +26,8 @@ jobs:
         with:
           channel: stable
       - run: flutter pub get
-      - run: flutter format ./lib --set-exit-if-changed
-      - run: flutter analyze
+      # If using a localization package, generate translations
+      # - run: flutter gen-l10n
+      - run: dart format ./lib --set-exit-if-changed
+      - run: dart analyze
       - run: flutter test

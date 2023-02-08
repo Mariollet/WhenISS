@@ -4,7 +4,8 @@
 name: keole
 description: Keole starter kit for Flutter projects.
 
-publish_to: none # Remove this line if you wish to publish to pub.dev
+# Remove this line if you wish to publish to pub.dev
+publish_to: none
 
 # Read more about Android versioning at
 # https://developer.android.com/studio/publish/versioning
@@ -50,17 +51,15 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   fonts:
-    - family: Montserrat
+    - family: Jost
       fonts:
-        - asset: assets/fonts/Montserrat-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Montserrat-Light.ttf
+        - asset: assets/fonts/Jost-Light.ttf
           weight: 300
-        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Jost-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Montserrat-Medium.ttf
+        - asset: assets/fonts/Jost-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Montserrat-SemiBold.ttf
+        - asset: assets/fonts/Jost-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/Montserrat-Bold.ttf
+        - asset: assets/fonts/Jost-Bold.ttf
           weight: 700

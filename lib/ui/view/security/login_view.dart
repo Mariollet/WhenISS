@@ -36,7 +36,7 @@ class LoginState extends ConsumerState<LoginView> {
               ),
               const SizedBox(height: 30),
               const Text(
-                "Saisissez votre e-mail et votre mot de passe pour accéder à l'application.",
+                "Saisissez votre e-mail et votre\nmot de passe pour accéder à\nl'application.",
                 style: AppTextStyles.p,
                 textAlign: TextAlign.center,
               ),
@@ -49,17 +49,16 @@ class LoginState extends ConsumerState<LoginView> {
                       controller: emailController,
                       disabled: loading,
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 15),
                     TextInput.password(
                       controller: passwordController,
                       disabled: loading,
-                      obscured: true,
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 15),
-              Align(
+              /* Align(
                 alignment: Alignment.centerRight,
                 child: Button(
                   text: "Mot de passe oublié",
@@ -67,12 +66,12 @@ class LoginState extends ConsumerState<LoginView> {
                     AppRoutes.forgotPassword,
                   ),
                 ),
-              ),
+              ), */
               const SizedBox(height: 15),
               if (loginResponse is String) FormError(loginResponse),
               const SizedBox(height: 15),
               Button(
-                width: 300,
+                width: double.infinity,
                 text: "Se connecter",
                 loading: loading,
                 onPressed: () {

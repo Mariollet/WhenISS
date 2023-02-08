@@ -29,31 +29,17 @@ class Button extends StatelessWidget {
   final VoidCallback? onPressed;
 
   @override
-  Widget build(BuildContext context) {
-    final Widget button = CupertinoButton.filled(
-      /* onPressed: disabled || loading ? null : onPressed,
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(AppColors.primary),
-          foregroundColor: MaterialStateProperty.all<Color>(AppColors.white),
+  Widget build(BuildContext context) => SizedBox(
+        width: width,
+        height: 50,
+        child: CupertinoButton.filled(
+          padding: EdgeInsets.zero,
+          disabledColor: AppColors.secondary,
+          borderRadius: BorderRadius.circular(27),
+          onPressed: disabled || loading ? null : onPressed,
+          child: loading
+              ? const Loader(color: AppColors.white)
+              : Text(text, style: AppTextStyles.button),
         ),
-        child: loading
-            ? const SizedBox.square(
-                dimension: 16,
-                child: Loader(
-                  color: AppColors.white,
-                ),
-              )
-            : Text(text), */
-      disabledColor: AppColors.secondary,
-      borderRadius: BorderRadius.circular(27),
-      onPressed: disabled || loading ? null : onPressed,
-      child: loading
-          ? const Loader(color: AppColors.white)
-          : Text(text, style: AppTextStyles.button),
-    );
-
-    if (width == null) return button;
-
-    return SizedBox(width: width!, child: button);
-  }
+      );
 }

@@ -1,3 +1,4 @@
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:keole/extensions/validator.dart";
@@ -59,7 +60,7 @@ class TextInput extends StatefulWidget {
   factory TextInput.password({
     required TextEditingController controller,
     bool disabled = false,
-    bool obscured = false,
+    bool obscured = true,
   }) =>
       TextInput(
         controller: controller,
@@ -90,8 +91,8 @@ class TextInputState extends State<TextInput> {
                   onPressed: () => setState(() => obscured = !obscured),
                   icon: Icon(
                     obscured
-                        ? Icons.visibility_rounded
-                        : Icons.visibility_off_rounded,
+                        ? CupertinoIcons.eye_fill
+                        : CupertinoIcons.eye_slash_fill,
                   ),
                 ),
         ),

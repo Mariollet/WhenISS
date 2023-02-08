@@ -11,19 +11,10 @@ class StartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomScaffold(
-        appBarLogo: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Image(image: AssetImage(AppImages.placeholder)),
-            /* const SizedBox(height: 180),
-            CustomRichText(
-              text: const [
-                RichString("Bienvenue sur le Fl_Starter\n"),
-                RichString("KEOLE.NET", bolder: true),
-              ],
-              style: AppTextStyles.h2,
-            ), */
             const SizedBox(height: 180),
             Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) {

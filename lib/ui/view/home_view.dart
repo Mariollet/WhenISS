@@ -15,7 +15,6 @@ class HomeView extends ConsumerStatefulWidget {
 class HomeState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) => CustomScaffold(
-        appBarLogo: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

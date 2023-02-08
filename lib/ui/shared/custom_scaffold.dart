@@ -55,7 +55,7 @@ class CustomScaffold extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: appBar,
+      // appBar: appBar,
       body: Container(
         padding: padding,
         child: verticallyCentered ? Center(child: body) : SafeArea(child: body),

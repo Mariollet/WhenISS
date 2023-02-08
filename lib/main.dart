@@ -36,9 +36,9 @@ class App extends StatelessWidget {
         onGenerateRoute: AppRoutes.onGenerateRoute,
         title: dotenv.env["APP_NAME"]!,
         theme: ThemeData(
-          cupertinoOverrideTheme: const CupertinoThemeData(
+          /* cupertinoOverrideTheme: const CupertinoThemeData(
             primaryColor: AppColors.secondary,
-          ),
+          ), */
           colorScheme: const ColorScheme.light(
             primary: AppColors.primary,
             secondary: AppColors.secondary,

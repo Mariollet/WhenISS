@@ -4,13 +4,6 @@ import "package:keole/services/app_colors.dart";
 abstract class AppTextStyles {
   static const String fontFamily = "Montserrat";
 
-  static TextStyle defaultStyle = TextStyle(
-    color: AppColors.grey.shade400,
-    fontSize: 20,
-    fontWeight: FontWeight.w300,
-    fontFamily: fontFamily,
-  );
-
   static const TextStyle h1 = TextStyle(
     fontSize: 28,
     fontWeight: FontWeight.w600,
@@ -35,5 +28,9 @@ abstract class AppTextStyles {
     fontSize: 18,
     letterSpacing: .2,
     fontFamily: fontFamily,
+  );
+
+  static const TextStyle textInputLabel = TextStyle(
+    fontWeight: FontWeight.w500,
   );
 }

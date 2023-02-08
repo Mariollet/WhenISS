@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:keole/extensions/validator.dart";
+import "package:keole/services/app_text_styles.dart";
 
 /// Custom text input based on the [TextFormField] widget.
 class TextInput extends StatefulWidget {
@@ -81,6 +82,7 @@ class TextInputState extends State<TextInput> {
         controller: widget.controller,
         decoration: InputDecoration(
           labelText: widget.placeholder,
+          labelStyle: AppTextStyles.textInputLabel,
           suffixIcon: !widget.obscured
               ? null
               : IconButton(

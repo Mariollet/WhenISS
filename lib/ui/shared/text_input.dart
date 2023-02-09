@@ -17,7 +17,6 @@ class TextInput extends StatefulWidget {
     this.maxLength,
   });
 
-  // final TextInputType
   final TextEditingController controller;
 
   final String? Function(String?) validator;

@@ -11,7 +11,6 @@ class Loader extends StatelessWidget {
   /// Loader radius. Defaults to 12.
   final double? radius;
 
-  /// Loader color.
   final Color? color;
 
   @override

@@ -8,7 +8,6 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/services/app_colors.dart";
 import "package:keole/services/app_routes.dart";
 import "package:keole/ui/view/security/login_view.dart";
-// import "package:keole/ui/view/start_view.dart";
 
 void main() async {
   await dotenv.load(fileName: ".env");

@@ -22,7 +22,6 @@ class CustomScaffold extends StatelessWidget {
   /// Determines if the body is vertically centered.
   final bool verticallyCentered;
 
-  /// The scaffold content.
   final Widget body;
 
   @override

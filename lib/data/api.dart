@@ -9,16 +9,12 @@ import "package:keole/services/snack_bar.dart";
 
 const String unknownErrorMessage = "Une erreur inconnue est survenue.";
 
-/// 0x01 possible causes:
-/// - Connection refused
-/// - CORS error
-/// - Server timeout?
-
 const Map<String, dynamic> clientExceptionResponse = {
   "success": false,
   "message": "Une erreur est survenue (0x01).",
 };
 
+// TODO: abstract API?
 final API api = API();
 
 class API {
@@ -28,53 +24,60 @@ class API {
   String? token;
 
   Future authenticate(Map<String, dynamic> body) async {
-    final Response response = await client.post(
-      Uri.https(baseUrl, APIRoutes.loginCheck),
-      headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
-      },
-      body: jsonEncode(body),
-    );
+    try {
+      final Response response = await client.post(
+        Uri.https(baseUrl, APIRoutes.loginCheck),
+        headers: {
+          HttpHeaders.accessControlAllowOriginHeader: '*',
+          HttpHeaders.contentTypeHeader: "application/json",
+        },
+        body: jsonEncode(body),
+      );
 
-    body = jsonDecode(response.body);
+      body = jsonDecode(response.body);
 
-    if (response.statusCode != 200) {
-      showError(body["message"]);
+      if (response.statusCode != 200) {
+        showSnackBarError(body);
 
-      return body["message"] ?? unknownErrorMessage;
+        return body["message"] ?? unknownErrorMessage;
+      }
+
+      await storage.write(key: "token", value: token = body["token"]);
+
+      return true;
+    } on ClientException {
+      return clientExceptionResponse;
     }
-
-    await storage.write(key: "token", value: token = body["token"]);
-
-    return true;
   }
 
   Future get(String endpoint) async {
-    // await getToken();
+    try {
+      final Response response = await client.get(
+        Uri.https(baseUrl, endpoint),
+        headers: {
+          HttpHeaders.accessControlAllowOriginHeader: '*',
+          HttpHeaders.authorizationHeader: "Bearer $token",
+          HttpHeaders.contentTypeHeader: "application/json",
+        },
+      );
 
-    final Response response = await client.get(
-      Uri.https(baseUrl, endpoint),
-      headers: {
-        HttpHeaders.authorizationHeader: "Bearer $token",
-        HttpHeaders.contentTypeHeader: "application/json",
-      },
-    );
+      final Map<String, dynamic> body = jsonDecode(response.body);
 
-    final Map<String, dynamic> body = jsonDecode(response.body);
+      if (response.statusCode != 200) showSnackBarError(body);
 
-    if (response.statusCode != 200) showError(body["message"]);
-
-    return body;
+      return body;
+    } on ClientException {
+      return clientExceptionResponse;
+    }
   }
 
   Future post(String endpoint, Map<String, dynamic> body,
-      [bool includeToken = true]) async {
-    // await getToken();
-
+      [bool includeToken = true, bool verbose = false]) async {
     try {
       final Response response = await client.post(
         Uri.https(baseUrl, endpoint),
         headers: {
+          HttpHeaders.accessControlAllowOriginHeader: '*',
           HttpHeaders.authorizationHeader: includeToken ? "Bearer $token" : '',
           HttpHeaders.contentTypeHeader: "application/json",
         },
@@ -83,7 +86,7 @@ class API {
 
       body = jsonDecode(response.body);
 
-      if (response.statusCode != 200) showError(body["message"]);
+      if (response.statusCode != 200 && verbose) showSnackBarError(body);
 
       return body;
     } on ClientException {
@@ -92,29 +95,27 @@ class API {
   }
 
   Future patch(String endpoint, Map<String, dynamic> body) async {
-    // await getToken();
+    try {
+      final Response response = await client.patch(
+        Uri.https(baseUrl, endpoint),
+        headers: {
+          HttpHeaders.accessControlAllowOriginHeader: '*',
+          HttpHeaders.authorizationHeader: "Bearer $token",
+          HttpHeaders.contentTypeHeader: "application/json",
+        },
+        body: jsonEncode(body),
+      );
 
-    final Response response = await client.patch(
-      Uri.https(baseUrl, endpoint),
-      headers: {
-        HttpHeaders.authorizationHeader: "Bearer $token",
-        HttpHeaders.contentTypeHeader: "application/json",
-      },
-      body: jsonEncode(body),
-    );
+      body = jsonDecode(response.body);
 
-    body = jsonDecode(response.body);
+      if (response.statusCode != 200) showSnackBarError(body);
 
-    if (response.statusCode != 200) showError(body["message"]);
-
-    return body;
+      return body;
+    } on ClientException {
+      return clientExceptionResponse;
+    }
   }
 
-  // TODO: rework
-  Future<void> getToken() async => token ??= await storage.read(key: "token");
-
-  // TODO: rework
-  void showError(String? message) {
-    showSnackBar(message ?? unknownErrorMessage);
-  }
+  void showSnackBarError(Map<String, dynamic> body) =>
+      showSnackBar(body["message"] ?? unknownErrorMessage);
 }

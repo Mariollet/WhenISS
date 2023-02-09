@@ -11,7 +11,7 @@ abstract class AppTextStyles {
 
   static const TextStyle p = TextStyle(
     fontSize: 17,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w400,
   );
 
   static const TextStyle formError = TextStyle(
@@ -24,6 +24,11 @@ abstract class AppTextStyles {
 
   static const TextStyle button = TextStyle(
     fontSize: 18,
+    fontFamily: fontFamily,
+  );
+
+  static const TextStyle link = TextStyle(
+    fontSize: 16,
     fontFamily: fontFamily,
   );
 

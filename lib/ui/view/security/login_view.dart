@@ -5,6 +5,7 @@ import "package:keole/services/app_text_styles.dart";
 import "package:keole/ui/shared/button.dart";
 import "package:keole/ui/shared/custom_scaffold.dart";
 import "package:keole/ui/shared/form_error.dart";
+import "package:keole/ui/shared/link.dart";
 import "package:keole/ui/shared/text_input.dart";
 import "package:keole/ui/view_model/login_view_model.dart";
 
@@ -57,16 +58,14 @@ class LoginState extends ConsumerState<LoginView> {
                   ],
                 ),
               ),
-              const SizedBox(height: 15),
-              /* Align(
+              Align(
                 alignment: Alignment.centerRight,
-                child: Button(
-                  text: "Mot de passe oublié",
-                  onPressed: () => Navigator.of(context).pushNamed(
-                    AppRoutes.forgotPassword,
-                  ),
+                child: Link(
+                  text: "Mot de passe oublié ?",
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(AppRoutes.forgotPassword),
                 ),
-              ), */
+              ),
               const SizedBox(height: 15),
               if (loginResponse is String) FormError(loginResponse),
               const SizedBox(height: 15),

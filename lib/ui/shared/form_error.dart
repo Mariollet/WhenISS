@@ -8,7 +8,6 @@ class FormError extends StatelessWidget {
     super.key,
   });
 
-  /// The error message to display.
   final String message;
 
   @override

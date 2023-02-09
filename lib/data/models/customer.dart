@@ -11,6 +11,12 @@ class Customer {
   final String lastName;
   final String email;
 
+  @override
+  int get hashCode => id;
+
+  @override
+  bool operator ==(other) => other is Customer && id == other.id;
+
   String get name => "$firstName $lastName";
 
   Customer copyWith({
@@ -26,7 +32,7 @@ class Customer {
         email: email ?? this.email,
       );
 
-  factory Customer.empty() => const Customer(
+  factory Customer.placeholder() => const Customer(
         id: 0,
         firstName: '',
         lastName: '',

@@ -34,7 +34,7 @@ class Button extends StatelessWidget {
         height: 50,
         child: CupertinoButton.filled(
           padding: EdgeInsets.zero,
-          disabledColor: AppColors.secondary,
+          disabledColor: AppColors.primary,
           borderRadius: BorderRadius.circular(27),
           onPressed: disabled || loading ? null : onPressed,
           child: loading

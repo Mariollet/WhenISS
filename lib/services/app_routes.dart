@@ -3,7 +3,7 @@ import "package:keole/ui/view/home_view.dart";
 import "package:keole/ui/view/security/forgot_password_view.dart";
 import "package:keole/ui/view/security/login_view.dart";
 
-class AppRoutes {
+abstract class AppRoutes {
   // Security
   static const String login = "/login";
   static const String forgotPassword = "/forgot-password";

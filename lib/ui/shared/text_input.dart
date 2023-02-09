@@ -51,7 +51,7 @@ class TextInput extends StatefulWidget {
 
           return null;
         },
-        placeholder: "E-mail",
+        placeholder: "E-mail *",
         keyboardType: TextInputType.emailAddress,
         disabled: disabled,
       );
@@ -68,7 +68,7 @@ class TextInput extends StatefulWidget {
 
           return null;
         },
-        placeholder: "Mot de passe",
+        placeholder: "Mot de passe *",
         disabled: disabled,
         obscured: obscured,
       );

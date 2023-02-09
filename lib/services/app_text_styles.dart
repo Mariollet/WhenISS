@@ -28,7 +28,7 @@ abstract class AppTextStyles {
   );
 
   static const TextStyle link = TextStyle(
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fontFamily,
   );
 

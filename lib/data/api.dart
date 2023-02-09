@@ -9,26 +9,23 @@ import "package:keole/services/snack_bar.dart";
 
 const String unknownErrorMessage = "Une erreur inconnue est survenue.";
 
-const Map<String, dynamic> clientExceptionResponse = {
+const Map<String, dynamic> clientErrorResponse = {
   "success": false,
   "message": "Une erreur est survenue (0x01).",
 };
 
-// TODO: abstract API?
-final API api = API();
+abstract class API {
+  static final Client client = Client();
+  static const FlutterSecureStorage storage = FlutterSecureStorage();
+  static final String baseUrl = dotenv.env["APP_BASE_URL"]!;
+  static String? token;
 
-class API {
-  final Client client = Client();
-  final FlutterSecureStorage storage = const FlutterSecureStorage();
-  final String baseUrl = dotenv.env["APP_BASE_URL"]!;
-  String? token;
-
-  Future authenticate(Map<String, dynamic> body) async {
+  static Future<Map<String, dynamic>> authenticate(
+      Map<String, dynamic> body) async {
     try {
       final Response response = await client.post(
         Uri.https(baseUrl, APIRoutes.loginCheck),
         headers: {
-          HttpHeaders.accessControlAllowOriginHeader: '*',
           HttpHeaders.contentTypeHeader: "application/json",
         },
         body: jsonEncode(body),
@@ -37,25 +34,30 @@ class API {
       body = jsonDecode(response.body);
 
       if (response.statusCode != 200) {
-        showSnackBarError(body);
-
-        return body["message"] ?? unknownErrorMessage;
+        return {
+          "success": false,
+          "message": body["message"] ?? unknownErrorMessage,
+        };
       }
 
       await storage.write(key: "token", value: token = body["token"]);
 
-      return true;
+      return {
+        "success": true,
+        "message": '',
+      };
     } on ClientException {
-      return clientExceptionResponse;
+      return clientErrorResponse;
     }
   }
 
-  Future get(String endpoint) async {
+  static Future get(String endpoint) async {
+    token ??= await getToken();
+
     try {
       final Response response = await client.get(
         Uri.https(baseUrl, endpoint),
         headers: {
-          HttpHeaders.accessControlAllowOriginHeader: '*',
           HttpHeaders.authorizationHeader: "Bearer $token",
           HttpHeaders.contentTypeHeader: "application/json",
         },
@@ -67,17 +69,18 @@ class API {
 
       return body;
     } on ClientException {
-      return clientExceptionResponse;
+      return clientErrorResponse;
     }
   }
 
-  Future post(String endpoint, Map<String, dynamic> body,
+  static Future post(String endpoint, Map<String, dynamic> body,
       [bool includeToken = true, bool verbose = false]) async {
+    token ??= await getToken();
+
     try {
       final Response response = await client.post(
         Uri.https(baseUrl, endpoint),
         headers: {
-          HttpHeaders.accessControlAllowOriginHeader: '*',
           HttpHeaders.authorizationHeader: includeToken ? "Bearer $token" : '',
           HttpHeaders.contentTypeHeader: "application/json",
         },
@@ -90,16 +93,17 @@ class API {
 
       return body;
     } on ClientException {
-      return clientExceptionResponse;
+      return clientErrorResponse;
     }
   }
 
-  Future patch(String endpoint, Map<String, dynamic> body) async {
+  static Future patch(String endpoint, Map<String, dynamic> body) async {
+    token ??= await getToken();
+
     try {
       final Response response = await client.patch(
         Uri.https(baseUrl, endpoint),
         headers: {
-          HttpHeaders.accessControlAllowOriginHeader: '*',
           HttpHeaders.authorizationHeader: "Bearer $token",
           HttpHeaders.contentTypeHeader: "application/json",
         },
@@ -112,10 +116,12 @@ class API {
 
       return body;
     } on ClientException {
-      return clientExceptionResponse;
+      return clientErrorResponse;
     }
   }
 
-  void showSnackBarError(Map<String, dynamic> body) =>
+  static Future<String?> getToken() async => await storage.read(key: "token");
+
+  static void showSnackBarError(Map<String, dynamic> body) =>
       showSnackBar(body["message"] ?? unknownErrorMessage);
 }

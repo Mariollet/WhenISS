@@ -51,7 +51,6 @@ class CustomScaffold extends StatelessWidget {
           child:
               verticallyCentered ? Center(child: body) : SafeArea(child: body),
         ),
-        extendBody: true,
         extendBodyBehindAppBar: true,
       );
 }

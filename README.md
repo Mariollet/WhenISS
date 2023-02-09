@@ -24,6 +24,8 @@ The project requires an `.env.local` file with the variables `APP_BASE_URL` and 
 
 - Use the formatter provided by the Dart extension, or `dart format ./lib && dart analyze`.
 - Document tasks with `// TODO: ...`. Todos are listed in the Problems section.
+- When possible, prefer `Consumer` over `ConsumerWidget` or `ConsumerStatefulWidget`;
 - Sort imports by alphabetical order. This is a style convention from the [Dart style guide](https://dart.dev/guides/language/effective-dart/style#do-sort-sections-alphabetically).
 - In a class, write the constructor before the parameter declaration. This is a style convention from the [Flutter style guide](https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#constructors-come-first-in-a-class).
 - When creating a class instance, follow the parameter order of the constructor (except for `child` and `children` properties which should always be at the end).
+- Design Riverpod notifiers so that they support method cascades.

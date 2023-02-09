@@ -20,7 +20,7 @@ class LoginState extends ConsumerState<LoginView> {
   final GlobalKey<FormState> loginFormKey = GlobalKey();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  dynamic loginResponse;
+  Map<String, dynamic>? loginResponse;
   bool loading = false;
 
   @override
@@ -58,26 +58,29 @@ class LoginState extends ConsumerState<LoginView> {
                   ],
                 ),
               ),
+              const SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerRight,
                 child: Link(
                   text: "Mot de passe oublié ?",
+                  disabled: loading,
                   onPressed: () =>
                       Navigator.of(context).pushNamed(AppRoutes.forgotPassword),
                 ),
               ),
               const SizedBox(height: 15),
-              if (loginResponse is String) FormError(loginResponse),
+              if (loginResponse?["success"] == false)
+                FormError(loginResponse?["message"]),
               const SizedBox(height: 15),
               Button(
-                width: double.infinity,
+                width: 300,
                 text: "Se connecter",
                 loading: loading,
                 onPressed: () {
                   if (!loginFormKey.currentState!.validate()) return;
 
                   loginResponse = null;
-                  loading = true;
+                  loading = !loading;
 
                   setState(() {});
 
@@ -103,7 +106,7 @@ class LoginState extends ConsumerState<LoginView> {
     }));
     loading = false;
 
-    if (loginResponse is String) return setState(() {});
+    if (loginResponse?["success"] == false) return setState(() {});
     if (!mounted) return;
 
     Navigator.of(context).pushReplacementNamed(AppRoutes.home);

@@ -1,7 +1,8 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/data/repository/login_repository.dart";
 
-final loginProvider = Provider.autoDispose.family<Future, Map<String, dynamic>>(
+final loginProvider = Provider.autoDispose
+    .family<Future<Map<String, dynamic>>, Map<String, dynamic>>(
   (ref, request) => ref.watch(loginRepository(request).future),
 );
 
@@ -13,9 +14,10 @@ final isLoggedProvider = Provider.autoDispose<bool>(
       ),
 );
 
-final sendResetPasswordRequestProvider = Provider.autoDispose
-    .family<Future<Map<String, dynamic>>, String>((ref, email) =>
-        ref.watch(sendResetPasswordRequestRepository(email).future));
+final sendResetPasswordRequestProvider =
+    Provider.autoDispose.family<Future<Map<String, dynamic>>, String>(
+  (ref, email) => ref.watch(sendResetPasswordRequestRepository(email).future),
+);
 
 final clearSecureStorageProvider = Provider.autoDispose<bool>(
   (ref) => ref.watch(clearSecureStorageRepository).when(

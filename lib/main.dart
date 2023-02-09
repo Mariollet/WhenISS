@@ -7,7 +7,13 @@ import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/services/app_colors.dart";
 import "package:keole/services/app_routes.dart";
-import "package:keole/ui/view/security/login_view.dart";
+import "package:keole/ui/view/start_view.dart";
+
+// TODO: .env.local constant list
+// TODO: where does BASE_URL_LOCAL_MAC_IP go?
+// TODO: RichString
+// TODO: Select
+// TODO: README debugging section
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -22,7 +28,11 @@ void main() async {
 
   if (kDebugMode) HttpOverrides.global = DebugHttpOverrides();
 
-  runApp(const ProviderScope(child: App()));
+  runApp(
+    const ProviderScope(
+      child: App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
@@ -31,7 +41,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         navigatorKey: ContextHolder.key,
-        home: const LoginView(),
+        home: const StartView(),
         onGenerateRoute: AppRoutes.onGenerateRoute,
         title: dotenv.env["APP_NAME"]!,
         theme: ThemeData(
@@ -39,6 +49,7 @@ class App extends StatelessWidget {
             primary: AppColors.primary,
             secondary: AppColors.secondary,
           ),
+          scaffoldBackgroundColor: AppColors.background,
           fontFamily: "Jost",
         ),
         debugShowCheckedModeBanner: false,

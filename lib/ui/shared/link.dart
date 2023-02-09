@@ -20,6 +20,7 @@ class Link extends StatelessWidget {
   @override
   Widget build(BuildContext context) => CupertinoButton(
         padding: EdgeInsets.zero,
+        minSize: null,
         onPressed: disabled ? null : onPressed,
         child: Text(text, style: AppTextStyles.link),
       );

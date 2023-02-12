@@ -9,17 +9,16 @@ import "package:keole/services/app_colors.dart";
 import "package:keole/services/app_routes.dart";
 import "package:keole/ui/view/start_view.dart";
 
-// TODO: .env.local constant list
-// TODO: where does BASE_URL_LOCAL_MAC_IP go?
-// TODO: RichString
-// TODO: Select
-// TODO: README debugging section
+// TODO: RichString widget
+// TODO: Select widget
 
 void main() async {
   await dotenv.load(fileName: ".env");
   await dotenv.load(fileName: ".env.local", mergeWith: {...dotenv.env});
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  initializeOrientations(dotenv.env["APP_ORIENTATION"]!);
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -51,6 +50,9 @@ class App extends StatelessWidget {
           ),
           scaffoldBackgroundColor: AppColors.background,
           fontFamily: "Jost",
+          bottomSheetTheme: const BottomSheetThemeData(
+            backgroundColor: AppColors.background,
+          ),
         ),
         debugShowCheckedModeBanner: false,
       );
@@ -61,4 +63,19 @@ class DebugHttpOverrides extends HttpOverrides {
   HttpClient createHttpClient(SecurityContext? context) =>
       super.createHttpClient(context)
         ..badCertificateCallback = (_, __, ___) => true;
+}
+
+void initializeOrientations(String orientation) async {
+  switch (orientation) {
+    case "landscape":
+      return await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    case "portrait":
+      return await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+  }
 }

@@ -14,14 +14,6 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle formError = TextStyle(
-    color: AppColors.error,
-  );
-
-  static const TextStyle snackBar = TextStyle(
-    fontFamily: fontFamily,
-  );
-
   static const TextStyle button = TextStyle(
     fontSize: 18,
     fontFamily: fontFamily,
@@ -34,5 +26,18 @@ abstract class AppTextStyles {
 
   static const TextStyle textInputLabel = TextStyle(
     fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle formError = TextStyle(
+    color: AppColors.error,
+  );
+
+  static const TextStyle snackBar = TextStyle(
+    fontFamily: fontFamily,
+  );
+
+  static const TextStyle copyright = TextStyle(
+    color: AppColors.muted,
+    fontSize: 12,
   );
 }

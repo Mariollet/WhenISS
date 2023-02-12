@@ -11,7 +11,7 @@ const String unknownErrorMessage = "Une erreur inconnue est survenue.";
 
 const Map<String, dynamic> clientErrorResponse = {
   "success": false,
-  "message": "Une erreur est survenue (0x01).",
+  "message": "Une erreur est survenue : serveur inaccessible.",
 };
 
 abstract class API {

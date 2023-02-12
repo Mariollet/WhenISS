@@ -19,6 +19,8 @@ After cloning the project, run `flutter pub get`. If the project uses a localiza
 #### Environment setup
 
 Create a file named `.env.local` in the project root. This will be your local configuration. It must not be committed!  
+Uncomment the line registering the file in `pubspec.yaml`.
+
 The local environment must define the commented constants from the `.env`. Keep in mind that the Dart debugger must be restarted after changing an environment constant.
 
 #### Debug mode

@@ -7,10 +7,8 @@ import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/services/app_colors.dart";
 import "package:keole/services/app_routes.dart";
-import "package:keole/ui/view/start_view.dart";
-
-// TODO: RichString widget
-// TODO: Select widget
+import "package:keole/ui/view/home_view.dart";
+// import "package:keole/ui/view/start_view.dart";
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -40,7 +38,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         navigatorKey: ContextHolder.key,
-        home: const StartView(),
+        home: const HomeView(),
         onGenerateRoute: AppRoutes.onGenerateRoute,
         title: dotenv.env["APP_NAME"]!,
         theme: ThemeData(

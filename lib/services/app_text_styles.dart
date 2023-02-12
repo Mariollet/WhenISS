@@ -28,6 +28,10 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w500,
   );
 
+  static const TextStyle selectLabel = TextStyle(
+      //
+      );
+
   static const TextStyle formError = TextStyle(
     color: AppColors.error,
   );

@@ -1,31 +1,29 @@
-import 'package:fl_starter/ui/view/security/login_view.dart';
-import 'package:fl_starter/ui/view/security/reset_password_view.dart';
-import 'package:fl_starter/ui/view/welcome_view.dart';
 import "package:flutter/material.dart";
+import "package:keole/ui/view/home_view.dart";
+import "package:keole/ui/view/security/forgot_password_view.dart";
+import "package:keole/ui/view/security/login_view.dart";
 
-class AppRoutes {
-  // Security Routes
+abstract class AppRoutes {
+  // Security
   static const String login = "/login";
-  static const String resetPassword = "/reset-password";
-  static const String welcome = "/welcome";
+  static const String forgotPassword = "/forgot-password";
 
-  static Route? onGenerateRoute(settings) {
-    Widget? screen;
+  // Home
+  static const String home = "/home";
 
+  static Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.login:
-        screen = const LoginView();
-        break;
-      case AppRoutes.resetPassword:
-        screen = const ResetPasswordView();
-        break;
-      case AppRoutes.welcome:
-        screen = const WelcomeView();
-        break;
+        return createPageRoute(const LoginView());
+      case AppRoutes.forgotPassword:
+        return createPageRoute(const ForgotPasswordView());
+      case AppRoutes.home:
+        return createPageRoute(const HomeView());
+      default:
+        return null;
     }
-
-    if (screen == null) return null;
-
-    return MaterialPageRoute(builder: (_) => screen!);
   }
+
+  static MaterialPageRoute createPageRoute(Widget view) =>
+      MaterialPageRoute(builder: (_) => view);
 }

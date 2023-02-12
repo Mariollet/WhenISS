@@ -1,15 +1,13 @@
-import 'package:fl_starter/services/app_images.dart';
-import 'package:fl_starter/ui/_shared/error_message.dart';
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:fl_starter/extensions/validator.dart";
-import "package:fl_starter/services/app_routes.dart";
-import "package:fl_starter/services/app_text_styles.dart";
-import "package:fl_starter/ui/_shared/custom_button.dart";
-import "package:fl_starter/ui/_shared/custom_input.dart";
-import "package:fl_starter/ui/_shared/custom_link.dart";
-import "package:fl_starter/ui/_shared/custom_scaffold.dart";
-import "package:fl_starter/ui/view_model/login_view_model.dart";
+import "package:keole/services/app_routes.dart";
+import "package:keole/services/app_text_styles.dart";
+import "package:keole/ui/shared/button.dart";
+import "package:keole/ui/shared/custom_scaffold.dart";
+import "package:keole/ui/shared/form_error.dart";
+import "package:keole/ui/shared/link.dart";
+import "package:keole/ui/shared/text_input.dart";
+import "package:keole/ui/view_model/login_view_model.dart";
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
@@ -22,107 +20,77 @@ class LoginState extends ConsumerState<LoginView> {
   final GlobalKey<FormState> loginFormKey = GlobalKey();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  Map<String, dynamic>? request;
-  String? response;
+  Map<String, dynamic>? loginResponse;
   bool loading = false;
-  bool invalid = false;
 
   @override
-  Widget build(BuildContext context) {
-    if (request != null) {
-      response = ref.watch(getLoginErrorViewModelProvider(request!));
-
-      if (response != null) {
-        loading = false;
-        invalid = response != "true";
-
-        if (!invalid) {
-          Future(() =>
-              Navigator.of(context).pushReplacementNamed(AppRoutes.welcome));
-        }
-
-        setState(() {});
-      }
-    }
-
-    return CustomScaffold(
-      appBarLogo: false,
-      bottomBarType: BottomBarType.copyright,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            AppImages.logo,
-            height: 140,
-          ),
-          const SizedBox(height: 90),
-          Form(
-            key: loginFormKey,
-            child: SizedBox(
-              width: 300,
-              child: Column(
-                children: [
-                  Text(
-                    "Connexion",
-                    style: AppTextStyles.h2,
-                  ),
-                  const SizedBox(height: 14),
-                  Text(
-                    "Saisissez votre email et votre mot de passe pour accéder à l'application.",
-                    textAlign: TextAlign.center,
-                    style: AppTextStyles.p,
-                  ),
-                  const SizedBox(height: 34),
-                  CustomInput(
-                    controller: emailController,
-                    validator: emailValidator,
-                    label: "E-mail",
-                    disabled: loading,
-                  ),
-                  const SizedBox(height: 26),
-                  CustomInput(
-                    controller: passwordController,
-                    validator: passwordValidator,
-                    label: "Mot de passe",
-                    disabled: loading,
-                    isPassword: true,
-                  ),
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: CustomLink(
-                      text: "Mot de passe oublié ?",
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(AppRoutes.resetPassword),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  if (invalid) CustomErrorMessage(response!),
-                  CustomButton(
-                    text: "Connexion",
-                    loading: loading,
-                    onPressed: () async {
-                      invalid = false;
-
-                      if (loginFormKey.currentState!.validate()) {
-                        loading = true;
-                        request = {
-                          "username": emailController.text,
-                          "password": passwordController.text,
-                        };
-                      }
-
-                      setState(() {});
-                    },
-                  ),
-                ],
+  Widget build(BuildContext context) => CustomScaffold(
+        body: SizedBox(
+          width: 300,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Connexion à votre espace personnel",
+                style: AppTextStyles.h1,
+                textAlign: TextAlign.center,
               ),
-            ),
+              const SizedBox(height: 30),
+              const Text(
+                "Saisissez votre e-mail et votre\nmot de passe pour accéder à\nl'application.",
+                style: AppTextStyles.p,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+              Form(
+                key: loginFormKey,
+                child: Column(
+                  children: [
+                    TextInput.email(
+                      controller: emailController,
+                      disabled: loading,
+                    ),
+                    const SizedBox(height: 15),
+                    TextInput.password(
+                      controller: passwordController,
+                      disabled: loading,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Link(
+                  text: "Mot de passe oublié ?",
+                  disabled: loading,
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(AppRoutes.forgotPassword),
+                ),
+              ),
+              const SizedBox(height: 15),
+              if (loginResponse?["success"] == false)
+                FormError(loginResponse?["message"]),
+              const SizedBox(height: 15),
+              Button(
+                width: 300,
+                text: "Se connecter",
+                loading: loading,
+                onPressed: () {
+                  if (!loginFormKey.currentState!.validate()) return;
+
+                  loginResponse = null;
+                  loading = !loading;
+
+                  setState(() {});
+
+                  login(emailController.text, passwordController.text);
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
 
   @override
   void dispose() {
@@ -131,23 +99,16 @@ class LoginState extends ConsumerState<LoginView> {
     super.dispose();
   }
 
-  String? emailValidator(String? value) {
-    if (value!.isEmpty) {
-      return "Ce champ est requis.";
-    }
+  void login(String email, String password) async {
+    loginResponse = await ref.read(loginProvider({
+      "username": email,
+      "password": password,
+    }));
+    loading = false;
 
-    if (!value.isValidEmail()) {
-      return "Veuillez saisir un e-mail valide.";
-    }
+    if (loginResponse?["success"] == false) return setState(() {});
+    if (!mounted) return;
 
-    return null;
-  }
-
-  String? passwordValidator(String? value) {
-    if (value!.isEmpty) {
-      return "Ce champ est requis.";
-    }
-
-    return null;
+    Navigator.of(context).pushReplacementNamed(AppRoutes.home);
   }
 }

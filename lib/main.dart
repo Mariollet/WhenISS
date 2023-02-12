@@ -1,24 +1,31 @@
 import "dart:io";
 import "package:context_holder/context_holder.dart";
-import "package:fl_starter/services/app_colors.dart";
-import "package:fl_starter/services/app_routes.dart";
-import "package:fl_starter/ui/view/start_view.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:keole/services/app_colors.dart";
+import "package:keole/services/app_routes.dart";
+import "package:keole/ui/view/home_view.dart";
+// import "package:keole/ui/view/start_view.dart";
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".env.local", mergeWith: {...dotenv.env});
+
   WidgetsFlutterBinding.ensureInitialized();
+
+  initializeOrientations(dotenv.env["APP_ORIENTATION"]!);
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  if (kDebugMode) HttpOverrides.global = MyHttpOverrides();
+  if (kDebugMode) HttpOverrides.global = DebugHttpOverrides();
 
   runApp(
-    /// This is where the state of our providers will be stored.
     const ProviderScope(
       child: App(),
     ),
@@ -30,29 +37,43 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: "Flutter Starter",
-        debugShowCheckedModeBanner: false,
         navigatorKey: ContextHolder.key,
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          scaffoldBackgroundColor: AppColors.grey.shade600,
-          fontFamily: "Montserrat",
-          colorScheme: const ColorScheme.dark(
-            primary: AppColors.black,
-            secondary: AppColors.grey,
-          ),
-          unselectedWidgetColor: AppColors.grey[425],
-        ),
+        home: const HomeView(),
         onGenerateRoute: AppRoutes.onGenerateRoute,
-        home: const StartView(),
+        title: dotenv.env["APP_NAME"]!,
+        theme: ThemeData(
+          colorScheme: const ColorScheme.light(
+            primary: AppColors.primary,
+            secondary: AppColors.secondary,
+          ),
+          scaffoldBackgroundColor: AppColors.background,
+          fontFamily: "Jost",
+          bottomSheetTheme: const BottomSheetThemeData(
+            backgroundColor: AppColors.background,
+          ),
+        ),
+        debugShowCheckedModeBanner: false,
       );
 }
 
-class MyHttpOverrides extends HttpOverrides {
+class DebugHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
+  HttpClient createHttpClient(SecurityContext? context) =>
+      super.createHttpClient(context)
+        ..badCertificateCallback = (_, __, ___) => true;
+}
+
+void initializeOrientations(String orientation) async {
+  switch (orientation) {
+    case "landscape":
+      return await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    case "portrait":
+      return await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
   }
 }

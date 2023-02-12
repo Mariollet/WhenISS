@@ -7,7 +7,7 @@ on:
   push:
     branches: [preprod, master]
     paths-ignore:
-      - '**/README.md'
+      - "**/README.md"
   pull_request:
     branches: [preprod, master]
 
@@ -16,7 +16,6 @@ on:
 
   # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
     name: flutter build
     # The type of runner that the job will run on
@@ -25,8 +24,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
-      - run: flutter pub get
-      - run: flutter format ./lib --set-exit-if-changed
-      - run: flutter analyze
+          channel: stable
+      - run: dart pub get
+      # If using a localization package, uncomment this to generate translations
+      # - run: flutter gen-l10n
+      - run: dart format ./lib
+      - run: dart analyze
       - run: flutter test

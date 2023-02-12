@@ -1,40 +1,70 @@
 class Customer {
-  final int? id;
-  final String? email;
-  final String? firstName;
-  final String? lastName;
-  final DateTime? birthDate;
-
   const Customer({
-    this.id,
-    this.email,
-    this.firstName,
-    this.lastName,
-    this.birthDate,
+    required this.id,
+    required this.civility,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
   });
+
+  final int id;
+  final Civility civility;
+  final String firstName;
+  final String lastName;
+  final String email;
+
+  @override
+  int get hashCode => id;
+
+  @override
+  bool operator ==(other) => other is Customer && id == other.id;
+
+  String get name => "$firstName $lastName";
 
   Customer copyWith({
     int? id,
-    String? email,
+    Civility? civility,
     String? firstName,
     String? lastName,
-    DateTime? birthDate,
+    String? email,
   }) =>
       Customer(
         id: id ?? this.id,
-        email: email ?? this.email,
+        civility: civility ?? this.civility,
         firstName: firstName ?? this.firstName,
         lastName: lastName ?? this.lastName,
-        birthDate: birthDate ?? this.birthDate,
+        email: email ?? this.email,
       );
 
-  factory Customer.fromJSON(Map<String, dynamic> json) {
-    return Customer(
-      id: json["id"],
-      email: json["email"],
-      firstName: json["first_name"],
-      lastName: json["last_name"],
-      birthDate: DateTime.parse(json["birth_date"]),
-    );
+  factory Customer.placeholder() => const Customer(
+        id: 0,
+        civility: Civility.mr,
+        firstName: '',
+        lastName: '',
+        email: '',
+      );
+
+  factory Customer.fromJSON(Map<String, dynamic> json) => Customer(
+        id: json["id"],
+        civility: getCivilityFromJSON(json["civility"])!,
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        email: json["email"],
+      );
+
+  static Civility? getCivilityFromJSON(String civility) {
+    switch (civility) {
+      case "Monsieur":
+        return Civility.mr;
+      case "Madame":
+        return Civility.mrs;
+      default:
+        return null;
+    }
   }
+}
+
+enum Civility {
+  mr,
+  mrs,
 }

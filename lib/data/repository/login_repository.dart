@@ -1,45 +1,30 @@
-import "package:fl_starter/data/api.dart";
-import "package:fl_starter/services/api_routes.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:flutter_secure_storage/flutter_secure_storage.dart";
+import "package:keole/data/api.dart";
+import "package:keole/services/api_routes.dart";
 
-final getTokenRepositoryProvider = FutureProvider.autoDispose
-    .family<String?, Map<String, dynamic>>((ref, credentials) async {
-  final Api api = ref.read(apiProvider);
+final loginRepository = FutureProvider.autoDispose
+    .family<Map<String, dynamic>, Map<String, dynamic>>(
+  (ref, request) async => await API.authenticate(request),
+);
 
-  return api.getToken(credentials);
-});
+final getTokenRepository = FutureProvider.autoDispose<bool>(
+  (ref) async => await API.storage.read(key: "token") != null,
+);
 
-final checkTokenRepositoryProvider = FutureProvider<bool>((ref) async {
-  const FlutterSecureStorage storage = FlutterSecureStorage();
-
-  String? token = await storage.read(key: "token");
-
-  return token != null && token != '';
-});
-
-final forgotPasswordRepositoryProvider = FutureProvider.autoDispose
-    .family<Map<String, dynamic>?, String?>((ref, email) async {
-  final Api api = ref.read(apiProvider);
-
-  final response = await api.post(
-    AppApi.forgotPassword,
+final sendResetPasswordRequestRepository =
+    FutureProvider.autoDispose.family<Map<String, dynamic>, String>(
+  (ref, email) async => await API.post(
+    APIRoutes.forgotPassword,
     {
       "email": email,
     },
     false,
-  );
+  ),
+);
 
-  if (response["code"] != 400 && response["success"]) return null;
-
-  return response;
-});
-
-final clearSecureStorageRepositoryProvider =
+final clearSecureStorageRepository =
     FutureProvider.autoDispose<bool>((ref) async {
-  const FlutterSecureStorage storage = FlutterSecureStorage();
-
-  await storage.deleteAll();
+  await API.storage.deleteAll();
 
   return true;
 });

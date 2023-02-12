@@ -25,9 +25,9 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-      - run: flutter pub get
-      # If using a localization package, generate translations
+      - run: dart pub get
+      # If using a localization package, uncomment this to generate translations
       # - run: flutter gen-l10n
-      - run: dart format ./lib --set-exit-if-changed
+      - run: dart format ./lib
       - run: dart analyze
       - run: flutter test

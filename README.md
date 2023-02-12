@@ -1,7 +1,5 @@
 ## Keole starter kit for Flutter projects.
 
-> Format code in CI?
-
 [Dart docs](https://dart.dev/guides) • [Flutter docs](https://docs.flutter.dev) • [pub.dev](https://pub.dev)  
 
 ### Dependencies

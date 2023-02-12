@@ -9,6 +9,9 @@ class CustomerNotifier extends StateNotifier<Customer> {
 
   void setId(int id) => state = state.copyWith(id: id);
 
+  void setCivility(Civility civility) =>
+      state = state.copyWith(civility: civility);
+
   void setFirstName(String firstName) =>
       state = state.copyWith(firstName: firstName);
 

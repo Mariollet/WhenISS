@@ -7,6 +7,7 @@ abstract class AppRoutes {
   // Security
   static const String login = "/login";
   static const String forgotPassword = "/forgot-password";
+
   // Home
   static const String home = "/home";
 

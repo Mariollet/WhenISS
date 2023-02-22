@@ -4,7 +4,7 @@ import "package:keole/data/models/customer.dart";
 import "package:keole/services/api_routes.dart";
 import "package:keole/ui/view_model/customer_view_model.dart";
 
-final getCustomerRepository = FutureProvider.autoDispose<Customer>(
+final getCustomerRepository = FutureProvider<Customer>(
   (ref) async => Customer.fromJSON(await API.get(APIRoutes.getCustomer)),
 );
 

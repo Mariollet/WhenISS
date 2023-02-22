@@ -42,8 +42,11 @@ class ForgotPasswordState extends ConsumerState<ForgotPasswordView> {
               const SizedBox(height: 30),
               Form(
                 key: forgotPasswordFormKey,
-                child: TextInput.email(
+                child: TextInput(
                   controller: emailController,
+                  validator: emailValidator,
+                  placeholder: "E-mail",
+                  keyboardType: TextInputType.emailAddress,
                   disabled: loading,
                 ),
               ),

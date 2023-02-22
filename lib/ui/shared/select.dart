@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:keole/services/app_text_styles.dart";
 
 /// A custom select menu based on the [DropdownButtonFormField] widget.
 class Select<T> extends StatefulWidget {
@@ -49,7 +48,7 @@ class SelectState<T> extends State<Select<T>> {
         iconSize: 0,
         borderRadius: BorderRadius.circular(25),
         decoration: InputDecoration(
-          label: Text(widget.placeholder, style: AppTextStyles.selectLabel),
+          labelText: widget.placeholder,
         ),
         validator: widget.validator,
       );

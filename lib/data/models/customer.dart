@@ -5,6 +5,9 @@ class Customer {
     required this.firstName,
     required this.lastName,
     required this.email,
+    required this.phoneNumber,
+    required this.birthDate,
+    required this.address,
   });
 
   final int id;
@@ -12,6 +15,9 @@ class Customer {
   final String firstName;
   final String lastName;
   final String email;
+  final String phoneNumber;
+  final DateTime birthDate;
+  final Address address;
 
   @override
   int get hashCode => id;
@@ -27,6 +33,9 @@ class Customer {
     String? firstName,
     String? lastName,
     String? email,
+    String? phoneNumber,
+    DateTime? birthDate,
+    Address? address,
   }) =>
       Customer(
         id: id ?? this.id,
@@ -34,29 +43,42 @@ class Customer {
         firstName: firstName ?? this.firstName,
         lastName: lastName ?? this.lastName,
         email: email ?? this.email,
+        phoneNumber: phoneNumber ?? this.phoneNumber,
+        birthDate: birthDate ?? this.birthDate,
+        address: address ?? this.address,
       );
 
-  factory Customer.placeholder() => const Customer(
-        id: 0,
+  factory Customer.placeholder() => Customer(
+        id: -1,
         civility: Civility.mr,
         firstName: '',
         lastName: '',
         email: '',
+        phoneNumber: '',
+        birthDate: DateTime.now(),
+        address: Address(
+          street: "86 rue Pierre et Marie-Curie",
+          postalCode: 34430,
+          city: "Saint-Jean-de-Védas",
+        ),
       );
 
   factory Customer.fromJSON(Map<String, dynamic> json) => Customer(
         id: json["id"],
-        civility: getCivilityFromJSON(json["civility"])!,
+        civility: parseCivility(json["civility"])!,
         firstName: json["first_name"],
         lastName: json["last_name"],
         email: json["email"],
+        phoneNumber: json["phone_number"],
+        birthDate: DateTime.parse(json["birth_date"]),
+        address: Address.fromJSON(json["address"]),
       );
 
-  static Civility? getCivilityFromJSON(String civility) {
+  static Civility? parseCivility(String civility) {
     switch (civility) {
-      case "Monsieur":
+      case "monsieur":
         return Civility.mr;
-      case "Madame":
+      case "madame":
         return Civility.mrs;
       default:
         return null;
@@ -67,4 +89,25 @@ class Customer {
 enum Civility {
   mr,
   mrs,
+}
+
+class Address {
+  Address({
+    required this.street,
+    this.complement,
+    required this.postalCode,
+    required this.city,
+  });
+
+  final String street;
+  final String? complement;
+  final int postalCode;
+  final String city;
+
+  factory Address.fromJSON(Map<String, dynamic> json) => Address(
+        street: json["street"],
+        complement: json["complement"],
+        postalCode: json["postal_code"],
+        city: json["city"],
+      );
 }

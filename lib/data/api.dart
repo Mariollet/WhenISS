@@ -20,6 +20,11 @@ abstract class API {
   static final String baseUrl = dotenv.env["APP_BASE_URL"]!;
   static String? token;
 
+  static Future<String?> getToken() async => await storage.read(key: "token");
+
+  static void showSnackBarError(Map<String, dynamic> body) =>
+      showSnackBar(body["message"] ?? unknownErrorMessage);
+
   static Future<Map<String, dynamic>> authenticate(
       Map<String, dynamic> body) async {
     try {
@@ -63,18 +68,18 @@ abstract class API {
         },
       );
 
-      final Map<String, dynamic> body = jsonDecode(response.body);
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
 
-      if (response.statusCode != 200) showSnackBarError(body);
+      if (response.statusCode != 200) showSnackBarError(responseBody);
 
-      return body;
+      return responseBody;
     } on ClientException {
       return clientErrorResponse;
     }
   }
 
   static Future post(String endpoint, Map<String, dynamic> body,
-      [bool includeToken = true, bool verbose = false]) async {
+      [bool includeToken = true]) async {
     token ??= await getToken();
 
     try {
@@ -87,11 +92,11 @@ abstract class API {
         body: jsonEncode(body),
       );
 
-      body = jsonDecode(response.body);
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
 
-      if (response.statusCode != 200 && verbose) showSnackBarError(body);
+      if (response.statusCode != 200) showSnackBarError(responseBody);
 
-      return body;
+      return responseBody;
     } on ClientException {
       return clientErrorResponse;
     }
@@ -110,18 +115,36 @@ abstract class API {
         body: jsonEncode(body),
       );
 
-      body = jsonDecode(response.body);
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
 
-      if (response.statusCode != 200) showSnackBarError(body);
+      if (response.statusCode != 200) showSnackBarError(responseBody);
 
-      return body;
+      return responseBody;
     } on ClientException {
       return clientErrorResponse;
     }
   }
 
-  static Future<String?> getToken() async => await storage.read(key: "token");
+  static Future delete(String endpoint, [Map<String, dynamic>? body]) async {
+    token ??= await getToken();
 
-  static void showSnackBarError(Map<String, dynamic> body) =>
-      showSnackBar(body["message"] ?? unknownErrorMessage);
+    try {
+      final Response response = await client.delete(
+        Uri.https(baseUrl, endpoint),
+        headers: {
+          HttpHeaders.authorizationHeader: "Bearer $token",
+          HttpHeaders.contentTypeHeader: "application/json",
+        },
+        body: body == null ? null : jsonEncode(body),
+      );
+
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+
+      if (response.statusCode != 200) showSnackBarError(responseBody);
+
+      return responseBody;
+    } on ClientException {
+      return clientErrorResponse;
+    }
+  }
 }

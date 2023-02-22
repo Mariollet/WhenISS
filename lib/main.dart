@@ -2,26 +2,17 @@ import "dart:io";
 import "package:context_holder/context_holder.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
-import "package:flutter/services.dart";
 import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/services/app_colors.dart";
 import "package:keole/services/app_routes.dart";
-import "package:keole/ui/view/home_view.dart";
-// import "package:keole/ui/view/start_view.dart";
+import "package:keole/ui/view/start_view.dart";
 
 void main() async {
   await dotenv.load(fileName: ".env");
   await dotenv.load(fileName: ".env.local", mergeWith: {...dotenv.env});
 
   WidgetsFlutterBinding.ensureInitialized();
-
-  initializeOrientations(dotenv.env["APP_ORIENTATION"]!);
-
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
 
   if (kDebugMode) HttpOverrides.global = DebugHttpOverrides();
 
@@ -38,7 +29,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         navigatorKey: ContextHolder.key,
-        home: const HomeView(),
+        home: const StartView(),
         onGenerateRoute: AppRoutes.onGenerateRoute,
         title: dotenv.env["APP_NAME"]!,
         theme: ThemeData(
@@ -47,7 +38,7 @@ class App extends StatelessWidget {
             secondary: AppColors.secondary,
           ),
           scaffoldBackgroundColor: AppColors.background,
-          fontFamily: "Jost",
+          fontFamily: dotenv.env["APP_FONT_FAMILY"],
           bottomSheetTheme: const BottomSheetThemeData(
             backgroundColor: AppColors.background,
           ),
@@ -61,19 +52,4 @@ class DebugHttpOverrides extends HttpOverrides {
   HttpClient createHttpClient(SecurityContext? context) =>
       super.createHttpClient(context)
         ..badCertificateCallback = (_, __, ___) => true;
-}
-
-void initializeOrientations(String orientation) async {
-  switch (orientation) {
-    case "landscape":
-      return await SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-    case "portrait":
-      return await SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-  }
 }

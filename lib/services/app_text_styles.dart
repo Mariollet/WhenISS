@@ -33,10 +33,6 @@ abstract class AppTextStyles {
     color: AppColors.error,
   );
 
-  static TextStyle snackBar = TextStyle(
-    fontFamily: fontFamily,
-  );
-
   static const TextStyle copyright = TextStyle(
     color: AppColors.muted,
     fontSize: 12,

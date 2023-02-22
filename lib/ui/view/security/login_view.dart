@@ -46,14 +46,20 @@ class LoginState extends ConsumerState<LoginView> {
                 key: loginFormKey,
                 child: Column(
                   children: [
-                    TextInput.email(
+                    TextInput(
                       controller: emailController,
+                      validator: emailValidator,
+                      placeholder: "E-mail",
+                      keyboardType: TextInputType.emailAddress,
                       disabled: loading,
                     ),
                     const SizedBox(height: 15),
-                    TextInput.password(
+                    TextInput(
                       controller: passwordController,
+                      validator: requiredValidator,
+                      placeholder: "Mot de passe",
                       disabled: loading,
+                      obscured: true,
                     ),
                   ],
                 ),

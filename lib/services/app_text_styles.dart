@@ -1,8 +1,9 @@
 import "package:flutter/material.dart";
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:keole/services/app_colors.dart";
 
 abstract class AppTextStyles {
-  static const String fontFamily = "Jost";
+  static String fontFamily = dotenv.env["APP_FONT_FAMILY"]!;
 
   static const TextStyle h1 = TextStyle(
     fontSize: 28,
@@ -14,12 +15,12 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle button = TextStyle(
+  static TextStyle button = TextStyle(
     fontSize: 18,
     fontFamily: fontFamily,
   );
 
-  static const TextStyle link = TextStyle(
+  static TextStyle link = TextStyle(
     fontSize: 14,
     fontFamily: fontFamily,
   );
@@ -28,15 +29,11 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle selectLabel = TextStyle(
-      //
-      );
-
   static const TextStyle formError = TextStyle(
     color: AppColors.error,
   );
 
-  static const TextStyle snackBar = TextStyle(
+  static TextStyle snackBar = TextStyle(
     fontFamily: fontFamily,
   );
 

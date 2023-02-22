@@ -4,6 +4,39 @@ import "package:flutter/services.dart";
 import "package:keole/extensions/validator.dart";
 import "package:keole/services/app_text_styles.dart";
 
+String? emailValidator(String? value) {
+  if (value!.isEmpty) return "Ce champ est requis.";
+  if (!value.isValidEmail()) {
+    return "Veuillez saisir une adresse e-mail valide.";
+  }
+
+  return null;
+}
+
+String? phoneNumberValidator(String? value) {
+  if (value!.isEmpty) return "Ce champ est requis.";
+  if (!value.isValidPhoneNumber()) {
+    return "Veuillez saisir un numéro de téléphone valide.";
+  }
+
+  return null;
+}
+
+String? postalCodeValidator(String? value) {
+  if (value!.isEmpty) return "Ce champ est requis.";
+  if (!value.isValidPostalCode()) {
+    return "Veuillez saisir un code postal valide.";
+  }
+
+  return null;
+}
+
+String? requiredValidator(String? value) {
+  if (value!.isEmpty) return "Ce champ est requis.";
+
+  return null;
+}
+
 /// Custom text input based on the [TextFormField] widget.
 class TextInput extends StatefulWidget {
   const TextInput({
@@ -38,40 +71,6 @@ class TextInput extends StatefulWidget {
 
   @override
   TextInputState createState() => TextInputState();
-
-  factory TextInput.email({
-    required TextEditingController controller,
-    bool disabled = false,
-  }) =>
-      TextInput(
-        controller: controller,
-        validator: (String? value) {
-          if (value!.isEmpty) return "Ce champ est requis.";
-          if (!value.isValidEmail()) return "Veuillez saisir un e-mail valide.";
-
-          return null;
-        },
-        placeholder: "E-mail *",
-        keyboardType: TextInputType.emailAddress,
-        disabled: disabled,
-      );
-
-  factory TextInput.password({
-    required TextEditingController controller,
-    bool disabled = false,
-    bool obscured = true,
-  }) =>
-      TextInput(
-        controller: controller,
-        validator: (String? value) {
-          if (value!.isEmpty) return "Ce champ est requis.";
-
-          return null;
-        },
-        placeholder: "Mot de passe *",
-        disabled: disabled,
-        obscured: obscured,
-      );
 }
 
 class TextInputState extends State<TextInput> {
@@ -95,7 +94,9 @@ class TextInputState extends State<TextInput> {
                   ),
                 ),
         ),
-        keyboardType: widget.keyboardType,
+        keyboardType: widget.obscured && !obscured
+            ? TextInputType.visiblePassword
+            : widget.keyboardType,
         obscuringCharacter: '•',
         obscureText: widget.obscured && obscured,
         maxLengthEnforcement: MaxLengthEnforcement.enforced,

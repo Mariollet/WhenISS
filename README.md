@@ -14,13 +14,13 @@
 
 ### Installation
 
-After cloning the project, run `flutter pub get`. If the project uses a localization package, run also `flutter gen-l10n`. You can uncomment this command in the CI.
+1. `flutter pub get`
+2. `flutter gen-l10n` if the project uses a localization package. You can also uncomment this command in the CI.
 
 #### Environment setup
 
-Create a file named `.env.local` in the project root. This will be your local configuration. It must not be committed!
-
-Then, uncomment the line registering the file in `pubspec.yaml`.
+1. Create a file named `.env.local` in the project root. This will be your local configuration. It must not be committed!
+2. Uncomment the line registering the file in `pubspec.yaml`.
 
 The local environment must define the commented constants from the `.env`. The Dart debugger must be restarted after changing a global or local environment constant.
 

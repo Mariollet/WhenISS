@@ -19,10 +19,11 @@
 
 #### Environment setup
 
-1. Create a file named `.env.local` in the project root. This will be your local configuration. It must not be committed!
-2. Uncomment the line registering the file in `pubspec.yaml`.
+1. Create a file named `.env.local` in the project root. This will be your local configuration.
+2. Copy the commented variables of the `.env` to the `.env.local`.
+3. Uncomment the line registering the file in `pubspec.yaml`.
 
-The local environment must define the commented constants from the `.env`. The Dart debugger must be restarted after changing a global or local environment constant.
+_Note: Changing an environment variable requires a restart of the Dart debugger._
 
 #### Debug mode
 

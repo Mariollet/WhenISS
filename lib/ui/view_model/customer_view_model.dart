@@ -1,19 +1,14 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:keole/data/models/address.dart";
 import "package:keole/data/models/customer.dart";
 import "package:keole/data/repository/customer_repository.dart";
 
 final customerProvider = StateNotifierProvider<CustomerNotifier, Customer>(
-  (ref) {
-    final AsyncValue<Customer> customer = ref.watch(getCustomerRepository);
-
-    return CustomerNotifier(customer: customer);
-  },
+  (ref) => CustomerNotifier(ref.watch(getCustomerRepository)),
 );
 
 class CustomerNotifier extends StateNotifier<Customer> {
-  CustomerNotifier({
-    required this.customer,
-  }) : super(Customer.placeholder()) {
+  CustomerNotifier(this.customer) : super(Customer.placeholder()) {
     customer.when(
       data: (Customer response) => state = response,
       error: (error, _) => throw Exception(error),

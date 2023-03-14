@@ -1,3 +1,5 @@
+import "package:keole/data/models/address.dart";
+
 class Customer {
   const Customer({
     required this.id,
@@ -58,56 +60,35 @@ class Customer {
         birthDate: DateTime.now(),
         address: Address(
           street: "86 rue Pierre et Marie-Curie",
-          postalCode: 34430,
+          postalCode: "34430",
           city: "Saint-Jean-de-Védas",
         ),
       );
 
   factory Customer.fromJSON(Map<String, dynamic> json) => Customer(
         id: json["id"],
-        civility: parseCivility(json["civility"])!,
+        civility: Civility.parse(json["civility"]),
         firstName: json["first_name"],
         lastName: json["last_name"],
         email: json["email"],
         phoneNumber: json["phone_number"],
         birthDate: DateTime.parse(json["birth_date"]),
-        address: Address.fromJSON(json["address"]),
+        address: Address.parse(json["address"]),
       );
-
-  static Civility? parseCivility(String civility) {
-    switch (civility) {
-      case "monsieur":
-        return Civility.mr;
-      case "madame":
-        return Civility.mrs;
-      default:
-        return null;
-    }
-  }
 }
 
 enum Civility {
   mr,
-  mrs,
-}
+  mrs;
 
-class Address {
-  Address({
-    required this.street,
-    this.complement,
-    required this.postalCode,
-    required this.city,
-  });
-
-  final String street;
-  final String? complement;
-  final int postalCode;
-  final String city;
-
-  factory Address.fromJSON(Map<String, dynamic> json) => Address(
-        street: json["street"],
-        complement: json["complement"],
-        postalCode: json["postal_code"],
-        city: json["city"],
-      );
+  factory Civility.parse(String string) {
+    switch (string) {
+      case "Monsieur":
+        return mr;
+      case "Madame":
+        return mrs;
+      default:
+        throw Exception("Invalid civility.");
+    }
+  }
 }

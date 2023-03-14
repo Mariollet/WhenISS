@@ -16,7 +16,11 @@ void main() async {
 
   if (kDebugMode) HttpOverrides.global = DebugHttpOverrides();
 
-  runApp(const ProviderScope(child: App()));
+  runApp(
+    const ProviderScope(
+      child: App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {

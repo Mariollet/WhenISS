@@ -1,5 +1,5 @@
 import "package:flutter/cupertino.dart";
-import "package:keole/services/app_text_styles.dart";
+import "package:keole/services/services.dart";
 
 class Link extends StatelessWidget {
   const Link({
@@ -22,6 +22,6 @@ class Link extends StatelessWidget {
         padding: EdgeInsets.zero,
         minSize: null,
         onPressed: disabled ? null : onPressed,
-        child: Text(text, style: AppTextStyles.link),
+        child: Text(text, style: TextStyles.link),
       );
 }

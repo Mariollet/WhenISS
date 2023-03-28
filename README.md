@@ -2,16 +2,6 @@
 
 [Dart docs](https://dart.dev/guides) • [Flutter docs](https://docs.flutter.dev) • [pub.dev](https://pub.dev)
 
-### Dependencies
-
-- [`context_holder`](https://pub.dev/documentation/context_holder/latest)
-- [`cupertino_icons`](https://api.flutter.dev/flutter/cupertino/CupertinoIcons-class.html)
-- [`flutter_dotenv`](https://pub.dev/documentation/flutter_dotenv/latest)
-- [`flutter_riverpod`](https://riverpod.dev/docs/getting_started)
-- [`flutter_secure_storage`](https://pub.dev/documentation/flutter_secure_storage/latest)
-- [`http`](https://pub.dev/documentation/http/latest)
-- [`intl`](https://pub.dev/documentation/intl/latest)
-
 ### Installation
 
 1. `flutter pub get`

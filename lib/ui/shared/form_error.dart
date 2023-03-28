@@ -1,13 +1,9 @@
 import "package:flutter/cupertino.dart";
-import "package:keole/services/app_colors.dart";
-import "package:keole/services/app_text_styles.dart";
+import "package:keole/services/services.dart";
 
 /// Generic container for a form error message.
 class FormError extends StatelessWidget {
-  const FormError(
-    this.message, {
-    super.key,
-  });
+  const FormError(this.message, {super.key});
 
   final String message;
 
@@ -29,7 +25,7 @@ class FormError extends StatelessWidget {
             TextSpan(text: message),
           ],
         ),
-        style: AppTextStyles.formError,
+        style: TextStyles.formError,
         textAlign: TextAlign.center,
       );
 }

@@ -1,8 +1,6 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:keole/services/app_colors.dart";
-import "package:keole/services/app_images.dart";
-import "package:keole/services/app_text_styles.dart";
+import "package:keole/services/services.dart";
 
 /// Custom [Scaffold] widget.
 class CustomScaffold extends StatelessWidget {
@@ -55,7 +53,7 @@ class CustomScaffold extends StatelessWidget {
         bottomSheet: Container(
           alignment: Alignment.center,
           height: 50,
-          child: const Text("© 2023 Keole", style: AppTextStyles.copyright),
+          child: const Text("© 2023 Keole", style: TextStyles.copyright),
         ),
         extendBodyBehindAppBar: true,
       );

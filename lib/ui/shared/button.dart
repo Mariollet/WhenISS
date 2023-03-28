@@ -1,6 +1,5 @@
 import "package:flutter/cupertino.dart";
-import "package:keole/services/app_colors.dart";
-import "package:keole/services/app_text_styles.dart";
+import "package:keole/services/services.dart";
 import "package:keole/ui/shared/loader.dart";
 
 /// Generic button based on the [CupertinoButton] widget.
@@ -39,7 +38,7 @@ class Button extends StatelessWidget {
           onPressed: disabled || loading ? null : onPressed,
           child: loading
               ? const Loader(color: AppColors.white)
-              : Text(text, style: AppTextStyles.button),
+              : Text(text, style: TextStyles.button),
         ),
       );
 }

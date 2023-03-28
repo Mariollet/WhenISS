@@ -20,9 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  context_holder: ^0.0.5
   cupertino_icons: ^1.0.5
-  flutter_dotenv: ^5.0.2
   flutter_riverpod: ^2.2.0
   flutter_secure_storage: ^8.0.0
   http: ^0.13.5
@@ -43,8 +41,6 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
   assets:
     - assets/images/
-    - .env
-    - .env.local
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

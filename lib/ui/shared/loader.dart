@@ -1,21 +1,14 @@
 import "package:flutter/cupertino.dart";
 
-/// Loader based on the [CupertinoActivityIndicator] widget.
 class Loader extends StatelessWidget {
-  const Loader({
-    super.key,
-    this.radius,
-    this.color,
-  });
+  const Loader({super.key, this.radius = 12, this.color});
 
-  /// Loader radius. Defaults to 12.
-  final double? radius;
-
+  final double radius;
   final Color? color;
 
   @override
   Widget build(BuildContext context) => CupertinoActivityIndicator(
         color: color,
-        radius: radius ?? 12,
+        radius: radius,
       );
 }

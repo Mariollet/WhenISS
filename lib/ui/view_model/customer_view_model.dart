@@ -1,41 +1,37 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/data/models/address.dart";
-import "package:keole/data/models/customer.dart";
+import "package:keole/data/models/user.dart";
 import "package:keole/data/repository/customer_repository.dart";
 
-final customerProvider = StateNotifierProvider<CustomerNotifier, Customer>(
-  (ref) => CustomerNotifier(ref.watch(getCustomerRepository)),
+final userProvider = StateNotifierProvider<UserNotifier, User?>(
+  (ref) => UserNotifier(user: ref.watch(getCustomerRepository)),
 );
 
-class CustomerNotifier extends StateNotifier<Customer> {
-  CustomerNotifier(this.customer) : super(Customer.placeholder()) {
-    customer.when(
-      data: (Customer response) => state = response,
+class UserNotifier extends StateNotifier<User?> {
+  UserNotifier({required this.user}) : super(null) {
+    user.when(
+      data: (User user) => state = user,
       error: (error, _) => throw Exception(error),
       loading: () {},
     );
   }
 
-  final AsyncValue<Customer> customer;
+  final AsyncValue<User> user;
 
-  void setId(int id) => state = state.copyWith(id: id);
+  void setId(int id) => state = state!.copyWith(id: id);
 
-  void setCivility(Civility civility) =>
-      state = state.copyWith(civility: civility);
+  void setCivility(Civility civility) => state!.copyWith(civility: civility);
 
-  void setFirstName(String firstName) =>
-      state = state.copyWith(firstName: firstName);
+  void setFirstName(String firstName) => state!.copyWith(firstName: firstName);
 
-  void setLastName(String lastName) =>
-      state = state.copyWith(lastName: lastName);
+  void setLastName(String lastName) => state!.copyWith(lastName: lastName);
 
-  void setEmail(String email) => state = state.copyWith(email: email);
+  void setEmail(String email) => state!.copyWith(email: email);
 
-  void setPhoneNumber(String phoneNumber) =>
-      state = state.copyWith(phoneNumber: phoneNumber);
+  void setPhone(String phone) => state!.copyWith(phone: phone);
 
-  void setBirthDate(DateTime birthDate) =>
-      state = state.copyWith(birthDate: birthDate);
+  void setBirthdate(DateTime birthdate) =>
+      state!.copyWith(birthdate: birthdate);
 
-  void setAddress(Address address) => state = state.copyWith(address: address);
+  void setAddress(Address address) => state!.copyWith(address: address);
 }

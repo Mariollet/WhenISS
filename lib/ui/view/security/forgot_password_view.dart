@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/services/app_text_styles.dart";
+import "package:keole/services/services.dart";
 import "package:keole/ui/shared/button.dart";
 import "package:keole/ui/shared/custom_scaffold.dart";
 import "package:keole/ui/shared/form_error.dart";
@@ -30,13 +30,13 @@ class ForgotPasswordState extends ConsumerState<ForgotPasswordView> {
             children: [
               const Text(
                 "Mot de passe oublié ?",
-                style: AppTextStyles.h1,
+                style: TextStyles.h1,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
               const Text(
                 "Si votre e-mail est reconnu, un lien pour renouveler votre mot de passe vous sera envoyé.",
-                style: AppTextStyles.p,
+                style: TextStyles.p,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),

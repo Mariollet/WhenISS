@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/services/app_routes.dart";
-import "package:keole/services/app_text_styles.dart";
+import "package:keole/services/services.dart";
 import "package:keole/ui/shared/button.dart";
 import "package:keole/ui/shared/custom_scaffold.dart";
 import "package:keole/ui/shared/form_error.dart";
@@ -32,13 +31,13 @@ class LoginState extends ConsumerState<LoginView> {
             children: [
               const Text(
                 "Connexion à votre espace personnel",
-                style: AppTextStyles.h1,
+                style: TextStyles.h1,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
               const Text(
                 "Saisissez votre e-mail et votre\nmot de passe pour accéder à\nl'application.",
-                style: AppTextStyles.p,
+                style: TextStyles.p,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
@@ -71,7 +70,7 @@ class LoginState extends ConsumerState<LoginView> {
                   text: "Mot de passe oublié ?",
                   disabled: loading,
                   onPressed: () =>
-                      Navigator.of(context).pushNamed(AppRoutes.forgotPassword),
+                      Navigator.of(context).pushNamed(Routes.forgotPassword),
                 ),
               ),
               const SizedBox(height: 15),
@@ -115,6 +114,6 @@ class LoginState extends ConsumerState<LoginView> {
     if (loginResponse?["success"] == false) return setState(() {});
     if (!mounted) return;
 
-    Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+    Navigator.of(context).pushReplacementNamed(Routes.home);
   }
 }

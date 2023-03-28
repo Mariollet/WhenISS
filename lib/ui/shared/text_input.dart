@@ -2,7 +2,7 @@ import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:keole/extensions/validator.dart";
-import "package:keole/services/app_text_styles.dart";
+import "package:keole/services/services.dart";
 
 String? emailValidator(String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";
@@ -81,7 +81,7 @@ class TextInputState extends State<TextInput> {
         controller: widget.controller,
         decoration: InputDecoration(
           labelText: widget.placeholder,
-          labelStyle: AppTextStyles.textInputLabel,
+          labelStyle: TextStyles.textInputLabel,
           suffixIcon: !widget.obscured
               ? null
               : IconButton(

@@ -6,22 +6,20 @@ class Address {
     required this.city,
   });
 
-  final String street;
+  final String street, postalCode, city;
   final String? complement;
-  final String postalCode;
-  final String city;
 
-  factory Address.parse(Map<String, dynamic> json) => Address(
+  factory Address.fromJSON(Map<String, dynamic> json) => Address(
         street: json["street"],
         complement: json["complement"],
         postalCode: json["postal_code"],
         city: json["city"],
       );
 
-  Map<String, dynamic> stringify() => {
+  Map<String, dynamic> toJSON() => {
         "street": street,
         "complement": complement,
-        "postalCode": postalCode,
+        "postal_code": postalCode,
         "city": city,
       };
 }

@@ -1,11 +1,11 @@
 import "dart:async";
 import "dart:convert";
 import "dart:io";
-import "package:flutter_dotenv/flutter_dotenv.dart";
+
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:http/http.dart";
-import "package:keole/services/api_routes.dart";
-import "package:keole/services/snack_bar.dart";
+import "package:keole/env.dart";
+import "package:keole/services/services.dart";
 
 const String unknownErrorMessage = "Une erreur inconnue est survenue.";
 
@@ -17,7 +17,7 @@ const Map<String, dynamic> clientErrorResponse = {
 abstract class API {
   static final Client client = Client();
   static const FlutterSecureStorage storage = FlutterSecureStorage();
-  static final String baseUrl = dotenv.env["APP_BASE_URL"]!;
+  static final String baseUrl = env["APP_BASE_URL"]!;
   static String? token;
 
   static Future<String?> getToken() async => await storage.read(key: "token");

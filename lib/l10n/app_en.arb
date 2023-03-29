@@ -1,4 +1,5 @@
 {
 	"home": "Home",
+	"homeDescription": "You are currently logged in.",
 	"logout": "Log out"
 }

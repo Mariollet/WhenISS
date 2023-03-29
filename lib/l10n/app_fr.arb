@@ -1,4 +1,5 @@
 {
 	"home": "Accueil",
+	"homeDescription": "Vous êtes actuellement connecté(e).",
 	"logout": "Se déconnecter"
 }

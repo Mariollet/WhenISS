@@ -12,10 +12,10 @@ class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
 
   @override
-  LoginState createState() => LoginState();
+  LoginViewState createState() => LoginViewState();
 }
 
-class LoginState extends ConsumerState<LoginView> {
+class LoginViewState extends ConsumerState<LoginView> {
   final GlobalKey<FormState> loginFormKey = GlobalKey();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();

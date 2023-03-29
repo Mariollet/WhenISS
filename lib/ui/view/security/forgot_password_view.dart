@@ -1,20 +1,17 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/services/services.dart";
-import "package:keole/ui/shared/button.dart";
-import "package:keole/ui/shared/custom_scaffold.dart";
-import "package:keole/ui/shared/form_error.dart";
-import "package:keole/ui/shared/text_input.dart";
-import "package:keole/ui/view_model/login_view_model.dart";
+import "package:keole/ui/shared/shared.dart";
+import "package:keole/ui/view_model/view_model.dart";
 
 class ForgotPasswordView extends ConsumerStatefulWidget {
   const ForgotPasswordView({super.key});
 
   @override
-  ForgotPasswordState createState() => ForgotPasswordState();
+  ForgotPasswordViewState createState() => ForgotPasswordViewState();
 }
 
-class ForgotPasswordState extends ConsumerState<ForgotPasswordView> {
+class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
   final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey();
   final TextEditingController emailController = TextEditingController();
   Map<String, dynamic>? forgotPasswordResponse;

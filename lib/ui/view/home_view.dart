@@ -2,9 +2,8 @@ import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/services/services.dart";
-import "package:keole/ui/shared/button.dart";
-import "package:keole/ui/shared/custom_scaffold.dart";
-import "package:keole/ui/view_model/login_view_model.dart";
+import "package:keole/ui/shared/shared.dart";
+import "package:keole/ui/view_model/view_model.dart";
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -20,8 +19,8 @@ class HomeView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),
-            const Text(
-              "Vous êtes actuellement connecté(e).",
+            Text(
+              localizations.homeDescription,
               style: TextStyles.p,
               textAlign: TextAlign.center,
             ),

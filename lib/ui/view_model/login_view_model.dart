@@ -7,12 +7,8 @@ final loginProvider = Provider.autoDispose
   (ref, request) => ref.watch(loginRepository(request).future),
 );
 
-final isLoggedProvider = Provider.autoDispose<bool>(
-  (ref) => ref.watch(getTokenRepository).when(
-        data: (bool isLogged) => isLogged,
-        error: (error, _) => throw Exception(error),
-        loading: () => false,
-      ),
+final isLoggedProvider = FutureProvider.autoDispose<bool>(
+  (ref) => ref.watch(getTokenRepository.future),
 );
 
 final sendResetPasswordRequestProvider =

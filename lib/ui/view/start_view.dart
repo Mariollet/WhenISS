@@ -13,8 +13,8 @@ class StartView extends StatelessWidget {
           builder: (BuildContext context, WidgetRef ref, Widget? child) {
             final bool isLogged = ref.watch(isLoggedProvider);
 
-            Future(() => Navigator.of(context)
-                .pushReplacementNamed(isLogged ? Routes.home : Routes.login));
+            Future(() => Navigator.of(context).pushReplacementNamed(
+                isLogged ? AppRoutes.home : AppRoutes.login));
 
             return child!;
           },

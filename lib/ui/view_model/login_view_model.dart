@@ -1,4 +1,5 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:keole/data/api.dart";
 import "package:keole/data/repository/login_repository.dart";
 
 final loginProvider = Provider.autoDispose
@@ -19,10 +20,6 @@ final sendResetPasswordRequestProvider =
   (ref, email) => ref.watch(sendResetPasswordRequestRepository(email).future),
 );
 
-final clearSecureStorageProvider = Provider.autoDispose<bool>(
-  (ref) => ref.watch(clearSecureStorageRepository).when(
-        data: (bool cleared) => cleared,
-        error: (error, _) => throw Exception(error),
-        loading: () => false,
-      ),
+final logoutProvider = FutureProvider.autoDispose<void>(
+  (_) async => await Api.secureStorage.delete(key: "token"),
 );

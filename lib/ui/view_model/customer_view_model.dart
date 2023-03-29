@@ -1,10 +1,10 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/data/models/address.dart";
 import "package:keole/data/models/user.dart";
-import "package:keole/data/repository/customer_repository.dart";
+import 'package:keole/data/repository/user_repository.dart';
 
 final userProvider = StateNotifierProvider<UserNotifier, User?>(
-  (ref) => UserNotifier(user: ref.watch(getCustomerRepository)),
+  (ref) => UserNotifier(user: ref.watch(getUserRepository)),
 );
 
 class UserNotifier extends StateNotifier<User?> {

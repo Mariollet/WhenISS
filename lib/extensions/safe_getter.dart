@@ -1,4 +1,11 @@
-extension SafeGetter<T> on List<T> {
-  /// Returns the element at [index] or `null` if it doesn't exist.
-  T? at(int index) => length <= index ? null : this[index];
+extension SafeGetter<E> on List<E> {
+  /// Returns the element at [index], or `null` if [index] is unreachable.
+  E? safeAt(int index) =>
+      index.isNegative || index >= length ? null : this[index];
+
+  /// Returns the first element, or `null` if the list is empty.
+  E? get safeFirst => isEmpty ? null : first;
+
+  /// Returns the last element, or `null` if the list is empty.
+  E? get safeLast => isEmpty ? null : last;
 }

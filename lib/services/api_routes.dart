@@ -4,6 +4,6 @@ abstract class APIRoutes {
   static const String forgotPassword = "/api/security/forgot-password";
 
   // Customer
-  static const String getCustomer = "/api/customer";
-  static String patchCustomer(int customerId) => "/api/customer/$customerId";
+  static const String getUser = "/api/customer";
+  static String patchUser(int userId) => "/api/customer/$userId";
 }

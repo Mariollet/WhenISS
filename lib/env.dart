@@ -1,9 +1,10 @@
-import "package:keole/env.local.dart";
+import "package:keole/env.local.dart" as local;
 
 final Map<String, dynamic> env = {
   "APP_NAME": "Keole",
   "APP_BASE_URL": null,
   "APP_HOME": '/',
+  "APP_LOCALE": "fr",
   // "APP_DEBUG": false,
   // "BASE_URL_LOCAL": "localhost:8000",
   // `ifconfig | grep 192` to get the current local Mac IP
@@ -12,4 +13,4 @@ final Map<String, dynamic> env = {
   // "BASE_URL_PROD": "________.app",
 };
 
-void setupEnvironment() => env.addAll(localEnv);
+void setupEnvironment() => env.addAll(local.env);

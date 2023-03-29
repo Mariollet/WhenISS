@@ -4,27 +4,22 @@ import "package:keole/services/services.dart";
 
 final loginRepository = FutureProvider.autoDispose
     .family<Map<String, dynamic>, Map<String, dynamic>>(
-  (ref, request) async => await API.authenticate(request),
+  (ref, request) async => await Api.authenticate(request),
 );
 
 final getTokenRepository = FutureProvider.autoDispose<bool>(
-  (ref) async => await API.storage.read(key: "token") != null,
+  (ref) async => await Api.secureStorage.read(key: "token") != null,
 );
 
 final sendResetPasswordRequestRepository =
     FutureProvider.autoDispose.family<Map<String, dynamic>, String>(
-  (ref, email) async => await API.post(
+  (ref, email) async => await Api.post(
     APIRoutes.forgotPassword,
-    {
-      "email": email,
-    },
+    {"email": email},
     false,
   ),
 );
 
-final clearSecureStorageRepository =
-    FutureProvider.autoDispose<bool>((ref) async {
-  await API.storage.deleteAll();
-
-  return true;
-});
+final logoutRepository = FutureProvider.autoDispose<void>(
+  (_) async => await Api.secureStorage.delete(key: "token"),
+);

@@ -14,13 +14,14 @@ const Map<String, dynamic> clientErrorResponse = {
   "message": "Une erreur est survenue : serveur inaccessible.",
 };
 
-abstract class API {
+abstract class Api {
   static final Client client = Client();
-  static const FlutterSecureStorage storage = FlutterSecureStorage();
-  static final String baseUrl = env["APP_BASE_URL"]!;
+  static const FlutterSecureStorage secureStorage = FlutterSecureStorage();
+  static final String baseUrl = env["APP_BASE_URL"];
   static String? token;
 
-  static Future<String?> getToken() async => await storage.read(key: "token");
+  static Future<String?> getToken() async =>
+      await secureStorage.read(key: "token");
 
   static void showSnackBarError(Map<String, dynamic> body) =>
       showSnackBar(body["message"] ?? unknownErrorMessage);
@@ -45,7 +46,7 @@ abstract class API {
         };
       }
 
-      await storage.write(key: "token", value: token = body["token"]);
+      await secureStorage.write(key: "token", value: token = body["token"]);
 
       return {
         "success": true,
@@ -56,7 +57,7 @@ abstract class API {
     }
   }
 
-  static Future get(String endpoint) async {
+  static Future<dynamic> get(String endpoint) async {
     token ??= await getToken();
 
     try {
@@ -78,8 +79,11 @@ abstract class API {
     }
   }
 
-  static Future post(String endpoint, Map<String, dynamic> body,
-      [bool includeToken = true]) async {
+  static Future<dynamic> post(
+    String endpoint,
+    Map<String, dynamic> body, [
+    bool includeToken = true,
+  ]) async {
     token ??= await getToken();
 
     try {
@@ -102,7 +106,10 @@ abstract class API {
     }
   }
 
-  static Future patch(String endpoint, Map<String, dynamic> body) async {
+  static Future<dynamic> patch(
+    String endpoint,
+    Map<String, dynamic> body,
+  ) async {
     token ??= await getToken();
 
     try {
@@ -125,7 +132,10 @@ abstract class API {
     }
   }
 
-  static Future delete(String endpoint, [Map<String, dynamic>? body]) async {
+  static Future<dynamic> delete(
+    String endpoint, [
+    Map<String, dynamic>? body,
+  ]) async {
     token ??= await getToken();
 
     try {

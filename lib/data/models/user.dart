@@ -68,14 +68,14 @@ enum Civility {
 
   final String json;
 
-  factory Civility.fromJson(String string) {
-    switch (string) {
+  factory Civility.fromJson(String json) {
+    switch (json) {
       case "Monsieur":
         return mr;
       case "Madame":
         return mrs;
       default:
-        throw ArgumentError.value(string);
+        throw ArgumentError.value(json);
     }
   }
 

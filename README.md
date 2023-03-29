@@ -5,7 +5,7 @@
 ### Installation
 
 1. `flutter pub get`
-2. `flutter gen-l10n` if the project uses a localization package. You can also uncomment this command in the CI.
+2. `flutter gen-l10n`
 
 #### Environment setup
 

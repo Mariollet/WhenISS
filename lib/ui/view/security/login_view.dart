@@ -70,7 +70,7 @@ class LoginState extends ConsumerState<LoginView> {
                   text: "Mot de passe oublié ?",
                   disabled: loading,
                   onPressed: () =>
-                      Navigator.of(context).pushNamed(Routes.forgotPassword),
+                      Navigator.of(context).pushNamed(AppRoutes.forgotPassword),
                 ),
               ),
               const SizedBox(height: 15),
@@ -114,6 +114,6 @@ class LoginState extends ConsumerState<LoginView> {
     if (loginResponse?["success"] == false) return setState(() {});
     if (!mounted) return;
 
-    Navigator.of(context).pushReplacementNamed(Routes.home);
+    Navigator.of(context).pushReplacementNamed(AppRoutes.home);
   }
 }

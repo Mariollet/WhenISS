@@ -14,8 +14,8 @@ class HomeView extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Accueil",
+            Text(
+              localizations.home,
               style: TextStyles.h1,
               textAlign: TextAlign.center,
             ),
@@ -29,12 +29,14 @@ class HomeView extends StatelessWidget {
             Consumer(
               builder: (BuildContext context, WidgetRef ref, _) => Button(
                 width: 300,
-                text: "Se déconnecter",
-                onPressed: () {
-                  ref.read(clearSecureStorageProvider);
+                text: localizations.logout,
+                onPressed: ([bool mounted = false]) async {
+                  await ref.read(logoutProvider.future);
+
+                  if (!mounted) return;
 
                   Navigator.of(context)
-                      .pushNamedAndRemoveUntil(Routes.login, (_) => false);
+                      .pushNamedAndRemoveUntil(AppRoutes.login, (_) => false);
                 },
               ),
             ),

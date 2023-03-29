@@ -6,16 +6,12 @@ class Link extends StatelessWidget {
     super.key,
     required this.text,
     this.disabled = false,
-    this.onPressed,
+    required this.onPressed,
   });
 
-  /// The text to display on the link.
   final String text;
-
-  /// If `true`, disables and fades the link. The [text] content stays visible.
   final bool disabled;
-
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) => CupertinoButton(

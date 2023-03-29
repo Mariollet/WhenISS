@@ -52,7 +52,7 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 FormError(forgotPasswordResponse!["message"]),
               const SizedBox(height: 15),
               Button(
-                width: 300,
+                size: ButtonSize.m,
                 text: "Envoyer",
                 loading: loading,
                 onPressed: () {

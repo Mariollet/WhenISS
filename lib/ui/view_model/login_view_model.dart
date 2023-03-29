@@ -1,6 +1,6 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/data/api.dart";
-import "package:keole/data/repository/login_repository.dart";
+import "package:keole/data/repository/security_repository.dart";
 
 final loginProvider = Provider.autoDispose
     .family<Future<Map<String, dynamic>>, Map<String, dynamic>>(

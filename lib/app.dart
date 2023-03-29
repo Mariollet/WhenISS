@@ -5,15 +5,15 @@ import "package:keole/env.dart";
 import "package:keole/services/services.dart";
 
 class App extends StatelessWidget {
-  const App({super.key, this.initialRoute});
+  const App({super.key, required this.initialRoute});
 
-  final String? initialRoute;
+  final String initialRoute;
 
   @override
   Widget build(BuildContext context) => ProviderScope(
         child: MaterialApp(
           navigatorKey: navigatorKey,
-          initialRoute: initialRoute ?? env["APP_HOME"],
+          initialRoute: initialRoute,
           onGenerateRoute: AppRoutes.onGenerateRoute,
           title: env["APP_NAME"],
           theme: ThemeData(

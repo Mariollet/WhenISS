@@ -14,7 +14,7 @@ final getTokenRepository = FutureProvider.autoDispose<bool>(
 final sendResetPasswordRequestRepository =
     FutureProvider.autoDispose.family<Map<String, dynamic>, String>(
   (ref, email) async => await Api.post(
-    APIRoutes.forgotPassword,
+    ApiRoutes.forgotPassword,
     {"email": email},
     false,
   ),

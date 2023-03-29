@@ -30,7 +30,7 @@ abstract class Api {
       Map<String, dynamic> body) async {
     try {
       final Response response = await client.post(
-        Uri.https(baseUrl, APIRoutes.loginCheck),
+        Uri.https(baseUrl, ApiRoutes.login),
         headers: {
           HttpHeaders.contentTypeHeader: "application/json",
         },

@@ -1,7 +1,6 @@
 import "package:flutter/cupertino.dart";
 import "package:keole/services/services.dart";
 
-/// Generic container for a form error message.
 class FormError extends StatelessWidget {
   const FormError(this.message, {super.key});
 

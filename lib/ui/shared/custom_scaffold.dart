@@ -2,7 +2,6 @@ import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:keole/services/services.dart";
 
-/// Custom [Scaffold] widget.
 class CustomScaffold extends StatelessWidget {
   const CustomScaffold({
     super.key,
@@ -12,15 +11,8 @@ class CustomScaffold extends StatelessWidget {
     required this.body,
   });
 
-  /// If `true`, a leading cross icon will appear on the app bar.
-  final bool isModal;
-
-  /// The padding to apply on the body. Defaults to [EdgeInsets.zero].
+  final bool isModal, verticallyCentered;
   final EdgeInsets padding;
-
-  /// Determines if the body is vertically centered.
-  final bool verticallyCentered;
-
   final Widget body;
 
   @override
@@ -31,13 +23,11 @@ class CustomScaffold extends StatelessWidget {
               : IconButton(
                   splashRadius: 30,
                   onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(
-                    isModal
-                        ? CupertinoIcons.xmark
-                        : CupertinoIcons.arrow_turn_down_left,
-                  ),
+                  icon: isModal
+                      ? const Icon(CupertinoIcons.xmark)
+                      : const Icon(CupertinoIcons.arrow_turn_down_left),
                 ),
-          title: const Image(image: AssetImage(AppImages.logo), width: 200),
+          title: const Image(image: AssetImage(Images.logo), width: 200),
           elevation: 0,
           backgroundColor: AppColors.transparent,
           foregroundColor: AppColors.black,

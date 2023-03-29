@@ -1,7 +1,7 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
-import "package:keole/extensions/validator.dart";
+import "package:keole/extensions/extensions.dart";
 import "package:keole/services/services.dart";
 
 String? emailValidator(String? value) {
@@ -37,7 +37,6 @@ String? requiredValidator(String? value) {
   return null;
 }
 
-/// Custom text input based on the [TextFormField] widget.
 class TextInput extends StatefulWidget {
   const TextInput({
     super.key,
@@ -51,22 +50,10 @@ class TextInput extends StatefulWidget {
   });
 
   final TextEditingController controller;
-
   final String? Function(String?) validator;
-
-  /// Helper label that describes the input field.
   final String placeholder;
-
   final TextInputType? keyboardType;
-
-  /// If `true`, prevents focusing or editing the input.
-  final bool disabled;
-
-  /// If `true`, replaces each character with the symbol defined in [TextInputState] to mimic a password input.
-  final bool obscured;
-
-  /// If non-null, prevents entering more than [maxLength] characters.
-  /// Displays a character counter below the input.
+  final bool disabled, obscured;
   final int? maxLength;
 
   @override
@@ -87,11 +74,9 @@ class TextInputState extends State<TextInput> {
               : IconButton(
                   splashRadius: 20,
                   onPressed: () => setState(() => obscured = !obscured),
-                  icon: Icon(
-                    obscured
-                        ? CupertinoIcons.eye_fill
-                        : CupertinoIcons.eye_slash_fill,
-                  ),
+                  icon: obscured
+                      ? const Icon(CupertinoIcons.eye_fill)
+                      : const Icon(CupertinoIcons.eye_slash_fill),
                 ),
         ),
         keyboardType: widget.obscured && !obscured

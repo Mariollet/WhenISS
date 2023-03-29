@@ -1,5 +1,12 @@
 {
-	"home": "Home",
+	"homeHello": "Hi, {name}",
+	"@homeHello": {
+		"placeholders": {
+			"name": {
+				"type": "String"
+			}
+		}
+	},
 	"homeDescription": "You are currently logged in.",
 	"logout": "Log out"
 }

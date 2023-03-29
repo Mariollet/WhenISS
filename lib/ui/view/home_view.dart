@@ -14,7 +14,7 @@ class HomeView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              localizations.home,
+              localizations.homeHello("Julien"),
               style: TextStyles.h1,
               textAlign: TextAlign.center,
             ),
@@ -27,7 +27,7 @@ class HomeView extends StatelessWidget {
             const SizedBox(height: 60),
             Consumer(
               builder: (BuildContext context, WidgetRef ref, _) => Button(
-                width: 300,
+                size: ButtonSize.m,
                 text: localizations.logout,
                 onPressed: ([bool mounted = false]) async {
                   await ref.read(logoutProvider.future);

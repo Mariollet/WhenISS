@@ -4,7 +4,7 @@ import "package:keole/services/services.dart";
 void showSnackBar(String message) {
   final SnackBar snackBar = SnackBar(
     content: Text(message),
-    duration: const Duration(seconds: 6),
+    duration: const Duration(seconds: 5),
   );
 
   ScaffoldMessenger.of(currentContext).showSnackBar(snackBar);

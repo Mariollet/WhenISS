@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import "package:keole/ui/view/view.dart";
 
 abstract class AppRoutes {
-  static const String home = "/";
+  static const String home = "/home";
   static const String login = "/login";
   static const String forgotPassword = "/forgot-password";
 
@@ -12,7 +12,11 @@ abstract class AppRoutes {
     forgotPassword: ForgotPasswordView(),
   };
 
-  static MaterialPageRoute onGenerateRoute(RouteSettings settings) =>
-      MaterialPageRoute(
-          builder: (_) => routes[settings.name] ?? const SplashView());
+  static Route<dynamic>? onGenerateRoute(RouteSettings settings) =>
+      settings.name == '/'
+          ? null
+          : MaterialPageRoute(
+              builder: (_) => routes[settings.name] ?? const NotFoundView(),
+              settings: settings,
+            );
 }

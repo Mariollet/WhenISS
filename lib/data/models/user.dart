@@ -1,4 +1,4 @@
-import "package:keole/data/models/address.dart";
+import "package:keole/data/models/models.dart";
 
 class User {
   const User({

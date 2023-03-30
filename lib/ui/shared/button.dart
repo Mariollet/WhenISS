@@ -28,7 +28,7 @@ class Button extends StatelessWidget {
           onPressed: disabled || loading ? null : onPressed,
           child: loading
               ? const Loader(color: AppColors.white)
-              : Text(text, style: TextStyles.button),
+              : Text(text, style: AppTextStyles.button),
         ),
       );
 }

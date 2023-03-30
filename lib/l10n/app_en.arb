@@ -8,5 +8,7 @@
 		}
 	},
 	"homeDescription": "You are currently logged in.",
-	"logout": "Log out"
+	"logout": "Log out",
+	"notFoundDescription": "This page doesn't exist.",
+	"notFoundReturn": "Return to home"
 }

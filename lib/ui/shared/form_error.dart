@@ -24,7 +24,7 @@ class FormError extends StatelessWidget {
             TextSpan(text: message),
           ],
         ),
-        style: TextStyles.formError,
+        style: AppTextStyles.formError,
         textAlign: TextAlign.center,
       );
 }

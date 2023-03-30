@@ -1,6 +1,6 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/data/api.dart";
-import "package:keole/data/models/user.dart";
+import "package:keole/data/models/models.dart";
 import "package:keole/services/services.dart";
 import "package:keole/ui/view_model/view_model.dart";
 

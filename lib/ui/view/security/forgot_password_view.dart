@@ -1,5 +1,5 @@
-import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:flutter/material.dart";
 import "package:keole/services/services.dart";
 import "package:keole/ui/shared/shared.dart";
 import "package:keole/ui/view_model/view_model.dart";
@@ -12,13 +12,15 @@ class ForgotPasswordView extends ConsumerStatefulWidget {
 }
 
 class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
-  final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey();
+  final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   Map<String, dynamic>? forgotPasswordResponse;
   bool loading = false;
 
   @override
-  Widget build(BuildContext context) => CustomScaffold(
+  Widget build(BuildContext context) => AppScaffold(
+        appBar: true,
+        bottomBar: true,
         isModal: true,
         body: SizedBox(
           width: 300,
@@ -27,13 +29,13 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
             children: [
               const Text(
                 "Mot de passe oublié ?",
-                style: TextStyles.h1,
+                style: AppTextStyles.h1,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
               const Text(
                 "Si votre e-mail est reconnu, un lien pour renouveler votre mot de passe vous sera envoyé.",
-                style: TextStyles.p,
+                style: AppTextStyles.p,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),

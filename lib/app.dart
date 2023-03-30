@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
-import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/env.dart";
 import "package:keole/services/services.dart";
 
@@ -10,27 +9,28 @@ class App extends StatelessWidget {
   final String initialRoute;
 
   @override
-  Widget build(BuildContext context) => ProviderScope(
-        child: MaterialApp(
-          navigatorKey: navigatorKey,
-          initialRoute: initialRoute,
-          onGenerateRoute: AppRoutes.onGenerateRoute,
-          title: env["APP_NAME"],
-          theme: ThemeData(
-            colorScheme: const ColorScheme.light(
-              primary: AppColors.primary,
-              secondary: AppColors.secondary,
-            ),
-            scaffoldBackgroundColor: AppColors.background,
-            fontFamily: "Jost",
-            bottomSheetTheme: const BottomSheetThemeData(
-              backgroundColor: AppColors.background,
-            ),
+  Widget build(BuildContext context) => MaterialApp(
+        navigatorKey: navigatorKey,
+        routes: AppRoutes.routes
+            .map((String key, Widget value) => MapEntry(key, (_) => value)),
+        initialRoute: initialRoute,
+        onGenerateRoute: AppRoutes.onGenerateRoute,
+        title: env["APP_NAME"],
+        color: AppColors.primary,
+        theme: ThemeData(
+          colorScheme: const ColorScheme.light(
+            primary: AppColors.primary,
+            secondary: AppColors.secondary,
           ),
-          locale: Locale(env["APP_LOCALE"]),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          debugShowCheckedModeBanner: false,
+          scaffoldBackgroundColor: AppColors.background,
+          fontFamily: "Jost",
+          bottomSheetTheme: const BottomSheetThemeData(
+            backgroundColor: AppColors.background,
+          ),
         ),
+        locale: Locale(env["APP_LOCALE"]),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        debugShowCheckedModeBanner: false,
       );
 }

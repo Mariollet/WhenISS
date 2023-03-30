@@ -12,14 +12,16 @@ class LoginView extends ConsumerStatefulWidget {
 }
 
 class LoginViewState extends ConsumerState<LoginView> {
-  final GlobalKey<FormState> loginFormKey = GlobalKey();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController(),
+      passwordController = TextEditingController();
   Map<String, dynamic>? loginResponse;
   bool loading = false;
 
   @override
-  Widget build(BuildContext context) => CustomScaffold(
+  Widget build(BuildContext context) => AppScaffold(
+        appBar: true,
+        bottomBar: true,
         body: SizedBox(
           width: 300,
           child: Column(
@@ -27,13 +29,13 @@ class LoginViewState extends ConsumerState<LoginView> {
             children: [
               const Text(
                 "Connexion à votre espace personnel",
-                style: TextStyles.h1,
+                style: AppTextStyles.h1,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
               const Text(
                 "Saisissez votre e-mail et votre\nmot de passe pour accéder à\nl'application.",
-                style: TextStyles.p,
+                style: AppTextStyles.p,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),

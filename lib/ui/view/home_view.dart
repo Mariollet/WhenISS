@@ -9,19 +9,21 @@ class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
-  Widget build(BuildContext context) => CustomScaffold(
+  Widget build(BuildContext context) => AppScaffold(
+        appBar: true,
+        bottomBar: true,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               localizations.homeHello("Julien"),
-              style: TextStyles.h1,
+              style: AppTextStyles.h1,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),
             Text(
               localizations.homeDescription,
-              style: TextStyles.p,
+              style: AppTextStyles.p,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 60),
@@ -29,14 +31,9 @@ class HomeView extends StatelessWidget {
               builder: (BuildContext context, WidgetRef ref, _) => Button(
                 size: ButtonSize.m,
                 text: localizations.logout,
-                onPressed: ([bool mounted = false]) async {
-                  await ref.read(logoutProvider.future);
-
-                  if (!mounted) return;
-
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil(AppRoutes.login, (_) => false);
-                },
+                onPressed: () => ref.read(logoutProvider.future).then((_) =>
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        AppRoutes.login, (_) => false)),
               ),
             ),
           ],

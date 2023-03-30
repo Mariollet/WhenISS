@@ -3,7 +3,7 @@ import "package:keole/services/services.dart";
 
 const String fontFamily = "Jost";
 
-abstract class TextStyles {
+abstract class AppTextStyles {
   static const TextStyle h1 = TextStyle(
     fontSize: 28,
     fontWeight: FontWeight.w600,
@@ -30,6 +30,16 @@ abstract class TextStyles {
 
   static const TextStyle formError = TextStyle(
     color: AppColors.error,
+  );
+
+  static const TextStyle notFoundTitle = TextStyle(
+    fontSize: 80,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const TextStyle notFoundDescription = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
   );
 
   static const TextStyle copyright = TextStyle(

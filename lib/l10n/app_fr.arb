@@ -8,5 +8,7 @@
 		}
 	},
 	"homeDescription": "Vous êtes actuellement connecté(e).",
-	"logout": "Se déconnecter"
+	"logout": "Se déconnecter",
+	"notFoundDescription": "Cette page n'existe pas.",
+	"notFoundReturn": "Revenir à l'accueil"
 }

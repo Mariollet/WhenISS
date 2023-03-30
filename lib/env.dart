@@ -1,16 +1,14 @@
 import "package:keole/env.local.dart" as local;
 
+abstract class Environment {
+  static void initialize() => env.addAll(local.env);
+}
+
 final Map<String, dynamic> env = {
   "APP_NAME": "Keole",
-  "APP_BASE_URL": null,
-  "APP_HOME": '/',
   "APP_LOCALE": "fr",
-  // "APP_DEBUG": false,
-  // "BASE_URL_LOCAL": "localhost:8000",
-  // `ifconfig | grep 192` to get the current local Mac IP
-  // "BASE_URL_LOCAL_MAC_IP": "192.168.10.___:8000",
-  // "BASE_URL_PREPROD": "inst-via-learn.abtel.fr",
-  // "BASE_URL_PROD": "________.app",
+  "APP_HOME": null,
+  "APP_BASE_URL": null,
+  "APP_DEBUG_EMAIL": null,
+  "APP_DEBUG_PASSWORD": null,
 };
-
-void setupEnvironment() => env.addAll(local.env);

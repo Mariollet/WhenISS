@@ -68,7 +68,7 @@ class TextInputState extends State<TextInput> {
         controller: widget.controller,
         decoration: InputDecoration(
           labelText: widget.placeholder,
-          labelStyle: TextStyles.textInputLabel,
+          labelStyle: AppTextStyles.textInputLabel,
           suffixIcon: !widget.obscured
               ? null
               : IconButton(

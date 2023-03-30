@@ -18,6 +18,10 @@ class Link extends StatelessWidget {
         padding: EdgeInsets.zero,
         minSize: null,
         onPressed: disabled ? null : onPressed,
-        child: Text(text, style: TextStyles.link),
+        child: Text(
+          text,
+          style: AppTextStyles.link,
+          textAlign: TextAlign.center,
+        ),
       );
 }

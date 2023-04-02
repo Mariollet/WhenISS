@@ -1,6 +1,7 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:keole/data/models/models.dart";
 import "package:keole/services/services.dart";
 import "package:keole/ui/shared/shared.dart";
 import "package:keole/ui/view_model/view_model.dart";
@@ -15,10 +16,17 @@ class HomeView extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              localizations.homeHello("Julien"),
-              style: AppTextStyles.h1,
-              textAlign: TextAlign.center,
+            Consumer(
+              builder: (_, WidgetRef ref, __) {
+                final String name =
+                    ref.watch(userProvider.select((User? user) => "$user"));
+
+                return Text(
+                  localizations.homeHello(name),
+                  style: AppTextStyles.h1,
+                  textAlign: TextAlign.center,
+                );
+              },
             ),
             const SizedBox(height: 30),
             Text(

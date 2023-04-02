@@ -9,61 +9,45 @@ import "package:keole/services/services.dart";
 
 abstract class Api {
   static final Client client = Client();
-  static const FlutterSecureStorage secureStorage = FlutterSecureStorage();
   static final String baseUrl = env["APP_BASE_URL"];
+  static const FlutterSecureStorage secureStorage = FlutterSecureStorage();
   static String? token;
 
-  // TODO: remove
-  static Future<Map<String, dynamic>> authenticate(
-      Map<String, dynamic> body) async {
-    try {
-      final Response response = await client.post(
-        Uri.https(baseUrl, ApiRoutes.login),
-        headers: {
-          HttpHeaders.contentTypeHeader: "application/json",
-        },
-        body: jsonEncode(body),
-      );
-
-      body = jsonDecode(response.body);
-
-      if (response.statusCode != 200) {
-        return {
-          "success": false,
-          "message": body["message"] ?? "Une erreur inconnue est survenue.",
-        };
-      }
-
-      await secureStorage.write(key: "token", value: token = body["token"]);
-
-      return {
-        "success": true,
-        "message": '',
-      };
-    } on ClientException {
-      return {
-        "success": false,
-        "message": "Une erreur est survenue : serveur inaccessible.",
-      };
-    }
-  }
-
-  static Future<dynamic> send({
-    required dynamic method,
+  static Future<dynamic> _send({
+    required ApiMethod method,
     required String endpoint,
     required bool authorizationHeader,
     Object? body,
   }) async {
+    if (method != ApiMethod.get) body = jsonEncode(body);
+    if (authorizationHeader) token = await secureStorage.read(key: "token");
+
+    final Uri url = Uri.https(baseUrl, endpoint);
+    final Map<String, String> headers = {
+      if (authorizationHeader) HttpHeaders.authorizationHeader: "Bearer $token",
+      HttpHeaders.contentTypeHeader: "application/json",
+    };
+    final Response response;
+
     try {
-      final Response response = await method(
-        Uri.https(baseUrl, endpoint),
-        headers: {
-          if (authorizationHeader)
-            HttpHeaders.authorizationHeader: "Bearer $token",
-          HttpHeaders.contentTypeHeader: "application/json",
-        },
-        body: jsonEncode(body),
-      );
+      switch (method) {
+        case ApiMethod.get:
+          response = await client.get(url, headers: headers);
+
+          break;
+        case ApiMethod.post:
+          response = await client.post(url, headers: headers, body: body);
+
+          break;
+        case ApiMethod.patch:
+          response = await client.patch(url, headers: headers, body: body);
+
+          break;
+        case ApiMethod.delete:
+          response = await client.delete(url, headers: headers, body: body);
+
+          break;
+      }
 
       return jsonDecode(response.body);
     } on ClientException catch (error) {
@@ -79,8 +63,8 @@ abstract class Api {
     String endpoint, {
     bool authorizationHeader = true,
   }) async =>
-      await send(
-        method: client.get,
+      await _send(
+        method: ApiMethod.get,
         endpoint: endpoint,
         authorizationHeader: authorizationHeader,
       );
@@ -90,8 +74,8 @@ abstract class Api {
     required Object? body,
     bool authorizationHeader = true,
   }) async =>
-      await send(
-        method: client.post,
+      await _send(
+        method: ApiMethod.post,
         endpoint: endpoint,
         authorizationHeader: authorizationHeader,
         body: body,
@@ -102,8 +86,8 @@ abstract class Api {
     required Object? body,
     bool authorizationHeader = true,
   }) async =>
-      await send(
-        method: client.patch,
+      await _send(
+        method: ApiMethod.patch,
         endpoint: endpoint,
         authorizationHeader: authorizationHeader,
         body: body,
@@ -114,10 +98,17 @@ abstract class Api {
     required Object? body,
     bool authorizationHeader = true,
   }) async =>
-      await send(
-        method: client.delete,
+      await _send(
+        method: ApiMethod.delete,
         endpoint: endpoint,
         authorizationHeader: authorizationHeader,
         body: body,
       );
+}
+
+enum ApiMethod {
+  get,
+  post,
+  patch,
+  delete,
 }

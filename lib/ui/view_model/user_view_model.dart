@@ -10,14 +10,14 @@ class UserNotifier extends StateNotifier<User?> {
   UserNotifier({required this.user}) : super(null) {
     user.when(
       data: (User user) => state = user,
-      error: (error, _) => throw Exception(error),
+      error: (error, _) => throw Exception("gné $error"),
       loading: () {},
     );
   }
 
   final AsyncValue<User> user;
 
-  void setId(int id) => state = state!.copyWith(id: id);
+  void setId(int id) => state!.copyWith(id: id);
 
   void setCivility(Civility civility) => state!.copyWith(civility: civility);
 
@@ -27,7 +27,7 @@ class UserNotifier extends StateNotifier<User?> {
 
   void setEmail(String email) => state!.copyWith(email: email);
 
-  void setPhone(String phone) => state!.copyWith(phone: phone);
+  void setPhone(String phone) => state!..copyWith(phone: phone);
 
   void setBirthdate(DateTime birthdate) =>
       state!.copyWith(birthdate: birthdate);

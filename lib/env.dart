@@ -7,7 +7,7 @@ abstract class Environment {
 final Map<String, dynamic> env = {
   "APP_NAME": "Keole",
   "APP_LOCALE": "fr",
-  "APP_HOME": null,
+  "APP_HOME": "/home",
   "APP_BASE_URL": null,
   "APP_DEBUG_EMAIL": null,
   "APP_DEBUG_PASSWORD": null,

@@ -18,7 +18,7 @@ class LoginViewState extends ConsumerState<LoginView> {
           TextEditingController(text: env["APP_DEBUG_EMAIL"]),
       passwordController =
           TextEditingController(text: env["APP_DEBUG_PASSWORD"]);
-  Map<String, dynamic>? loginResponse;
+  Exception? error;
   bool loading = false;
 
   @override
@@ -30,14 +30,14 @@ class LoginViewState extends ConsumerState<LoginView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Connexion à votre espace personnel",
+              Text(
+                localizations.loginTitle,
                 style: AppTextStyles.h1,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
-              const Text(
-                "Saisissez votre e-mail et votre\nmot de passe pour accéder à\nl'application.",
+              Text(
+                localizations.loginDescription,
                 style: AppTextStyles.p,
                 textAlign: TextAlign.center,
               ),
@@ -49,7 +49,7 @@ class LoginViewState extends ConsumerState<LoginView> {
                     TextInput(
                       controller: emailController,
                       validator: emailValidator,
-                      placeholder: "E-mail",
+                      placeholder: localizations.placeholderEmail,
                       keyboardType: TextInputType.emailAddress,
                       disabled: loading,
                     ),
@@ -57,7 +57,7 @@ class LoginViewState extends ConsumerState<LoginView> {
                     TextInput(
                       controller: passwordController,
                       validator: requiredValidator,
-                      placeholder: "Mot de passe",
+                      placeholder: localizations.placeholderPassword,
                       disabled: loading,
                       obscured: true,
                     ),
@@ -68,30 +68,21 @@ class LoginViewState extends ConsumerState<LoginView> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Link(
-                  text: "Mot de passe oublié ?",
+                  text: localizations.loginForgotPassword,
                   disabled: loading,
                   onPressed: () =>
                       Navigator.of(context).pushNamed(AppRoutes.forgotPassword),
                 ),
               ),
               const SizedBox(height: 15),
-              if (loginResponse?["success"] == false)
-                FormError(loginResponse?["message"]),
+              FormError(error),
               const SizedBox(height: 15),
               Button(
                 size: ButtonSize.m,
-                text: "Se connecter",
+                text: localizations.commonLogIn,
                 loading: loading,
-                onPressed: () {
-                  if (!loginFormKey.currentState!.validate()) return;
-
-                  loginResponse = null;
-                  loading = !loading;
-
-                  setState(() {});
-
-                  login(emailController.text, passwordController.text);
-                },
+                onPressed: () =>
+                    login(emailController.text, passwordController.text),
               ),
             ],
           ),
@@ -106,15 +97,27 @@ class LoginViewState extends ConsumerState<LoginView> {
   }
 
   void login(String email, String password) async {
-    loginResponse = await ref.read(loginProvider({
-      "username": email,
-      "password": password,
-    }));
-    loading = false;
+    if (!loginFormKey.currentState!.validate()) return;
 
-    if (loginResponse?["success"] == false) return setState(() {});
-    if (!mounted) return;
+    error = null;
+    loading = true;
 
-    Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+    setState(() {});
+
+    try {
+      await ref.read(loginProvider({
+        "username": email,
+        "password": password,
+      }));
+
+      if (!mounted) return;
+
+      Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+    } on Exception catch (error) {
+      this.error = error;
+      loading = false;
+
+      setState(() {});
+    }
   }
 }

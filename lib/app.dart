@@ -13,7 +13,7 @@ class App extends StatelessWidget {
         navigatorKey: navigatorKey,
         routes: AppRoutes.routes
             .map((String key, Widget value) => MapEntry(key, (_) => value)),
-        initialRoute: initialRoute,
+        initialRoute: "/login",
         onGenerateRoute: AppRoutes.onGenerateRoute,
         title: env["APP_NAME"],
         color: AppColors.primary,

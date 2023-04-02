@@ -1,17 +1,16 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/data/api.dart";
 import "package:keole/data/repository/repository.dart";
 
-final loginProvider = Provider.autoDispose
-    .family<Future<Map<String, dynamic>>, Map<String, dynamic>>(
-  (ref, request) => ref.watch(postLoginRepository(request).future),
+final loginProvider =
+    Provider.autoDispose.family<Future<dynamic>, Map<String, dynamic>>(
+  (ref, credentials) => ref.watch(postLoginRepository(credentials).future),
 );
 
 // TODO: JWT expiration check
 final isLoggedProvider = FutureProvider.autoDispose<bool>(
-  (ref) => ref.watch(getTokenRepository.future),
+  (ref) => ref.watch(getJwtRepository.future),
 );
 
 final logoutProvider = FutureProvider.autoDispose<void>(
-  (_) async => await Api.secureStorage.delete(key: "token"),
+  (ref) => ref.watch(deleteLogoutRepository.future),
 );

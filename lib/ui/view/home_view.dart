@@ -30,7 +30,7 @@ class HomeView extends StatelessWidget {
             Consumer(
               builder: (BuildContext context, WidgetRef ref, _) => Button(
                 size: ButtonSize.m,
-                text: localizations.logout,
+                text: localizations.homeLogout,
                 onPressed: () => ref.read(logoutProvider.future).then((_) =>
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         AppRoutes.login, (_) => false)),

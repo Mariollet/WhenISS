@@ -1,11 +1,12 @@
 import "package:flutter/material.dart";
 import "package:keole/services/services.dart";
 
-// TODO: rework snack bar
 void showSnackBar(String message) =>
     ScaffoldMessenger.of(currentContext).showSnackBar(
       SnackBar(
-        content: Text(message),
-        duration: const Duration(seconds: 5),
+        content: Text(message, style: AppTextStyles.snackBar),
+        backgroundColor: AppColors.snackBarBackground,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+        behavior: SnackBarBehavior.floating,
       ),
     );

@@ -10,4 +10,7 @@ abstract class AppColors {
 
   static const Color background = Color(0xffffffff);
   static const Color error = Color(0xfff1416c);
+
+  static const Color snackBarBackground = Color(0xff0d0d0d);
+  static const Color snackBar = Color(0xffd3d3d3);
 }

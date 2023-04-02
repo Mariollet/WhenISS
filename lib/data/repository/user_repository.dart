@@ -14,6 +14,9 @@ final patchUserRepository = FutureProvider.autoDispose
     final int userId =
         ref.watch(userProvider.select((User? user) => user!.id!));
 
-    return await Api.patch(ApiRoutes.patchUser(userId), request);
+    return await Api.patch(
+      ApiRoutes.patchUser(userId),
+      body: request,
+    );
   },
 );

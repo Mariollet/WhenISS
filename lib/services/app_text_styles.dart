@@ -42,6 +42,12 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w400,
   );
 
+  static const TextStyle snackBar = TextStyle(
+    color: AppColors.snackBar,
+    fontSize: 12,
+    fontFamily: fontFamily,
+  );
+
   static const TextStyle copyright = TextStyle(
     color: AppColors.lightgrey,
     fontSize: 12,

@@ -1,4 +1,14 @@
 {
+	"@_COMMON": {},
+	"commonSend": "Envoyer",
+	"@_ERROR": {},
+	"errorUnreachableServer": "Le serveur est inaccessible. Veuillez rééssayer dans quelques instants.",
+	"errorExpiredSession": "Votre session est expirée. Veuillez vous reconnecter.",
+	"@_PLACEHOLDER": {},
+	"placeholderEmail": "E-mail",
+	"@_SNACK_BAR": {},
+	"snackBarForgotPassword": "Un e-mail vous a été envoyé pour réinitialiser votre mot de passe.",
+	"@_HOME": {},
 	"homeHello": "Bonjour, {name}",
 	"@homeHello": {
 		"placeholders": {
@@ -8,7 +18,11 @@
 		}
 	},
 	"homeDescription": "Vous êtes actuellement connecté(e).",
-	"logout": "Se déconnecter",
+	"homeLogout": "Se déconnecter",
+	"@_FORGOT_PASSWORD": {},
+	"forgotPasswordTitle": "Mot de passe oublié ?",
+	"forgotPasswordDescription": "Si cette adresse existe, un lien pour renouveler votre mot de passe vous sera envoyé.",
+	"@_NOT_FOUND": {},
 	"notFoundDescription": "Cette page n'existe pas.",
 	"notFoundReturn": "Revenir à l'accueil"
 }

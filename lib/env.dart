@@ -1,7 +1,7 @@
-import "package:keole/env.local.dart" as local;
+import "package:keole/env.local.dart";
 
 abstract class Environment {
-  static void initialize() => env.addAll(local.env);
+  static void initialize() => env.addAll(localEnv);
 }
 
 final Map<String, dynamic> env = {

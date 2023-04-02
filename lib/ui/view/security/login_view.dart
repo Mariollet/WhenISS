@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:keole/env.dart";
 import "package:keole/services/services.dart";
 import "package:keole/ui/shared/shared.dart";
 import "package:keole/ui/view_model/view_model.dart";
@@ -13,8 +14,10 @@ class LoginView extends ConsumerStatefulWidget {
 
 class LoginViewState extends ConsumerState<LoginView> {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController(),
-      passwordController = TextEditingController();
+  final TextEditingController emailController =
+          TextEditingController(text: env["APP_DEBUG_EMAIL"]),
+      passwordController =
+          TextEditingController(text: env["APP_DEBUG_PASSWORD"]);
   Map<String, dynamic>? loginResponse;
   bool loading = false;
 

@@ -7,25 +7,13 @@ import "package:http/http.dart";
 import "package:keole/env.dart";
 import "package:keole/services/services.dart";
 
-const String unknownErrorMessage = "Une erreur inconnue est survenue.";
-
-const Map<String, dynamic> clientErrorResponse = {
-  "success": false,
-  "message": "Une erreur est survenue : serveur inaccessible.",
-};
-
 abstract class Api {
   static final Client client = Client();
   static const FlutterSecureStorage secureStorage = FlutterSecureStorage();
   static final String baseUrl = env["APP_BASE_URL"];
   static String? token;
 
-  static Future<String?> getToken() async =>
-      await secureStorage.read(key: "token");
-
-  static void showSnackBarError(Map<String, dynamic> body) =>
-      showSnackBar(body["message"] ?? unknownErrorMessage);
-
+  // TODO: remove
   static Future<Map<String, dynamic>> authenticate(
       Map<String, dynamic> body) async {
     try {
@@ -42,7 +30,7 @@ abstract class Api {
       if (response.statusCode != 200) {
         return {
           "success": false,
-          "message": body["message"] ?? unknownErrorMessage,
+          "message": body["message"] ?? "Une erreur inconnue est survenue.",
         };
       }
 
@@ -53,108 +41,83 @@ abstract class Api {
         "message": '',
       };
     } on ClientException {
-      return clientErrorResponse;
+      return {
+        "success": false,
+        "message": "Une erreur est survenue : serveur inaccessible.",
+      };
     }
   }
 
-  static Future<dynamic> get(String endpoint) async {
-    token ??= await getToken();
-
+  static Future<dynamic> send({
+    required dynamic method,
+    required String endpoint,
+    required bool authorizationHeader,
+    Object? body,
+  }) async {
     try {
-      final Response response = await client.get(
+      final Response response = await method(
         Uri.https(baseUrl, endpoint),
         headers: {
-          HttpHeaders.authorizationHeader: "Bearer $token",
+          if (authorizationHeader)
+            HttpHeaders.authorizationHeader: "Bearer $token",
           HttpHeaders.contentTypeHeader: "application/json",
         },
+        body: jsonEncode(body),
       );
 
-      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+      return jsonDecode(response.body);
+    } on ClientException catch (error) {
+      if (error.message == "XMLHttpRequest error.") {
+        throw Exception(localizations.errorUnreachableServer);
+      }
 
-      if (response.statusCode != 200) showSnackBarError(responseBody);
-
-      return responseBody;
-    } on ClientException {
-      return clientErrorResponse;
+      rethrow;
     }
   }
+
+  static Future<dynamic> get(
+    String endpoint, {
+    bool authorizationHeader = true,
+  }) async =>
+      await send(
+        method: client.get,
+        endpoint: endpoint,
+        authorizationHeader: authorizationHeader,
+      );
 
   static Future<dynamic> post(
-    String endpoint,
-    Map<String, dynamic> body, [
-    bool includeToken = true,
-  ]) async {
-    token ??= await getToken();
-
-    try {
-      final Response response = await client.post(
-        Uri.https(baseUrl, endpoint),
-        headers: {
-          HttpHeaders.authorizationHeader: includeToken ? "Bearer $token" : '',
-          HttpHeaders.contentTypeHeader: "application/json",
-        },
-        body: jsonEncode(body),
+    String endpoint, {
+    required Object? body,
+    bool authorizationHeader = true,
+  }) async =>
+      await send(
+        method: client.post,
+        endpoint: endpoint,
+        authorizationHeader: authorizationHeader,
+        body: body,
       );
-
-      final Map<String, dynamic> responseBody = jsonDecode(response.body);
-
-      if (response.statusCode != 200) showSnackBarError(responseBody);
-
-      return responseBody;
-    } on ClientException {
-      return clientErrorResponse;
-    }
-  }
 
   static Future<dynamic> patch(
-    String endpoint,
-    Map<String, dynamic> body,
-  ) async {
-    token ??= await getToken();
-
-    try {
-      final Response response = await client.patch(
-        Uri.https(baseUrl, endpoint),
-        headers: {
-          HttpHeaders.authorizationHeader: "Bearer $token",
-          HttpHeaders.contentTypeHeader: "application/json",
-        },
-        body: jsonEncode(body),
+    String endpoint, {
+    required Object? body,
+    bool authorizationHeader = true,
+  }) async =>
+      await send(
+        method: client.patch,
+        endpoint: endpoint,
+        authorizationHeader: authorizationHeader,
+        body: body,
       );
-
-      final Map<String, dynamic> responseBody = jsonDecode(response.body);
-
-      if (response.statusCode != 200) showSnackBarError(responseBody);
-
-      return responseBody;
-    } on ClientException {
-      return clientErrorResponse;
-    }
-  }
 
   static Future<dynamic> delete(
-    String endpoint, [
-    Map<String, dynamic>? body,
-  ]) async {
-    token ??= await getToken();
-
-    try {
-      final Response response = await client.delete(
-        Uri.https(baseUrl, endpoint),
-        headers: {
-          HttpHeaders.authorizationHeader: "Bearer $token",
-          HttpHeaders.contentTypeHeader: "application/json",
-        },
-        body: body == null ? null : jsonEncode(body),
+    String endpoint, {
+    required Object? body,
+    bool authorizationHeader = true,
+  }) async =>
+      await send(
+        method: client.delete,
+        endpoint: endpoint,
+        authorizationHeader: authorizationHeader,
+        body: body,
       );
-
-      final Map<String, dynamic> responseBody = jsonDecode(response.body);
-
-      if (response.statusCode != 200) showSnackBarError(responseBody);
-
-      return responseBody;
-    } on ClientException {
-      return clientErrorResponse;
-    }
-  }
 }

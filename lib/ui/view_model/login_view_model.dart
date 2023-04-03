@@ -11,6 +11,8 @@ final isLoggedProvider = FutureProvider.autoDispose<bool>(
   (ref) => ref.watch(getJwtRepository.future),
 );
 
+final isLoggedStateProvider = StateProvider<bool>((_) => false);
+
 final logoutProvider = FutureProvider.autoDispose<void>(
   (ref) => ref.watch(deleteLogoutRepository.future),
 );

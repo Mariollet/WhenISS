@@ -8,56 +8,68 @@ abstract class AppRoutes {
   static const String login = "/login";
   static const String forgotPassword = "/forgot-password";
 
+  static const List<String> publicRoutes = [login, forgotPassword];
+  static const List<String> privateRoutes = [home];
+
   static const Map<String, Widget> routes = {
     home: HomeView(),
     login: LoginView(),
     forgotPassword: ForgotPasswordView(),
   };
 
-  static const List<String> publicRoutes = [login, forgotPassword];
-  static const List<String> privateRoutes = [home];
-
   static Route<dynamic>? onGenerateRoute(
-      RouteSettings settings, WidgetRef ref, bool isLogged) {
+    RouteSettings settings,
+    WidgetRef ref,
+  ) {
+    final bool isLogged = ref.read(isLoggedStateProvider);
     final String? route = settings.name;
     String? finalRoute = route;
-    bool shouldReplace = false;
+    bool rewriteUrl = false;
 
-    print("onGenerate: $route");
+    print("onGenerateRoute: $route");
 
     if (!isLogged && privateRoutes.contains(route)) {
       finalRoute = login;
-      shouldReplace = true;
+      rewriteUrl = true;
     }
 
-    return createPageRoute(finalRoute,
-        settings: settings, shouldReplace: shouldReplace);
+    return createPageRoute(
+      finalRoute,
+      settings: settings,
+      rewriteUrl: rewriteUrl,
+    );
   }
 
   static List<Route<dynamic>> onGenerateInitialRoutes(
-      String? initialRoute, WidgetRef ref) {
-    // if (initialRoute == forgotPassword) print("YES");
+    String? initialRoute,
+    WidgetRef ref,
+  ) {
     final bool isLogged = ref.read(isLoggedStateProvider);
 
-    return [
-      if (!isLogged) createPageRoute(home),
-      if (!isLogged) createPageRoute(login),
-      if (!isLogged && initialRoute == forgotPassword)
-        createPageRoute(forgotPassword),
-    ];
+    print("onGenerateInitialRoutes: $initialRoute");
+
+    if (!isLogged && initialRoute == forgotPassword) {
+      return [createPageRoute(login), createPageRoute(forgotPassword)];
+    }
+
+    if (!isLogged && privateRoutes.contains(initialRoute)) {
+      return [createPageRoute(login, rewriteUrl: true)];
+    }
+
+    return [createPageRoute(initialRoute)];
   }
 
   static Route<dynamic> createPageRoute(
     String? route, {
     RouteSettings? settings,
-    bool shouldReplace = false,
+    bool rewriteUrl = false,
   }) {
     return MaterialPageRoute(
       builder: (_) => routes[route] ?? const NotFoundView(),
-      settings: shouldReplace
+      settings: rewriteUrl
           ? RouteSettings(
               name: route,
-              arguments: settings!.arguments,
+              arguments: settings?.arguments,
             )
           : settings,
     );

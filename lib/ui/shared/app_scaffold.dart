@@ -8,58 +8,55 @@ class AppScaffold extends StatelessWidget {
     required this.appBar,
     required this.bottomBar,
     this.isModal = false,
+    this.backButton = false,
     this.padding = EdgeInsets.zero,
-    this.verticallyCentered = true,
     required this.body,
   });
 
-  final bool appBar, bottomBar, isModal, verticallyCentered;
+  final bool appBar, bottomBar, isModal, backButton;
   final EdgeInsets padding;
   final Widget body;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: appBar
-            ? AppBar(
-                leading: Navigator.of(currentContext).canPop()
-                    ? IconButton(
-                        splashRadius: 30,
-                        onPressed: () {
-                          if (!Navigator.of(currentContext).canPop()) return;
-
-                          Navigator.of(context).pop();
-                        },
-                        icon: isModal
-                            ? const Icon(CupertinoIcons.xmark)
-                            : const Icon(CupertinoIcons.arrow_turn_down_left),
-                      )
-                    : null,
-                title:
-                    const Image(image: AssetImage(AppImages.logo), width: 200),
-                elevation: 0,
-                backgroundColor: AppColors.transparent,
-                foregroundColor: AppColors.black,
-                centerTitle: true,
-                toolbarHeight: 80,
-                leadingWidth: 80,
-              )
-            : null,
-        body: Padding(
-          padding: padding,
-          child:
-              verticallyCentered ? Center(child: body) : SafeArea(child: body),
-        ),
-        bottomSheet: bottomBar
-            ? Container(
-                alignment: Alignment.center,
-                height: 50,
-                child: const Text(
-                  "© 2023 Keole",
-                  style: AppTextStyles.copyright,
-                  textAlign: TextAlign.center,
-                ),
-              )
-            : null,
-        extendBodyBehindAppBar: true,
-      );
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: appBar
+          ? AppBar(
+              leading: backButton
+                  ? IconButton(
+                      splashRadius: 30,
+                      onPressed: Navigator.of(context).pop,
+                      icon: isModal
+                          ? const Icon(CupertinoIcons.xmark)
+                          : const Icon(CupertinoIcons.arrow_turn_down_left),
+                    )
+                  : null,
+              automaticallyImplyLeading: false,
+              title: const Image(image: AssetImage(AppImages.logo), width: 200),
+              elevation: 0,
+              backgroundColor: AppColors.transparent,
+              foregroundColor: AppColors.black,
+              centerTitle: true,
+              toolbarHeight: 80,
+              leadingWidth: 80,
+            )
+          : null,
+      body: Padding(
+        padding: padding,
+        child: Center(child: body),
+      ),
+      bottomSheet: bottomBar
+          ? Container(
+              alignment: Alignment.center,
+              height: 50,
+              child: const Text(
+                "© 2023 Keole",
+                style: AppTextStyles.copyright,
+                textAlign: TextAlign.center,
+              ),
+            )
+          : null,
+      extendBodyBehindAppBar: true,
+    );
+  }
 }

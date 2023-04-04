@@ -14,6 +14,10 @@
 	"loginTitle": "Connectez-vous à votre espace personnel",
 	"loginDescription": "Saisissez votre e-mail et votre\nmot de passe pour accéder à\nl'application.",
 	"loginForgotPassword": "Mot de passe oublié ?",
+	"@_FORGOT_PASSWORD": {},
+	"forgotPasswordTitle": "Mot de passe oublié ?",
+	"forgotPasswordDescription": "Si cette adresse existe, un lien pour renouveler votre mot de passe vous sera envoyé.",
+	"forgotPasswordLogin": "Retour à la connexion",
 	"@_HOME": {},
 	"homeHello": "Bonjour, {name}",
 	"@homeHello": {
@@ -25,9 +29,6 @@
 	},
 	"homeDescription": "Vous êtes actuellement connecté(e).",
 	"homeLogout": "Se déconnecter",
-	"@_FORGOT_PASSWORD": {},
-	"forgotPasswordTitle": "Mot de passe oublié ?",
-	"forgotPasswordDescription": "Si cette adresse existe, un lien pour renouveler votre mot de passe vous sera envoyé.",
 	"@_NOT_FOUND": {},
 	"notFoundDescription": "Cette page n'existe pas.",
 	"notFoundReturn": "Revenir à l'accueil"

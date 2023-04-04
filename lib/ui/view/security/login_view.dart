@@ -69,7 +69,6 @@ class LoginViewState extends ConsumerState<LoginView> {
                 alignment: Alignment.centerRight,
                 child: Link(
                   text: localizations.loginForgotPassword,
-                  disabled: loading,
                   onPressed: () =>
                       Navigator.of(context).pushNamed(AppRoutes.forgotPassword),
                 ),

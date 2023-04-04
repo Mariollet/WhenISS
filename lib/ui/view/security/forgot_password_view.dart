@@ -23,7 +23,6 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
   Widget build(BuildContext context) => AppScaffold(
         appBar: true,
         bottomBar: true,
-        isModal: true,
         body: SizedBox(
           width: 300,
           child: Column(
@@ -49,6 +48,14 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                   placeholder: localizations.placeholderEmail,
                   keyboardType: TextInputType.emailAddress,
                   disabled: loading,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Link(
+                  text: localizations.forgotPasswordLogin,
+                  onPressed: Navigator.of(context).pop,
                 ),
               ),
               const SizedBox(height: 15),

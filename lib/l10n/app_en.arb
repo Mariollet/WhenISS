@@ -14,6 +14,10 @@
 	"loginTitle": "Log in into your personal space",
 	"loginDescription": "Enter your email and password\nto access the app.",
 	"loginForgotPassword": "Forgot password?",
+	"@_FORGOT_PASSWORD": {},
+	"forgotPasswordTitle": "Forgot password?",
+	"forgotPasswordDescription": "If this address exists, an e-mail to reset your password will be sent to you.",
+	"forgotPasswordLogin": "Back to login",
 	"@_HOME": {},
 	"homeHello": "Hi, {name}",
 	"@homeHello": {
@@ -25,9 +29,6 @@
 	},
 	"homeDescription": "You are currently logged in.",
 	"homeLogout": "Log out",
-	"@_FORGOT_PASSWORD": {},
-	"forgotPasswordTitle": "Forgot password?",
-	"forgotPasswordDescription": "If this address exists, an e-mail to reset your password will be sent to you.",
 	"@_NOT_FOUND": {},
 	"notFoundDescription": "This page doesn't exist.",
 	"notFoundReturn": "Return to home"

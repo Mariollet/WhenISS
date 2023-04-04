@@ -13,6 +13,8 @@ final isLoggedProvider = FutureProvider.autoDispose<bool>(
 
 final isLoggedStateProvider = StateProvider<bool>((_) => false);
 
+final isFirstLaunchProvider = StateProvider<bool>((_) => true);
+
 final logoutProvider = FutureProvider.autoDispose<void>(
   (ref) => ref.watch(deleteLogoutRepository.future),
 );

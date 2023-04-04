@@ -3,17 +3,21 @@ import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/env.dart";
 import "package:keole/services/services.dart";
-import "package:keole/ui/view_model/view_model.dart";
+import "package:keole/ui/view_model/login_view_model.dart";
 
 class App extends ConsumerWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Router<Object> router = ref.watch(routerProvider);
+    final bool isLogged = ref.watch(isLoggedStateProvider);
 
-    return MaterialApp.router(
-      routerDelegate: router.routerDelegate,
+    return MaterialApp(
+      navigatorKey: navigatorKey,
+      onGenerateRoute: (RouteSettings settings) =>
+          AppRoutes.onGenerateRoute(settings, ref, isLogged),
+      onGenerateInitialRoutes: (String? initialRoute) =>
+          AppRoutes.onGenerateInitialRoutes(initialRoute, ref),
       title: env["APP_NAME"],
       color: AppColors.primary,
       theme: ThemeData(

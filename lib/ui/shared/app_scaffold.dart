@@ -21,10 +21,14 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: appBar
             ? AppBar(
-                leading: Navigator.canPop(context)
+                leading: Navigator.of(currentContext).canPop()
                     ? IconButton(
                         splashRadius: 30,
-                        onPressed: Navigator.of(context).pop,
+                        onPressed: () {
+                          if (!Navigator.of(currentContext).canPop()) return;
+
+                          Navigator.of(context).pop();
+                        },
                         icon: isModal
                             ? const Icon(CupertinoIcons.xmark)
                             : const Icon(CupertinoIcons.arrow_turn_down_left),

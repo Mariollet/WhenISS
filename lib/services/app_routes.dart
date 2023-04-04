@@ -17,18 +17,11 @@ abstract class AppRoutes {
   // static final Map<String, Widget Function(BuildContext)> routeBuilders =
   // routes.map((String key, Widget value) => MapEntry(key, (_) => value));
 
-  static Route<dynamic>? onGenerateRoute(
-      RouteSettings settings, bool isLogged) {
-    final String? route = settings.name;
-    // final String? finalRoute = onRedirect(route, isLogged);
-
-    // print("Final route: $finalRoute");
-
-    return MaterialPageRoute(
-      builder: (_) => routes[login] ?? const NotFoundView(),
-      settings: settings,
-    );
-  }
+  static Route<dynamic>? onGenerateRoute(RouteSettings settings) =>
+      MaterialPageRoute(
+        builder: (_) => routes[settings.name] ?? const NotFoundView(),
+        settings: settings,
+      );
 
   /* static String? onRedirect(String? route, bool isLogged) {
     final bool isPrivate = privateRoutes.contains(route);

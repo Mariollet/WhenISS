@@ -3,31 +3,17 @@ import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/env.dart";
 import "package:keole/services/services.dart";
-import "package:keole/ui/view/start_view.dart";
-import "package:keole/ui/view/view.dart";
 import "package:keole/ui/view_model/view_model.dart";
 
-/// URL rewrite
-/// - page if OK
-/// - /login if the page is guarded
-/// - /not-found
-
-/// If the page must not have an URL,
-
-// TODO: better routing
 class App extends ConsumerWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final bool isLogged = ref.watch(isLoggedStateProvider);
+    final Router<Object> router = ref.watch(routerProvider);
 
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      home: const StartView(),
-      // initialRoute: initialRoute,
-      // onGenerateRoute: (RouteSettings settings) =>
-      // AppRoutes.onGenerateRoute(settings, isLogged),
+    return MaterialApp.router(
+      routerDelegate: router.routerDelegate,
       title: env["APP_NAME"],
       color: AppColors.primary,
       theme: ThemeData(

@@ -12,7 +12,7 @@ class Address {
   factory Address.fromJSON(Map<String, dynamic> json) => Address(
         street: json["street"],
         complement: json["complement"],
-        postalCode: json["postal_code"],
+        postalCode: json["zip_code"],
         city: json["city"],
       );
 

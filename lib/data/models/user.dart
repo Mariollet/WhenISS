@@ -29,12 +29,13 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
-        civility: Civility.fromJson(json["civility"]),
+        civility: Civility.fromJson(json["gender"]),
         firstName: json["first_name"],
         lastName: json["last_name"],
         email: json["email"],
         phone: json["phone_number"],
-        birthdate: DateTime.parse(json["birth_date"]),
+        // birthdate: DateTime.parse(json["birth_date"]),
+        birthdate: DateTime.now(),
         address: Address.fromJSON(json["address"]),
       );
 

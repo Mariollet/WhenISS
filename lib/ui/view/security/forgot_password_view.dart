@@ -55,6 +55,7 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 alignment: Alignment.centerRight,
                 child: Link(
                   text: localizations.forgotPasswordLogin,
+                  disabled: loading,
                   onPressed: Navigator.of(context).pop,
                 ),
               ),
@@ -87,7 +88,7 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
     setState(() {});
 
     try {
-      await ref.read(resetPasswordProvider(email));
+      await ref.read(resetPasswordProvider(email).future);
 
       showSnackBar(localizations.snackBarForgotPassword);
 

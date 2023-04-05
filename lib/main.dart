@@ -12,12 +12,12 @@ void main() async {
   runApp(const SplashView());
 
   final ProviderContainer ref = ProviderContainer();
-  final bool isLogged = await ref.read(isLoggedProvider.future);
+  final bool isLogged = await ref.read(readTokenProvider.future) != null;
 
   runApp(
     ProviderScope(
       overrides: [
-        isLoggedStateProvider.overrideWith((_) => isLogged),
+        isLoggedProvider.overrideWith((_) => isLogged),
       ],
       child: const App(),
     ),

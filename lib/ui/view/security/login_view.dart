@@ -69,6 +69,7 @@ class LoginViewState extends ConsumerState<LoginView> {
                 alignment: Alignment.centerRight,
                 child: Link(
                   text: localizations.loginForgotPassword,
+                  disabled: loading,
                   onPressed: () =>
                       Navigator.of(context).pushNamed(AppRoutes.forgotPassword),
                 ),
@@ -107,7 +108,7 @@ class LoginViewState extends ConsumerState<LoginView> {
       await ref.read(loginProvider({
         "username": email,
         "password": password,
-      }));
+      }).future);
 
       if (!mounted) return;
 

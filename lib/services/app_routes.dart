@@ -21,15 +21,18 @@ abstract class AppRoutes {
     RouteSettings settings,
     WidgetRef ref,
   ) {
-    final bool isLogged = ref.read(isLoggedStateProvider);
+    final bool isLogged = ref.read(isLoggedProvider);
     final String? route = settings.name;
     String? finalRoute = route;
     bool rewriteUrl = false;
 
-    print("onGenerateRoute: $route");
-
     if (!isLogged && privateRoutes.contains(route)) {
       finalRoute = login;
+      rewriteUrl = true;
+    }
+
+    if (isLogged && publicRoutes.contains(route)) {
+      finalRoute = home;
       rewriteUrl = true;
     }
 
@@ -44,16 +47,22 @@ abstract class AppRoutes {
     String? initialRoute,
     WidgetRef ref,
   ) {
-    final bool isLogged = ref.read(isLoggedStateProvider);
-
-    print("onGenerateInitialRoutes: $initialRoute");
+    final bool isLogged = ref.read(isLoggedProvider);
 
     if (!isLogged && initialRoute == forgotPassword) {
-      return [createPageRoute(login), createPageRoute(forgotPassword)];
+      return [
+        createPageRoute(login, rewriteUrl: true),
+        // The following rewriteUrl is not required
+        createPageRoute(forgotPassword, rewriteUrl: true),
+      ];
     }
 
     if (!isLogged && privateRoutes.contains(initialRoute)) {
       return [createPageRoute(login, rewriteUrl: true)];
+    }
+
+    if (isLogged && publicRoutes.contains(initialRoute)) {
+      return [createPageRoute(home, rewriteUrl: true)];
     }
 
     return [createPageRoute(initialRoute)];

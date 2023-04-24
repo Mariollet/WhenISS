@@ -7,18 +7,6 @@
 1. `flutter pub get`
 2. `flutter gen-l10n`
 
-#### Environment setup
-
-1. Create a file named `.env.local` in the project root. This will be your local configuration.
-2. Copy the commented variables of the `.env` to the `.env.local`.
-3. Uncomment the line registering the file in `pubspec.yaml`.
-
-_Note: Changing an environment variable requires a restart of the Dart debugger._
-
-#### Debug mode
-
-The constant `APP_DEBUG` determines the state of the project debug mode. **It must not be enabled from the global environment.** You can use it to make tests that won't show in production.
-
 ### Good practices
 
 - Use the formatter provided by the Dart extension, or run `dart format ./lib && dart analyze` before committing.

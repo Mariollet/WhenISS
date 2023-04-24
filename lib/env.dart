@@ -2,7 +2,7 @@ import "package:envied/envied.dart";
 
 part "env.g.dart";
 
-@Envied(path: ".env")
+@Envied()
 abstract class Environment {
   @EnviedField(varName: "APP_NAME")
   static const String appName = _Environment.appName;

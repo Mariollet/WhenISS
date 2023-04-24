@@ -14,7 +14,7 @@
 
 ### Environment
 
-Rebuild environment constants:
+Re-generate environment constants:
 ```bash
 flutter pub run build_runner build --delete-conflicting-outputs
 ```

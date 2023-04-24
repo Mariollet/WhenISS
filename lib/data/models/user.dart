@@ -36,7 +36,7 @@ class User {
         phone: json["phone_number"],
         // birthdate: DateTime.parse(json["birth_date"]),
         birthdate: DateTime.now(),
-        address: Address.fromJSON(json["address"]),
+        address: Address.fromJson(json["address"]),
       );
 
   User copyWith({

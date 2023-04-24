@@ -6,15 +6,10 @@
 
 1. `flutter pub get`
 2. `flutter gen-l10n`
-3. Create `lib/env.local.dart` with the following:
-	```dart
-	const Map<String, dynamic> localEnv = {};
-	```
-4. Uncomment the `package:keole/env.local.dart` import in `lib/env.dart`
 
 ### Environment
 
-Re-generate environment constants:
+Generate environment constants:
 ```bash
 flutter pub run build_runner build --delete-conflicting-outputs
 ```

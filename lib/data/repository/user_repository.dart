@@ -7,6 +7,8 @@ final getUserRepository = FutureProvider<User>(
   (_) async {
     final response = await Api.get(ApiRoutes.getUser);
 
+    if (response["code"] == 401) throw Exception(response["message"]);
+
     return User.fromJson(response);
   },
 );

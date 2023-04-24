@@ -4,7 +4,7 @@
 	"commonSend": "Send",
 	"@_ERROR": {},
 	"errorUnreachableServer": "The server is unreachable. Please retry in a few moments.",
-	"errorExpiredSession": "Votre session est expirée. Veuillez vous reconnecter.",
+	"errorExpiredSession": "Your session has expired. Please log in again.",
 	"@_PLACEHOLDER": {},
 	"placeholderEmail": "E-mail",
 	"placeholderPassword": "Password",

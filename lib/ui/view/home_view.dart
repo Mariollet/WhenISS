@@ -17,12 +17,14 @@ class HomeView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Consumer(
-              builder: (_, WidgetRef ref, __) {
+              builder: (_, WidgetRef ref, Widget? child) {
                 try {
                   final String? name = ref.watch(userProvider
                       .select((User? user) => user == null ? null : "$user"));
 
-                  if (name == null) return const Loader();
+                  if (name == null) {
+                    throw Exception(localizations.errorExpiredSession);
+                  }
 
                   return Text(
                     localizations.homeHello(name),
@@ -33,6 +35,7 @@ class HomeView extends StatelessWidget {
                   return FormError(error);
                 }
               },
+              child: const Loader(),
             ),
             const SizedBox(height: 30),
             Text(

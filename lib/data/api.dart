@@ -8,9 +8,9 @@ import "package:keole/env.dart";
 import "package:keole/services/services.dart";
 
 abstract class Api {
-  static final Client client = Client();
-  static final String baseUrl = env["APP_BASE_URL"];
+  static const String baseUrl = Environment.appBaseUrl;
   static const FlutterSecureStorage secureStorage = FlutterSecureStorage();
+  static final Client client = Client();
   static String? token;
 
   static Future<dynamic> _send({

@@ -14,7 +14,7 @@ class App extends ConsumerWidget {
             AppRoutes.onGenerateRoute(settings, ref),
         onGenerateInitialRoutes: (String? initialRoute) =>
             AppRoutes.onGenerateInitialRoutes(initialRoute, ref),
-        title: env["APP_NAME"],
+        title: Environment.appName,
         color: AppColors.primary,
         theme: ThemeData(
           colorScheme: const ColorScheme.light(
@@ -27,7 +27,7 @@ class App extends ConsumerWidget {
             backgroundColor: AppColors.background,
           ),
         ),
-        locale: Locale(env["APP_LOCALE"]),
+        locale: const Locale(Environment.appLocale),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,

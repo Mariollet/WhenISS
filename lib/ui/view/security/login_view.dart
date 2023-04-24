@@ -15,9 +15,9 @@ class LoginView extends ConsumerStatefulWidget {
 class LoginViewState extends ConsumerState<LoginView> {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final TextEditingController emailController =
-          TextEditingController(text: env["APP_DEBUG_EMAIL"]),
+          TextEditingController(text: Environment.appDebugEmail),
       passwordController =
-          TextEditingController(text: env["APP_DEBUG_PASSWORD"]);
+          TextEditingController(text: Environment.appDebugPassword);
   Exception? error;
   bool loading = false;
 

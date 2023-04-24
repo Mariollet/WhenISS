@@ -15,7 +15,7 @@ class ForgotPasswordView extends ConsumerStatefulWidget {
 class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
   final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
   final TextEditingController emailController =
-      TextEditingController(text: env["APP_DEBUG_EMAIL"]);
+      TextEditingController(text: Environment.appDebugEmail);
   Exception? error;
   bool loading = false;
 

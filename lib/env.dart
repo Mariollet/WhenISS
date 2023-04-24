@@ -1,14 +1,24 @@
-// import "package:keole/env.local.dart";
-import "package:keole/services/services.dart";
+import "package:envied/envied.dart";
 
-// ignore: undefined_identifier
-void setupEnvironment() => env.addAll(localEnv);
+part "env.g.dart";
 
-final Map<String, dynamic> env = {
-  "APP_NAME": "Keole",
-  "APP_LOCALE": "fr",
-  "APP_HOME": AppRoutes.home,
-  "APP_BASE_URL": null,
-  "APP_DEBUG_EMAIL": null,
-  "APP_DEBUG_PASSWORD": null,
-};
+@Envied(path: ".env")
+abstract class Environment {
+  @EnviedField(varName: "APP_NAME")
+  static const String appName = _Environment.appName;
+
+  @EnviedField(varName: "APP_LOCALE")
+  static const String appLocale = _Environment.appLocale;
+
+  @EnviedField(varName: "APP_HOME")
+  static const String appHome = _Environment.appHome;
+
+  @EnviedField(varName: "APP_BASE_URL")
+  static const String appBaseUrl = _Environment.appBaseUrl;
+
+  @EnviedField(varName: "APP_DEBUG_EMAIL")
+  static const String appDebugEmail = _Environment.appDebugEmail;
+
+  @EnviedField(varName: "APP_DEBUG_PASSWORD")
+  static const String appDebugPassword = _Environment.appDebugPassword;
+}

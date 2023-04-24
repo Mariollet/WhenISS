@@ -12,6 +12,13 @@
 	```
 4. Uncomment the `package:keole/env.local.dart` import in `lib/env.dart`
 
+### Environment
+
+Rebuild environment constants:
+```bash
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
 ### Good practices
 
 - Use the formatter provided by the Dart extension, or run `dart format ./lib && dart analyze` before committing.

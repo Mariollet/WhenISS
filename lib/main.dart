@@ -6,7 +6,7 @@ import "package:keole/ui/view/view.dart";
 import "package:keole/ui/view_model/view_model.dart";
 
 void main() async {
-  buildEnvironment();
+  setupEnvironment();
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(const SplashView());

@@ -56,7 +56,8 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 child: Link(
                   text: localizations.forgotPasswordLogin,
                   disabled: loading,
-                  onPressed: () => Navigator.of(context).pushReplacementNamed(AppRoutes.login),
+                  onPressed: () => Navigator.of(context)
+                      .pushReplacementNamed(AppRoutes.login),
                 ),
               ),
               const SizedBox(height: 15),

@@ -1,7 +1,8 @@
-import "package:keole/env.local.dart";
+// import "package:keole/env.local.dart";
 import "package:keole/services/services.dart";
 
-void buildEnvironment() => env.addAll(localEnv);
+// ignore: undefined_identifier
+void setupEnvironment() => env.addAll(localEnv);
 
 final Map<String, dynamic> env = {
   "APP_NAME": "Keole",

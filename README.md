@@ -9,9 +9,10 @@
 
 ### Environment
 
-Generate environment constants:
+Regenerate environment variables (no debugger restart required):
 ```bash
-flutter pub run build_runner build --delete-conflicting-outputs
+dart run build_runner clean
+dart run build_runner build --delete-conflicting-outputs
 ```
 
 ### Good practices

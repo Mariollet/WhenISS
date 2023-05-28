@@ -1,6 +1,5 @@
 # Miscellaneous
 *.class
-*.env
 *.log
 *.pyc
 *.swp
@@ -9,6 +8,8 @@
 .buildlog/
 .history
 .svn/
+.env
+.env.local
 lib/env.g.dart
 migrate_working_dir/
 

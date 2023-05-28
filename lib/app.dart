@@ -8,11 +8,11 @@ class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => MaterialApp(
+  Widget build(final BuildContext context, final WidgetRef ref) => MaterialApp(
         navigatorKey: navigatorKey,
-        onGenerateRoute: (RouteSettings settings) =>
+        onGenerateRoute: (final RouteSettings settings) =>
             AppRoutes.onGenerateRoute(settings, ref),
-        onGenerateInitialRoutes: (String? initialRoute) =>
+        onGenerateInitialRoutes: (final String? initialRoute) =>
             AppRoutes.onGenerateInitialRoutes(initialRoute, ref),
         title: Environment.appName,
         color: AppColors.primary,

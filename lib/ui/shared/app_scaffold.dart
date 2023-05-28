@@ -1,6 +1,7 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:keole/services/services.dart";
+import "package:keole/ui/shared/version.dart";
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
@@ -49,11 +50,12 @@ class AppScaffold extends StatelessWidget {
           ? Container(
               alignment: Alignment.center,
               height: 50,
-              child: const Text(
+              child: const Version(),
+              /* const Text(
                 "© 2023 Keole",
                 style: AppTextStyles.copyright,
                 textAlign: TextAlign.center,
-              ),
+              ), */
             )
           : null,
       extendBodyBehindAppBar: true,

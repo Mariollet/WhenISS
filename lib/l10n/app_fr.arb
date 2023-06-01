@@ -1,4 +1,8 @@
 {
+	"@_CIVILITY": {},
+	"civilityMr": "monsieur",
+	"civilityMrs": "madame",
+	"civilityNone": "ne se prononce pas",
 	"@_COMMON": {},
 	"commonLogIn": "Se connecter",
 	"commonSend": "Envoyer",

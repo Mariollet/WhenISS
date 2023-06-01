@@ -1,43 +1,45 @@
 import "package:keole/data/models/models.dart";
 
 class User {
-  const User({
+  User({
     this.id,
     required this.civility,
     required this.firstName,
     required this.lastName,
     required this.email,
-    required this.phone,
-    required this.birthdate,
-    required this.address,
+    this.phone,
+    this.birthdate,
+    this.address,
   });
 
   final int? id;
-  final Civility civility;
-  final String firstName, lastName, email, phone;
-  final DateTime birthdate;
-  final Address address;
+  Civility civility;
+  String firstName, lastName, email;
+  Phone? phone;
+  DateTime? birthdate;
+  Address? address;
 
   @override
   int get hashCode => id ?? 0;
 
   @override
-  bool operator ==(dynamic other) => other is User && id == other.id;
+  bool operator ==(final dynamic other) => other is User && id == other.id;
 
   @override
   String toString() => "$firstName $lastName";
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory User.fromJson(final Map<String, dynamic> json) => User(
         id: json["id"],
-        civility: Civility.fromJson(json["gender"]),
+        civility: Civility.parse(json["gender"]),
         firstName: json["first_name"],
         lastName: json["last_name"],
         email: json["email"],
-        phone: json["phone_number"],
-        // birthdate: DateTime.parse(json["birth_date"]),
-        birthdate: DateTime.now(),
+        phone: Phone.tryParse("${json["phone_number"]}"),
+        birthdate: DateTime.tryParse("${json["birth_date"]}"),
         address: Address.fromJson(json["address"]),
       );
+
+  // TODO: Implement toJson()
 
   User copyWith({
     int? id,
@@ -45,7 +47,7 @@ class User {
     String? firstName,
     String? lastName,
     String? email,
-    String? phone,
+    Phone? phone,
     DateTime? birthdate,
     Address? address,
   }) =>
@@ -59,26 +61,4 @@ class User {
         birthdate: birthdate ?? this.birthdate,
         address: address ?? this.address,
       );
-}
-
-enum Civility {
-  mr("monsieur"),
-  mrs("madame");
-
-  const Civility(this.json);
-
-  final String json;
-
-  factory Civility.fromJson(String json) {
-    switch (json) {
-      case "Monsieur":
-        return mr;
-      case "Madame":
-        return mrs;
-      default:
-        throw ArgumentError.value(json);
-    }
-  }
-
-  String toJson() => json;
 }

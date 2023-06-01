@@ -10,7 +10,7 @@ class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
-  Widget build(BuildContext context) => AppScaffold(
+  Widget build(final BuildContext context) => AppScaffold(
         appBar: true,
         bottomBar: true,
         body: Column(

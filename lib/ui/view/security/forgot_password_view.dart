@@ -9,10 +9,10 @@ class ForgotPasswordView extends ConsumerStatefulWidget {
   const ForgotPasswordView({super.key});
 
   @override
-  ForgotPasswordViewState createState() => ForgotPasswordViewState();
+  ConsumerState<ForgotPasswordView> createState() => _ForgotPasswordViewState();
 }
 
-class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
+class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
   final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
   final TextEditingController emailController =
       TextEditingController(text: Environment.appDebugEmail);
@@ -20,7 +20,7 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
   bool loading = false;
 
   @override
-  Widget build(BuildContext context) => AppScaffold(
+  Widget build(final BuildContext context) => AppScaffold(
         appBar: true,
         bottomBar: true,
         body: SizedBox(
@@ -56,8 +56,9 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 child: Link(
                   text: localizations.forgotPasswordLogin,
                   disabled: loading,
-                  onPressed: () => Navigator.of(context)
-                      .pushReplacementNamed(AppRoutes.login),
+                  onPressed: () => Navigator.of(context).pushReplacementNamed(
+                    AppRoutes.login,
+                  ),
                 ),
               ),
               const SizedBox(height: 15),
@@ -67,7 +68,9 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 size: ButtonSize.m,
                 text: localizations.commonSend,
                 loading: loading,
-                onPressed: () => sendResetPasswordRequest(emailController.text),
+                onPressed: () => sendResetPasswordRequest(
+                  email: emailController.text,
+                ),
               ),
             ],
           ),
@@ -80,7 +83,7 @@ class ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
     super.dispose();
   }
 
-  void sendResetPasswordRequest(String email) async {
+  void sendResetPasswordRequest({required final String email}) async {
     if (!forgotPasswordFormKey.currentState!.validate()) return;
 
     error = null;

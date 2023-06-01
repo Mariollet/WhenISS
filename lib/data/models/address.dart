@@ -9,7 +9,7 @@ class Address {
   final String street, postalCode, city;
   final String? complement;
 
-  factory Address.fromJson(Map<String, dynamic> json) => Address(
+  factory Address.fromJson(final Map<String, dynamic> json) => Address(
         street: json["street"],
         complement: json["complement"],
         postalCode: json["zip_code"],
@@ -19,7 +19,7 @@ class Address {
   Map<String, dynamic> toJson() => {
         "street": street,
         "complement": complement,
-        "postal_code": postalCode,
+        "zip_code": postalCode,
         "city": city,
       };
 }

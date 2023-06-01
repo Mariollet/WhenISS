@@ -9,10 +9,10 @@ class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
 
   @override
-  LoginViewState createState() => LoginViewState();
+  ConsumerState<LoginView> createState() => _LoginViewState();
 }
 
-class LoginViewState extends ConsumerState<LoginView> {
+class _LoginViewState extends ConsumerState<LoginView> {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final TextEditingController emailController =
           TextEditingController(text: Environment.appDebugEmail),
@@ -22,7 +22,7 @@ class LoginViewState extends ConsumerState<LoginView> {
   bool loading = false;
 
   @override
-  Widget build(BuildContext context) => AppScaffold(
+  Widget build(final BuildContext context) => AppScaffold(
         appBar: true,
         bottomBar: true,
         body: SizedBox(
@@ -70,8 +70,9 @@ class LoginViewState extends ConsumerState<LoginView> {
                 child: Link(
                   text: localizations.loginForgotPassword,
                   disabled: loading,
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(AppRoutes.forgotPassword),
+                  onPressed: () => Navigator.of(context).pushNamed(
+                    AppRoutes.forgotPassword,
+                  ),
                 ),
               ),
               const SizedBox(height: 15),
@@ -81,8 +82,10 @@ class LoginViewState extends ConsumerState<LoginView> {
                 size: ButtonSize.m,
                 text: localizations.commonLogIn,
                 loading: loading,
-                onPressed: () =>
-                    login(emailController.text, passwordController.text),
+                onPressed: () => login(
+                  email: emailController.text,
+                  password: passwordController.text,
+                ),
               ),
             ],
           ),
@@ -96,7 +99,10 @@ class LoginViewState extends ConsumerState<LoginView> {
     super.dispose();
   }
 
-  void login(String email, String password) async {
+  void login({
+    required final String email,
+    required final String password,
+  }) async {
     if (!loginFormKey.currentState!.validate()) return;
 
     error = null;

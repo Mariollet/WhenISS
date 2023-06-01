@@ -1,4 +1,8 @@
 {
+	"@_CIVILITY": {},
+	"civilityMr": "mr",
+	"civilityMrs": "mrs",
+	"civilityNone": "not applicable",
 	"@_COMMON": {},
 	"commonLogIn": "Log in",
 	"commonSend": "Send",

@@ -6,7 +6,7 @@ class NotFoundView extends StatelessWidget {
   const NotFoundView({super.key});
 
   @override
-  Widget build(BuildContext context) => AppScaffold(
+  Widget build(final BuildContext context) => AppScaffold(
         appBar: false,
         bottomBar: true,
         body: Column(

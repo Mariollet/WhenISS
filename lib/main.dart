@@ -3,7 +3,6 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:jwt_decoder/jwt_decoder.dart";
 import "package:keole/app.dart";
 import "package:keole/ui/view/view.dart";
-import 'package:keole/ui/view_model/package_view_model.dart';
 import "package:keole/ui/view_model/view_model.dart";
 import "package:package_info_plus/package_info_plus.dart";
 
@@ -20,7 +19,7 @@ void main() async {
   if (jwt != null) {
     try {
       isLogged = !JwtDecoder.isExpired(jwt);
-    } on FormatException catch (_) {
+    } on FormatException {
       isLogged = false;
     }
 

@@ -6,7 +6,7 @@ class Phone {
   final String number;
 
   factory Phone.parse(final String number) {
-    if (!number.isValidPhoneNumber()) throw const FormatException();
+    if (!number.isValidPhoneNumber()) throw FormatException;
 
     return Phone(number: number);
   }

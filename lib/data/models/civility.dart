@@ -13,7 +13,7 @@ enum Civility {
         "Monsieur" => mr,
         "Madame" => mrs,
         "Ne se prononce pas" => none,
-        _ => throw const FormatException(),
+        _ => throw FormatException,
       };
 
   @override

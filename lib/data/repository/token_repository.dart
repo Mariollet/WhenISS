@@ -1,6 +1,6 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/data/api.dart";
-import "package:keole/ui/view_model/login_view_model.dart";
+import "package:keole/ui/view_model/view_model.dart";
 
 final readTokenRepository = FutureProvider.autoDispose<String?>(
   (_) async => await Api.secureStorage.read(key: "token"),
@@ -19,5 +19,6 @@ final deleteTokenRepository = FutureProvider.autoDispose<void>(
     await Api.secureStorage.delete(key: "token");
 
     ref.read(isLoggedProvider.notifier).state = false;
+    ref.read(userProvider.notifier).state = null;
   },
 );

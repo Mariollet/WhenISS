@@ -39,7 +39,16 @@ class User {
         address: Address.fromJson(json["address"]),
       );
 
-  // TODO: Implement toJson()
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "gender": civility.name,
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "phone": phone?.toJson(),
+        "birthdate": birthdate?.toString(),
+        "address": address?.toJson(),
+      };
 
   User copyWith({
     int? id,

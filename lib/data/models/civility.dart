@@ -1,13 +1,13 @@
 import "package:keole/services/services.dart";
 
 enum Civility {
-  mr(slug: "Monsieur"),
-  mrs(slug: "Madame"),
-  none(slug: "Ne se prononce pas");
+  mr(name: "Monsieur"),
+  mrs(name: "Madame"),
+  none(name: "Ne se prononce pas");
 
-  const Civility({required this.slug});
+  const Civility({required this.name});
 
-  final String slug;
+  final String name;
 
   factory Civility.parse(final String civility) => switch (civility) {
         "Monsieur" => mr,

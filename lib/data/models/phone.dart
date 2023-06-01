@@ -19,6 +19,7 @@ class Phone {
     }
   }
 
+  // TODO: Dynamic country ISO?
   Map<String, dynamic> toJson() => {
         "country": "FR",
         "number": number,

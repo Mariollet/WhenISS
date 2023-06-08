@@ -51,14 +51,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       validator: emailValidator,
                       placeholder: localizations.placeholderEmail,
                       keyboardType: TextInputType.emailAddress,
-                      disabled: loading,
                     ),
                     const SizedBox(height: 15),
                     TextInput(
                       controller: passwordController,
                       validator: requiredValidator,
                       placeholder: localizations.placeholderPassword,
-                      disabled: loading,
                       obscured: true,
                     ),
                   ],
@@ -68,10 +66,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Link(
-                  text: localizations.loginForgotPassword,
-                  disabled: loading,
                   onPressed: () => Navigator.of(context).pushNamed(
                     AppRoutes.forgotPassword,
+                  ),
+                  child: Text(
+                    localizations.loginForgotPassword,
+                    style: AppTextStyles.link,
                   ),
                 ),
               ),
@@ -82,10 +82,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 size: ButtonSize.m,
                 text: localizations.commonLogIn,
                 loading: loading,
-                onPressed: () => login(
-                  email: emailController.text,
-                  password: passwordController.text,
-                ),
+                onPressed: () {
+                  if (!loginFormKey.currentState!.validate()) return;
+
+                  login(
+                    email: emailController.text,
+                    password: passwordController.text,
+                  );
+                },
               ),
             ],
           ),
@@ -103,14 +107,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
     required final String email,
     required final String password,
   }) async {
-    if (!loginFormKey.currentState!.validate()) return;
-
     error = null;
     loading = true;
 
     setState(() {});
 
     try {
+      await Future.delayed(const Duration(seconds: 2));
+
       await ref.read(loginProvider({
         "username": email,
         "password": password,
@@ -118,7 +122,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
 
       if (!mounted) return;
 
-      Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+      Navigator.of(context).pushNamed(AppRoutes.home);
     } on Exception catch (error) {
       this.error = error;
       loading = false;

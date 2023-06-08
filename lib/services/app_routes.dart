@@ -21,6 +21,8 @@ abstract class AppRoutes {
     final RouteSettings settings,
     final WidgetRef ref,
   ) {
+    print("onGenerateRoute");
+
     final bool isLogged = ref.read(isLoggedProvider);
     final String? route = settings.name;
     String? finalRoute = route;
@@ -47,6 +49,8 @@ abstract class AppRoutes {
     final String? initialRoute,
     final WidgetRef ref,
   ) {
+    print("onGenerateInitialRoute");
+
     final bool isLogged = ref.read(isLoggedProvider);
 
     if (!isLogged && initialRoute == forgotPassword) {
@@ -72,14 +76,17 @@ abstract class AppRoutes {
     final String? route, {
     final RouteSettings? settings,
     final bool rewriteUrl = false,
-  }) =>
-      MaterialPageRoute(
-        builder: (_) => routes[route] ?? const NotFoundView(),
-        settings: rewriteUrl
-            ? RouteSettings(
-                name: route,
-                arguments: settings?.arguments,
-              )
-            : settings,
-      );
+  }) {
+    print("createPageRoute: $route");
+
+    return MaterialPageRoute(
+      builder: (_) => routes[route] ?? const NotFoundView(),
+      settings: rewriteUrl
+          ? RouteSettings(
+              name: route,
+              arguments: settings?.arguments,
+            )
+          : settings,
+    );
+  }
 }

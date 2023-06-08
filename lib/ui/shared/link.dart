@@ -1,27 +1,16 @@
 import "package:flutter/cupertino.dart";
-import "package:keole/services/index.dart";
 
 class Link extends StatelessWidget {
-  const Link({
-    super.key,
-    required this.text,
-    this.disabled = false,
-    required this.onPressed,
-  });
+  const Link({super.key, required this.onPressed, required this.child});
 
-  final String text;
-  final bool disabled;
   final VoidCallback onPressed;
+  final Widget child;
 
   @override
   Widget build(final BuildContext context) => CupertinoButton(
         padding: EdgeInsets.zero,
         minSize: null,
-        onPressed: disabled ? null : onPressed,
-        child: Text(
-          text,
-          style: AppTextStyles.link,
-          textAlign: TextAlign.center,
-        ),
+        onPressed: onPressed,
+        child: child,
       );
 }

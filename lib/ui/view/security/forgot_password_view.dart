@@ -47,17 +47,18 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                   validator: emailValidator,
                   placeholder: localizations.placeholderEmail,
                   keyboardType: TextInputType.emailAddress,
-                  disabled: loading,
                 ),
               ),
               const SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerRight,
                 child: Link(
-                  text: localizations.forgotPasswordLogin,
-                  disabled: loading,
-                  onPressed: () => Navigator.of(context).pushReplacementNamed(
+                  onPressed: () => Navigator.of(context).pushNamed(
                     AppRoutes.login,
+                  ),
+                  child: Text(
+                    localizations.forgotPasswordLogin,
+                    style: AppTextStyles.link,
                   ),
                 ),
               ),
@@ -68,9 +69,13 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 size: ButtonSize.m,
                 text: localizations.commonSend,
                 loading: loading,
-                onPressed: () => sendResetPasswordRequest(
-                  email: emailController.text,
-                ),
+                onPressed: () {
+                  if (!forgotPasswordFormKey.currentState!.validate()) return;
+
+                  sendResetPasswordRequest(
+                    email: emailController.text,
+                  );
+                },
               ),
             ],
           ),
@@ -84,8 +89,6 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
   }
 
   void sendResetPasswordRequest({required final String email}) async {
-    if (!forgotPasswordFormKey.currentState!.validate()) return;
-
     error = null;
     loading = true;
 
@@ -98,7 +101,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
 
       if (!mounted) return;
 
-      Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+      Navigator.of(context).pushNamed(AppRoutes.login);
     } on Exception catch (error) {
       this.error = error;
       loading = false;

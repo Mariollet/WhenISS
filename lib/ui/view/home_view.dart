@@ -20,9 +20,7 @@ class HomeView extends StatelessWidget {
               builder: (_, final WidgetRef ref, final Widget? child) {
                 try {
                   final String? name = ref.watch(
-                    userProvider.select(
-                      (User? user) => user == null ? null : "$user",
-                    ),
+                    userProvider.select((final User? user) => user?.toString()),
                   );
 
                   if (name == null) {

@@ -17,10 +17,13 @@ class HomeView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Consumer(
-              builder: (_, WidgetRef ref, Widget? child) {
+              builder: (_, final WidgetRef ref, final Widget? child) {
                 try {
-                  final String? name = ref.watch(userProvider
-                      .select((User? user) => user == null ? null : "$user"));
+                  final String? name = ref.watch(
+                    userProvider.select(
+                      (User? user) => user == null ? null : "$user",
+                    ),
+                  );
 
                   if (name == null) {
                     throw Exception(localizations.errorExpiredSession);
@@ -45,12 +48,16 @@ class HomeView extends StatelessWidget {
             ),
             const SizedBox(height: 60),
             Consumer(
-              builder: (BuildContext context, WidgetRef ref, _) => Button(
+              builder: (final BuildContext context, final WidgetRef ref, _) =>
+                  Button(
                 size: ButtonSize.m,
                 text: localizations.homeLogout,
-                onPressed: () => ref.read(logoutProvider.future).then((_) =>
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        AppRoutes.login, (_) => false)),
+                onPressed: () => ref.read(logoutProvider.future).then(
+                      (_) => Navigator.of(context).pushNamedAndRemoveUntil(
+                        AppRoutes.login,
+                        (_) => false,
+                      ),
+                    ),
               ),
             ),
           ],

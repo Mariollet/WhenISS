@@ -7,7 +7,7 @@ class FormError extends StatelessWidget {
   final dynamic error;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     if (error is! Exception) return const SizedBox();
 
     return Text.rich(

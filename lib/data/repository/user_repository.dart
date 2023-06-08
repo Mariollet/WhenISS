@@ -15,5 +15,5 @@ final getUserRepository = FutureProvider<User>(
 
 final patchUserRepository = FutureProvider.autoDispose
     .family<Map<String, dynamic>, Map<String, dynamic>>(
-  (ref, request) async => await Api.patch(ApiRoutes.patchUser, body: request),
+  (_, request) async => await Api.patch(ApiRoutes.patchUser, body: request),
 );

@@ -8,9 +8,7 @@ class SplashView extends StatelessWidget {
   Widget build(final BuildContext context) => Container(
         decoration: const BoxDecoration(
           color: AppColors.black,
-          image: DecorationImage(
-            image: AssetImage(AppImages.splash),
-          ),
+          image: DecorationImage(image: AssetImage(AppImages.splash)),
         ),
       );
 }

@@ -4,7 +4,7 @@ import "package:flutter/services.dart";
 import "package:keole/extensions/index.dart";
 import "package:keole/services/index.dart";
 
-String? emailValidator(String? value) {
+String? emailValidator(final String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";
   if (!value.isValidEmail()) {
     return "Veuillez saisir une adresse e-mail valide.";
@@ -13,7 +13,7 @@ String? emailValidator(String? value) {
   return null;
 }
 
-String? phoneNumberValidator(String? value) {
+String? phoneNumberValidator(final String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";
   if (!value.isValidPhoneNumber()) {
     return "Veuillez saisir un numéro de téléphone valide.";
@@ -22,7 +22,7 @@ String? phoneNumberValidator(String? value) {
   return null;
 }
 
-String? postalCodeValidator(String? value) {
+String? postalCodeValidator(final String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";
   if (!value.isValidPostalCode()) {
     return "Veuillez saisir un code postal valide.";
@@ -31,7 +31,7 @@ String? postalCodeValidator(String? value) {
   return null;
 }
 
-String? requiredValidator(String? value) {
+String? requiredValidator(final String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";
 
   return null;
@@ -66,7 +66,7 @@ class TextInputState extends State<TextInput> {
   bool obscured = true;
 
   @override
-  Widget build(BuildContext context) => TextFormField(
+  Widget build(final BuildContext context) => TextFormField(
         controller: widget.controller,
         decoration: InputDecoration(
           labelText: widget.placeholder,

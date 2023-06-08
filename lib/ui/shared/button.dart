@@ -18,7 +18,7 @@ class Button extends StatelessWidget {
   final VoidCallback onPressed;
 
   @override
-  Widget build(BuildContext context) => SizedBox(
+  Widget build(final BuildContext context) => SizedBox(
         width: size.width,
         height: size.height,
         child: CupertinoButton.filled(

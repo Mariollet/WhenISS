@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:keole/services/index.dart";
 
-void showSnackBar(String message) =>
+void showSnackBar(final String message) =>
     ScaffoldMessenger.of(currentContext).showSnackBar(
       SnackBar(
         content: Text(message, style: AppTextStyles.snackBar),

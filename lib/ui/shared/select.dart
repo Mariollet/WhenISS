@@ -20,13 +20,10 @@ class Select<E> extends StatelessWidget {
   final String? Function(E?)? validator;
 
   @override
-  Widget build(BuildContext context) => DropdownButtonFormField(
+  Widget build(final BuildContext context) => DropdownButtonFormField(
         items: [
           for (final E item in items)
-            DropdownMenuItem(
-              value: item,
-              child: Text(labelBuilder(item)),
-            ),
+            DropdownMenuItem(value: item, child: Text(labelBuilder(item))),
         ],
         value: value,
         onChanged: onChanged,

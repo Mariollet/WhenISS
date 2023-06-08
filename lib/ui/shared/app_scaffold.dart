@@ -19,46 +19,39 @@ class AppScaffold extends StatelessWidget {
   final Widget body;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar
-          ? AppBar(
-              leading: backButton
-                  ? IconButton(
-                      splashRadius: 30,
-                      onPressed: Navigator.of(context).pop,
-                      icon: isModal
-                          ? const Icon(CupertinoIcons.xmark)
-                          : const Icon(CupertinoIcons.arrow_turn_down_left),
-                    )
-                  : null,
-              automaticallyImplyLeading: false,
-              title: const Image(image: AssetImage(AppImages.logo), width: 200),
-              elevation: 0,
-              backgroundColor: AppColors.transparent,
-              foregroundColor: AppColors.black,
-              centerTitle: true,
-              toolbarHeight: 80,
-              leadingWidth: 80,
-            )
-          : null,
-      body: Padding(
-        padding: padding,
-        child: Center(child: body),
-      ),
-      bottomSheet: bottomBar
-          ? Container(
-              alignment: Alignment.center,
-              height: 50,
-              child: const Version(),
-              /* const Text(
-                "© 2023 Keole",
-                style: AppTextStyles.copyright,
-                textAlign: TextAlign.center,
-              ), */
-            )
-          : null,
-      extendBodyBehindAppBar: true,
-    );
-  }
+  Widget build(final BuildContext context) => Scaffold(
+        appBar: appBar
+            ? AppBar(
+                leading: backButton
+                    ? IconButton(
+                        splashRadius: 30,
+                        onPressed: Navigator.of(context).pop,
+                        icon: isModal
+                            ? const Icon(CupertinoIcons.xmark)
+                            : const Icon(CupertinoIcons.arrow_turn_down_left),
+                      )
+                    : null,
+                automaticallyImplyLeading: false,
+                title: const Image(
+                  image: AssetImage(AppImages.logo),
+                  width: 200,
+                ),
+                elevation: 0,
+                backgroundColor: AppColors.transparent,
+                foregroundColor: AppColors.black,
+                centerTitle: true,
+                toolbarHeight: 80,
+                leadingWidth: 80,
+              )
+            : null,
+        body: Padding(padding: padding, child: Center(child: body)),
+        bottomSheet: bottomBar
+            ? Container(
+                alignment: Alignment.center,
+                height: 50,
+                child: const Version(),
+              )
+            : null,
+        extendBodyBehindAppBar: true,
+      );
 }

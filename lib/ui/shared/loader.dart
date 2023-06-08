@@ -7,7 +7,7 @@ class Loader extends StatelessWidget {
   final Color? color;
 
   @override
-  Widget build(BuildContext context) => CupertinoActivityIndicator(
+  Widget build(final BuildContext context) => CupertinoActivityIndicator(
         color: color,
         radius: radius,
       );

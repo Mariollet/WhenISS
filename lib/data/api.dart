@@ -14,12 +14,12 @@ abstract class Api {
   static String? token;
 
   static Future<dynamic> _send({
-    required ApiMethod method,
-    required String endpoint,
-    required bool authorizationHeader,
+    required final _ApiMethod method,
+    required final String endpoint,
+    required final bool authorizationHeader,
     Object? body,
   }) async {
-    if (method != ApiMethod.get) body = jsonEncode(body);
+    if (method != _ApiMethod.get) body = jsonEncode(body);
     if (authorizationHeader) token = await secureStorage.read(key: "token");
 
     final Uri url = Uri.https(baseUrl, endpoint);
@@ -31,19 +31,19 @@ abstract class Api {
 
     try {
       switch (method) {
-        case ApiMethod.get:
+        case _ApiMethod.get:
           response = await client.get(url, headers: headers);
 
           break;
-        case ApiMethod.post:
+        case _ApiMethod.post:
           response = await client.post(url, headers: headers, body: body);
 
           break;
-        case ApiMethod.patch:
+        case _ApiMethod.patch:
           response = await client.patch(url, headers: headers, body: body);
 
           break;
-        case ApiMethod.delete:
+        case _ApiMethod.delete:
           response = await client.delete(url, headers: headers, body: body);
 
           break;
@@ -60,53 +60,53 @@ abstract class Api {
   }
 
   static Future<dynamic> get(
-    String endpoint, {
-    bool authorizationHeader = true,
+    final String endpoint, {
+    final bool authorizationHeader = true,
   }) async =>
       await _send(
-        method: ApiMethod.get,
+        method: _ApiMethod.get,
         endpoint: endpoint,
         authorizationHeader: authorizationHeader,
       );
 
   static Future<dynamic> post(
-    String endpoint, {
-    required Object? body,
-    bool authorizationHeader = true,
+    final String endpoint, {
+    required final Object? body,
+    final bool authorizationHeader = true,
   }) async =>
       await _send(
-        method: ApiMethod.post,
+        method: _ApiMethod.post,
         endpoint: endpoint,
         authorizationHeader: authorizationHeader,
         body: body,
       );
 
   static Future<dynamic> patch(
-    String endpoint, {
-    required Object? body,
-    bool authorizationHeader = true,
+    final String endpoint, {
+    required final Object? body,
+    final bool authorizationHeader = true,
   }) async =>
       await _send(
-        method: ApiMethod.patch,
+        method: _ApiMethod.patch,
         endpoint: endpoint,
         authorizationHeader: authorizationHeader,
         body: body,
       );
 
   static Future<dynamic> delete(
-    String endpoint, {
-    required Object? body,
-    bool authorizationHeader = true,
+    final String endpoint, {
+    required final Object? body,
+    final bool authorizationHeader = true,
   }) async =>
       await _send(
-        method: ApiMethod.delete,
+        method: _ApiMethod.delete,
         endpoint: endpoint,
         authorizationHeader: authorizationHeader,
         body: body,
       );
 }
 
-enum ApiMethod {
+enum _ApiMethod {
   get,
   post,
   patch,

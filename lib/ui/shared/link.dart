@@ -14,7 +14,7 @@ class Link extends StatelessWidget {
   final VoidCallback onPressed;
 
   @override
-  Widget build(BuildContext context) => CupertinoButton(
+  Widget build(final BuildContext context) => CupertinoButton(
         padding: EdgeInsets.zero,
         minSize: null,
         onPressed: disabled ? null : onPressed,

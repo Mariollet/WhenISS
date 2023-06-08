@@ -6,6 +6,6 @@ extension Casing on String {
   /// Returns this string with each word capitalized.
   String toTitleCase() => replaceAll(RegExp(" +"), ' ')
       .split(' ')
-      .map((String word) => word.toCapitalized())
+      .map((final String word) => word.toCapitalized())
       .join(' ');
 }

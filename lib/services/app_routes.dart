@@ -18,8 +18,8 @@ abstract class AppRoutes {
   };
 
   static Route<dynamic>? onGenerateRoute(
-    RouteSettings settings,
-    WidgetRef ref,
+    final RouteSettings settings,
+    final WidgetRef ref,
   ) {
     final bool isLogged = ref.read(isLoggedProvider);
     final String? route = settings.name;
@@ -44,8 +44,8 @@ abstract class AppRoutes {
   }
 
   static List<Route<dynamic>> onGenerateInitialRoutes(
-    String? initialRoute,
-    WidgetRef ref,
+    final String? initialRoute,
+    final WidgetRef ref,
   ) {
     final bool isLogged = ref.read(isLoggedProvider);
 
@@ -69,18 +69,17 @@ abstract class AppRoutes {
   }
 
   static Route<dynamic> createPageRoute(
-    String? route, {
-    RouteSettings? settings,
-    bool rewriteUrl = false,
-  }) {
-    return MaterialPageRoute(
-      builder: (_) => routes[route] ?? const NotFoundView(),
-      settings: rewriteUrl
-          ? RouteSettings(
-              name: route,
-              arguments: settings?.arguments,
-            )
-          : settings,
-    );
-  }
+    final String? route, {
+    final RouteSettings? settings,
+    final bool rewriteUrl = false,
+  }) =>
+      MaterialPageRoute(
+        builder: (_) => routes[route] ?? const NotFoundView(),
+        settings: rewriteUrl
+            ? RouteSettings(
+                name: route,
+                arguments: settings?.arguments,
+              )
+            : settings,
+      );
 }

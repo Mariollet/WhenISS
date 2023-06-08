@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:keole/services/services.dart";
+import "package:keole/services/index.dart";
 
 const String fontFamily = "Jost";
 

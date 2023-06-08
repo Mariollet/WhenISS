@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/ui/view/view.dart";
-import "package:keole/ui/view_model/login_view_model.dart";
+import "package:keole/ui/view/index.dart";
+import "package:keole/ui/view_model/index.dart";
 
 abstract class AppRoutes {
   static const String home = '/';

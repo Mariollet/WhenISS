@@ -1,6 +1,6 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/data/api.dart";
-import "package:keole/services/services.dart";
+import "package:keole/services/index.dart";
 
 final postResetPasswordRepository =
     FutureProvider.autoDispose.family<void, String>(

@@ -1,6 +1,6 @@
 import "package:flutter/cupertino.dart";
-import "package:keole/services/services.dart";
-import "package:keole/ui/shared/shared.dart";
+import "package:keole/services/index.dart";
+import "package:keole/ui/shared/index.dart";
 
 class Button extends StatelessWidget {
   const Button({

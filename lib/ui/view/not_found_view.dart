@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import "package:keole/services/services.dart";
-import "package:keole/ui/shared/shared.dart";
+import "package:keole/services/index.dart";
+import "package:keole/ui/shared/index.dart";
 
 class NotFoundView extends StatelessWidget {
   const NotFoundView({super.key});

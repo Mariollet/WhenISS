@@ -1,6 +1,6 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/data/api.dart";
-import "package:keole/ui/view_model/view_model.dart";
+import "package:keole/ui/view_model/index.dart";
 
 final readTokenRepository = FutureProvider.autoDispose<String?>(
   (_) async => await Api.secureStorage.read(key: "token"),

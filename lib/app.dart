@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/env.dart";
-import "package:keole/services/services.dart";
+import "package:keole/services/index.dart";
 
 class App extends ConsumerWidget {
   const App({super.key});

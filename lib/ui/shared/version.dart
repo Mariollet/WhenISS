@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/services/app_text_styles.dart";
-import "package:keole/ui/view_model/package_view_model.dart";
+import "package:keole/services/index.dart";
+import "package:keole/ui/view_model/index.dart";
 import "package:package_info_plus/package_info_plus.dart";
 
 const int copyrightYear = 2023;

@@ -5,3 +5,4 @@ export "link.dart";
 export "loader.dart";
 export "select.dart";
 export "text_input.dart";
+export "version.dart";

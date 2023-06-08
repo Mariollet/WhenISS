@@ -1,8 +1,8 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
-import "package:keole/extensions/extensions.dart";
-import "package:keole/services/services.dart";
+import "package:keole/extensions/index.dart";
+import "package:keole/services/index.dart";
 
 String? emailValidator(String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";

@@ -1,4 +1,4 @@
-import "package:keole/data/models/models.dart";
+import "package:keole/data/models/index.dart";
 
 class User {
   User({

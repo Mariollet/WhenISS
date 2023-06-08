@@ -1,7 +1,7 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:keole/services/services.dart";
-import "package:keole/ui/shared/version.dart";
+import "package:keole/services/index.dart";
+import "package:keole/ui/shared/index.dart";
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({

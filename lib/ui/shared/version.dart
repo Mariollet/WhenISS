@@ -1,3 +1,5 @@
+import "dart:io";
+
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/services/index.dart";
@@ -17,8 +19,13 @@ class Version extends ConsumerWidget {
   Widget build(final BuildContext context, final WidgetRef ref) {
     final String version = ref.watch(
       packageProvider.select(
-        (final PackageInfo package) =>
-            "${package.version}+${package.buildNumber}",
+        (final PackageInfo package) {
+          if (Platform.isAndroid || Platform.isIOS) {
+            return "${package.version}+${package.buildNumber}";
+          } else {
+            return package.version;
+          }
+        },
       ),
     );
 

@@ -1,0 +1,69 @@
+name: Build and deploy to web server
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+
+jobs:
+  build:
+    name: Deploying
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "16.x"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: dart pub get
+      - name: Create .env.local file from GitHub secrets
+        run: |
+          echo "APP_BASE_URL=${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}" >> .env
+          echo "APP_DEBUG=false" >> .env
+          echo "APP_DEBUG_EMAIL=debug@keole.net" >> .env
+          echo "APP_DEBUG_PASSWORD=password" >> .env
+      - name: Analyze and build
+        run: |
+          dart pub run build_runner build --delete-conflicting-outputs
+          flutter gen-l10n
+          dart format ./lib
+          flutter analyze
+          flutter test
+          flutter build web --release
+      # Deploy to a web server using ssh-scp-deploy
+      - uses: mdallasanta/ssh-scp-deploy@v1.2.0
+        with:
+          local: "./build/web/version.json"
+          remote: "~/app"
+          host: ${{ secrets.REMOTE_HOST }}
+          user: ${{ secrets.REMOTE_USER }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          # pre_upload: echo "This will be executed before the upload!"
+          # post_upload: echo "This will be executed after the upload!"
+          # ssh_options: -o StrictHostKeyChecking=no
+          # scp_options: -v
+      # Deploy to a web server using scp-action
+      # - uses: appleboy/scp-action@v0.1.4
+      #   with:
+      #     host: ${{ secrets.REMOTE_HOST }}
+      #     username: ${{ secrets.REMOTE_USER }}
+      #     password: ${{ secrets.REMOTE_PASSWORD }}
+      #     # key: ${{ secrets.REMOTE_SSH_KEY }}
+      #     source: "build/web/version.json"
+      #     target: "app"
+      #     # strip_components: 1
+      #     timeout: "60s"
+      # Deploy to a web server using ssh-action
+      # - uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.REMOTE_HOST }}
+      #     username: ${{ secrets.REMOTE_USER }}
+      #     password: ${{ secrets.REMOTE_PASSWORD }}
+      #     # key: ${{ secrets.SSH_KEY }}
+      #     script: git pull

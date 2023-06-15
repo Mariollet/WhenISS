@@ -20,6 +20,7 @@ class Phone {
   }
 
   // TODO: Dynamic country ISO?
+  // Localizations.localeOf(context).countryCode ?
   Map<String, dynamic> toJson() => {
         "country": "FR",
         "number": number,

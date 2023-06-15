@@ -37,7 +37,7 @@ class Version extends ConsumerWidget {
             recognizer: TapGestureRecognizer()
               ..onTap = () => launchUrl(Uri(
                     scheme: "https",
-                    host: "keole.io",
+                    host: "www.keole.net",
                   )),
           ),
           TextSpan(

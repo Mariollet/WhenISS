@@ -48,6 +48,7 @@ class TextInput extends StatefulWidget {
     this.obscured = false,
     this.maxLength,
     this.onChanged,
+    this.onSubmitted,
   });
 
   final TextEditingController controller;
@@ -57,6 +58,7 @@ class TextInput extends StatefulWidget {
   final bool disabled, obscured;
   final int? maxLength;
   final void Function(String)? onChanged;
+  final void Function(String)? onSubmitted;
 
   @override
   TextInputState createState() => TextInputState();
@@ -89,6 +91,10 @@ class TextInputState extends State<TextInput> {
         maxLengthEnforcement: MaxLengthEnforcement.enforced,
         maxLength: widget.maxLength,
         onChanged: widget.onChanged,
+        onFieldSubmitted: widget.onSubmitted,
+        textInputAction: widget.onSubmitted == null
+            ? TextInputAction.next
+            : TextInputAction.done,
         validator: widget.validator,
         enabled: !widget.disabled,
       );

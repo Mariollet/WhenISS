@@ -58,6 +58,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       validator: requiredValidator,
                       placeholder: localizations.placeholderPassword,
                       obscured: true,
+                      onSubmitted: (_) => submit(),
                     ),
                   ],
                 ),
@@ -82,14 +83,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 size: ButtonSize.m,
                 text: localizations.commonLogIn,
                 loading: loading,
-                onPressed: () {
-                  if (!loginFormKey.currentState!.validate()) return;
-
-                  login(
-                    email: emailController.text,
-                    password: passwordController.text,
-                  );
-                },
+                onPressed: submit,
               ),
             ],
           ),
@@ -101,6 +95,15 @@ class _LoginViewState extends ConsumerState<LoginView> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  void submit() {
+    if (!loginFormKey.currentState!.validate()) return;
+
+    login(
+      email: emailController.text,
+      password: passwordController.text,
+    );
   }
 
   void login({

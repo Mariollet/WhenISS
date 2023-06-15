@@ -21,7 +21,7 @@ abstract class AppRoutes {
     final RouteSettings settings,
     final WidgetRef ref,
   ) {
-    print("onGenerateRoute");
+    debugPrint("onGenerateRoute");
 
     final bool isLogged = ref.read(isLoggedProvider);
     final String? route = settings.name;
@@ -49,7 +49,7 @@ abstract class AppRoutes {
     final String? initialRoute,
     final WidgetRef ref,
   ) {
-    print("onGenerateInitialRoute");
+    debugPrint("onGenerateInitialRoute");
 
     final bool isLogged = ref.read(isLoggedProvider);
 
@@ -77,7 +77,7 @@ abstract class AppRoutes {
     final RouteSettings? settings,
     final bool rewriteUrl = false,
   }) {
-    print("createPageRoute: $route");
+    debugPrint("createPageRoute: $route");
 
     return MaterialPageRoute(
       builder: (_) => routes[route] ?? const NotFoundView(),

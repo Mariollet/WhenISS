@@ -1,9 +1,27 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:jwt_decoder/jwt_decoder.dart";
 import "package:keole/data/api.dart";
 import "package:keole/ui/view_model/index.dart";
 
-final readTokenRepository = FutureProvider.autoDispose<String?>(
-  (_) async => await Api.secureStorage.read(key: "token"),
+final readTokenRepository = FutureProvider.autoDispose<bool>(
+  (ref) async {
+    final token = await Api.secureStorage.read(key: "token");
+    bool isLogged;
+
+    if (token != null) {
+      try {
+        isLogged = !JwtDecoder.isExpired(token);
+      } on FormatException {
+        isLogged = false;
+      }
+
+      if (!isLogged) await ref.read(logoutProvider.future);
+    } else {
+      isLogged = false;
+    }
+
+    return isLogged;
+  },
 );
 
 final writeTokenRepository = FutureProvider.autoDispose.family<void, String>(

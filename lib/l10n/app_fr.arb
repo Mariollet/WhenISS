@@ -14,14 +14,6 @@
 	"placeholderPassword": "Mot de passe",
 	"@_SNACK_BAR": {},
 	"snackBarForgotPassword": "Un e-mail vous a été envoyé pour réinitialiser votre mot de passe.",
-	"snackBarUrlLauncherError": "Une erreur est survenue lors de l'ouverture de l'URL {url}.",
-	"@snackBarUrlLauncherError": {
-		"placeholders": {
-			"url": {
-				"type": "String"
-			}
-		}
-	},
 	"@_LOGIN": {},
 	"loginTitle": "Connectez-vous à votre espace personnel",
 	"loginDescription": "Saisissez votre e-mail et votre\nmot de passe pour accéder à\nl'application.",

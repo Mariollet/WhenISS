@@ -14,14 +14,6 @@
 	"placeholderPassword": "Password",
 	"@_SNACK_BAR": {},
 	"snackBarForgotPassword": "An e-mail has been sent to you to reset your password.",
-	"snackBarUrlLauncherError": "An error occurred while opening the URL {url}.",
-	"@snackBarUrlLauncherError": {
-		"placeholders": {
-			"url": {
-				"type": "String"
-			}
-		}
-	},
 	"@_LOGIN": {},
 	"loginTitle": "Log in into your personal space",
 	"loginDescription": "Enter your email and password\nto access the app.",

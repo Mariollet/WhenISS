@@ -47,6 +47,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                   validator: emailValidator,
                   placeholder: localizations.placeholderEmail,
                   keyboardType: TextInputType.emailAddress,
+                  onSubmitted: (_) => submit(),
                 ),
               ),
               const SizedBox(height: 8),
@@ -69,13 +70,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 size: ButtonSize.m,
                 text: localizations.commonSend,
                 loading: loading,
-                onPressed: () {
-                  if (!forgotPasswordFormKey.currentState!.validate()) return;
-
-                  sendResetPasswordRequest(
-                    email: emailController.text,
-                  );
-                },
+                onPressed: submit,
               ),
             ],
           ),
@@ -86,6 +81,14 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
   void dispose() {
     emailController.dispose();
     super.dispose();
+  }
+
+  void submit() {
+    if (!forgotPasswordFormKey.currentState!.validate()) return;
+
+    sendResetPasswordRequest(
+      email: emailController.text,
+    );
   }
 
   void sendResetPasswordRequest({required final String email}) async {

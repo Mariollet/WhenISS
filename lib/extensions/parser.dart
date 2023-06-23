@@ -1,6 +1,9 @@
 import "package:flutter/services.dart";
 
 extension Parser on String {
+  /// Returns a boolean representation of this string.
+  bool toBool() => int.tryParse(this) == 1 || toLowerCase() == "true";
+
   /// Converts this hexadecimal string to a [Color].
   Color toHex() {
     final StringBuffer buffer = StringBuffer();

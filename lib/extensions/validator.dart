@@ -3,6 +3,7 @@ extension Validator on String {
   bool isValidPhoneNumber() => _phone.hasMatch(this);
   bool isValidPostalCode() => _postalCode.hasMatch(this);
   bool isValid4DigitCode() => _fourDigitCode.hasMatch(this);
+  bool isValidPassword() => _password.hasMatch(this);
 }
 
 final RegExp _email = RegExp(
@@ -10,4 +11,5 @@ final RegExp _email = RegExp(
     ),
     _phone = RegExp(r"^(33|0)(6|7|9)\d{8}$"),
     _postalCode = RegExp(r"^\d{5}$"),
-    _fourDigitCode = RegExp(r"^\d{4}$");
+    _fourDigitCode = RegExp(r"^\d{4}$"),
+    _password = RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$");

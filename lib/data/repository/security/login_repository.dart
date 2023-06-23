@@ -1,7 +1,7 @@
 import "dart:convert";
 
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/data/new_api.dart";
+import "package:keole/data/api.dart";
 import "package:keole/data/models/index.dart";
 import "package:keole/data/repository/index.dart";
 import "package:keole/services/index.dart";

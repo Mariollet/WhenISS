@@ -8,5 +8,6 @@ void showSnackBar(final String message) =>
         backgroundColor: AppColors.snackBarBackground,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
         behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 5),
       ),
     );

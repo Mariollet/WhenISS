@@ -8,8 +8,13 @@ abstract class AppRoutes {
   static const String login = "/login";
   static const String forgotPassword = "/forgot-password";
 
-  static const List<String> publicRoutes = [login, forgotPassword];
-  static const List<String> privateRoutes = [home];
+  static const List<String> publicRoutes = [
+    login,
+    forgotPassword,
+  ];
+  static const List<String> privateRoutes = [
+    home,
+  ];
 
   static const Map<String, Widget> routes = {
     home: HomeView(),
@@ -21,8 +26,6 @@ abstract class AppRoutes {
     final RouteSettings settings,
     final WidgetRef ref,
   ) {
-    debugPrint("onGenerateRoute");
-
     final bool isLogged = ref.read(isLoggedProvider);
     final String? route = settings.name;
     String? finalRoute = route;
@@ -49,8 +52,6 @@ abstract class AppRoutes {
     final String? initialRoute,
     final WidgetRef ref,
   ) {
-    debugPrint("onGenerateInitialRoute");
-
     final bool isLogged = ref.read(isLoggedProvider);
 
     if (!isLogged && initialRoute == forgotPassword) {
@@ -77,8 +78,6 @@ abstract class AppRoutes {
     final RouteSettings? settings,
     final bool rewriteUrl = false,
   }) {
-    debugPrint("createPageRoute: $route");
-
     return MaterialPageRoute(
       builder: (_) => routes[route] ?? const NotFoundView(),
       settings: rewriteUrl

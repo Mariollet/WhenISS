@@ -1,4 +1,4 @@
-export "address.dart";
-export "civility.dart";
-export "phone.dart";
-export "user.dart";
+export "user/address.dart";
+export "user/civility.dart";
+export "user/phone.dart";
+export "user/user.dart";

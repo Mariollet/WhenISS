@@ -1,21 +1,15 @@
 extension Validator on String {
-  bool isValidEmail() => RegExp(
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
-      ).hasMatch(this);
-
-  bool isValidPassword() => RegExp(
-        r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$",
-      ).hasMatch(this);
-
-  bool isValidPhoneNumber() => RegExp(
-        r"^(33|0)(6|7|9)\d{8}$",
-      ).hasMatch(this);
-
-  bool isValidPostalCode() => RegExp(
-        r"^\d{5}$",
-      ).hasMatch(this);
-
-  bool isValid4DigitCode() => RegExp(
-        r"^\d{4}$",
-      ).hasMatch(this);
+  bool isValidEmail() => _email.hasMatch(this);
+  bool isValidPhoneNumber() => _phone.hasMatch(this);
+  bool isValidPostalCode() => _postalCode.hasMatch(this);
+  bool isValid4DigitCode() => _fourDigitCode.hasMatch(this);
+  bool isValidPassword() => _password.hasMatch(this);
 }
+
+final RegExp _email = RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
+    ),
+    _phone = RegExp(r"^(33|0)(6|7|9)\d{8}$"),
+    _postalCode = RegExp(r"^\d{5}$"),
+    _fourDigitCode = RegExp(r"^\d{4}$"),
+    _password = RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$");

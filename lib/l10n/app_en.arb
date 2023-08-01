@@ -1,0 +1,39 @@
+{
+	"@_CIVILITY": {},
+	"civilityMr": "mr",
+	"civilityMrs": "mrs",
+	"civilityNone": "not applicable",
+	"@_COMMON": {},
+	"commonLogIn": "Log in",
+	"commonSend": "Send",
+	"@_ERROR": {},
+	"errorUnreachableServer": "The server is unreachable. Please retry in a few moments.",
+	"errorExpiredSession": "Your session has expired. Please log in again.",
+	"@_PLACEHOLDER": {},
+	"placeholderEmail": "E-mail",
+	"placeholderPassword": "Password",
+	"@_SNACK_BAR": {},
+	"snackBarForgotPassword": "An e-mail has been sent to you to reset your password.",
+	"@_LOGIN": {},
+	"loginTitle": "Log in into your personal space",
+	"loginDescription": "Enter your email and password\nto access the app.",
+	"loginForgotPassword": "Forgot password?",
+	"@_FORGOT_PASSWORD": {},
+	"forgotPasswordTitle": "Forgot password?",
+	"forgotPasswordDescription": "If this address exists, an e-mail to reset your password will be sent to you.",
+	"forgotPasswordLogin": "Back to login",
+	"@_HOME": {},
+	"homeHello": "Hi, {name}",
+	"@homeHello": {
+		"placeholders": {
+			"name": {
+				"type": "String"
+			}
+		}
+	},
+	"homeDescription": "You are currently logged in.",
+	"homeLogout": "Log out",
+	"@_NOT_FOUND": {},
+	"notFoundDescription": "This page doesn't exist.",
+	"notFoundReturn": "Return to home"
+}

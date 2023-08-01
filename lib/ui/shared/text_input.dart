@@ -1,10 +1,10 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
-import "package:keole/extensions/validator.dart";
-import "package:keole/services/app_text_styles.dart";
+import "package:keole/extensions/index.dart";
+import "package:keole/services/index.dart";
 
-String? emailValidator(String? value) {
+String? emailValidator(final String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";
   if (!value.isValidEmail()) {
     return "Veuillez saisir une adresse e-mail valide.";
@@ -13,7 +13,7 @@ String? emailValidator(String? value) {
   return null;
 }
 
-String? phoneNumberValidator(String? value) {
+String? phoneNumberValidator(final String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";
   if (!value.isValidPhoneNumber()) {
     return "Veuillez saisir un numéro de téléphone valide.";
@@ -22,7 +22,7 @@ String? phoneNumberValidator(String? value) {
   return null;
 }
 
-String? postalCodeValidator(String? value) {
+String? postalCodeValidator(final String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";
   if (!value.isValidPostalCode()) {
     return "Veuillez saisir un code postal valide.";
@@ -31,13 +31,12 @@ String? postalCodeValidator(String? value) {
   return null;
 }
 
-String? requiredValidator(String? value) {
+String? requiredValidator(final String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";
 
   return null;
 }
 
-/// Custom text input based on the [TextFormField] widget.
 class TextInput extends StatefulWidget {
   const TextInput({
     super.key,
@@ -48,26 +47,18 @@ class TextInput extends StatefulWidget {
     this.disabled = false,
     this.obscured = false,
     this.maxLength,
+    this.onChanged,
+    this.onSubmitted,
   });
 
   final TextEditingController controller;
-
   final String? Function(String?) validator;
-
-  /// Helper label that describes the input field.
   final String placeholder;
-
   final TextInputType? keyboardType;
-
-  /// If `true`, prevents focusing or editing the input.
-  final bool disabled;
-
-  /// If `true`, replaces each character with the symbol defined in [TextInputState] to mimic a password input.
-  final bool obscured;
-
-  /// If non-null, prevents entering more than [maxLength] characters.
-  /// Displays a character counter below the input.
+  final bool disabled, obscured;
   final int? maxLength;
+  final void Function(String)? onChanged;
+  final void Function(String)? onSubmitted;
 
   @override
   TextInputState createState() => TextInputState();
@@ -77,7 +68,7 @@ class TextInputState extends State<TextInput> {
   bool obscured = true;
 
   @override
-  Widget build(BuildContext context) => TextFormField(
+  Widget build(final BuildContext context) => TextFormField(
         controller: widget.controller,
         decoration: InputDecoration(
           labelText: widget.placeholder,
@@ -87,11 +78,9 @@ class TextInputState extends State<TextInput> {
               : IconButton(
                   splashRadius: 20,
                   onPressed: () => setState(() => obscured = !obscured),
-                  icon: Icon(
-                    obscured
-                        ? CupertinoIcons.eye_fill
-                        : CupertinoIcons.eye_slash_fill,
-                  ),
+                  icon: obscured
+                      ? const Icon(CupertinoIcons.eye_fill)
+                      : const Icon(CupertinoIcons.eye_slash_fill),
                 ),
         ),
         keyboardType: widget.obscured && !obscured
@@ -101,6 +90,11 @@ class TextInputState extends State<TextInput> {
         obscureText: widget.obscured && obscured,
         maxLengthEnforcement: MaxLengthEnforcement.enforced,
         maxLength: widget.maxLength,
+        onChanged: widget.onChanged,
+        onFieldSubmitted: widget.onSubmitted,
+        textInputAction: widget.onSubmitted == null
+            ? TextInputAction.next
+            : TextInputAction.done,
         validator: widget.validator,
         enabled: !widget.disabled,
       );

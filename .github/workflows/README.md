@@ -4,11 +4,21 @@ Ceci est une liste de github actions fantastique qui fait toutes sortes de chose
 
 ## Installation
 
-`git submodule add git@github.com:keole/github_workflows.git .github/workflows`
+$ `git clone git@github.com:keole/github_workflows.git .github/workflows`
 
-## Synchronisation
+## Choisir son workflow
 
-`git submodule sync`
+.github/workflows$ `git checkout {workflow_name}`
+
+###### Workflow disponible :
+
+- [Flutter](https://github.com/keole/github_workflows/tree/workflows_fl) - workflows_fl
+- [Symfony](https://github.com/keole/github_workflows/tree/workflows_sf) - workflows_sf
+
+## Supprimer la remote github
+
+.github/workflows$ `git remote remove origin`
+  
 
 ## Configuration
 

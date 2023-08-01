@@ -1,0 +1,8 @@
+- Localized messages depend on platform locale
+- Phone number country ISO
+- Cancel API fetchs on navigator update
+- Form submit on enter
+- API error handling in view
+- Transitions
+- API file upload/download
+- Start date on version widget

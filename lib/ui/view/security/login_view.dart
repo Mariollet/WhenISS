@@ -1,43 +1,43 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/services/app_routes.dart";
-import "package:keole/services/app_text_styles.dart";
-import "package:keole/ui/shared/button.dart";
-import "package:keole/ui/shared/custom_scaffold.dart";
-import "package:keole/ui/shared/form_error.dart";
-import "package:keole/ui/shared/link.dart";
-import "package:keole/ui/shared/text_input.dart";
-import "package:keole/ui/view_model/login_view_model.dart";
+import "package:keole/env.dart";
+import "package:keole/services/index.dart";
+import "package:keole/ui/shared/index.dart";
+import "package:keole/ui/view_model/index.dart";
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
 
   @override
-  LoginState createState() => LoginState();
+  ConsumerState<LoginView> createState() => _LoginViewState();
 }
 
-class LoginState extends ConsumerState<LoginView> {
-  final GlobalKey<FormState> loginFormKey = GlobalKey();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  Map<String, dynamic>? loginResponse;
+class _LoginViewState extends ConsumerState<LoginView> {
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final TextEditingController emailController =
+          TextEditingController(text: Environment.appDebugEmail),
+      passwordController =
+          TextEditingController(text: Environment.appDebugPassword);
+  Exception? error;
   bool loading = false;
 
   @override
-  Widget build(BuildContext context) => CustomScaffold(
+  Widget build(final BuildContext context) => AppScaffold(
+        appBar: true,
+        bottomBar: true,
         body: SizedBox(
           width: 300,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Connexion à votre espace personnel",
+              Text(
+                localizations.loginTitle,
                 style: AppTextStyles.h1,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
-              const Text(
-                "Saisissez votre e-mail et votre\nmot de passe pour accéder à\nl'application.",
+              Text(
+                localizations.loginDescription,
                 style: AppTextStyles.p,
                 textAlign: TextAlign.center,
               ),
@@ -49,17 +49,16 @@ class LoginState extends ConsumerState<LoginView> {
                     TextInput(
                       controller: emailController,
                       validator: emailValidator,
-                      placeholder: "E-mail",
+                      placeholder: localizations.placeholderEmail,
                       keyboardType: TextInputType.emailAddress,
-                      disabled: loading,
                     ),
                     const SizedBox(height: 15),
                     TextInput(
                       controller: passwordController,
                       validator: requiredValidator,
-                      placeholder: "Mot de passe",
-                      disabled: loading,
+                      placeholder: localizations.placeholderPassword,
                       obscured: true,
+                      onSubmitted: (_) => submit(),
                     ),
                   ],
                 ),
@@ -68,30 +67,23 @@ class LoginState extends ConsumerState<LoginView> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Link(
-                  text: "Mot de passe oublié ?",
-                  disabled: loading,
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(AppRoutes.forgotPassword),
+                  onPressed: () => Navigator.of(context).pushNamed(
+                    AppRoutes.forgotPassword,
+                  ),
+                  child: Text(
+                    localizations.loginForgotPassword,
+                    style: AppTextStyles.link,
+                  ),
                 ),
               ),
               const SizedBox(height: 15),
-              if (loginResponse?["success"] == false)
-                FormError(loginResponse?["message"]),
+              FormError(error),
               const SizedBox(height: 15),
               Button(
-                width: 300,
-                text: "Se connecter",
+                size: ButtonSize.m,
+                text: localizations.commonLogIn,
                 loading: loading,
-                onPressed: () {
-                  if (!loginFormKey.currentState!.validate()) return;
-
-                  loginResponse = null;
-                  loading = !loading;
-
-                  setState(() {});
-
-                  login(emailController.text, passwordController.text);
-                },
+                onPressed: submit,
               ),
             ],
           ),
@@ -105,16 +97,40 @@ class LoginState extends ConsumerState<LoginView> {
     super.dispose();
   }
 
-  void login(String email, String password) async {
-    loginResponse = await ref.read(loginProvider({
-      "username": email,
-      "password": password,
-    }));
-    loading = false;
+  void submit() {
+    if (!loginFormKey.currentState!.validate()) return;
 
-    if (loginResponse?["success"] == false) return setState(() {});
-    if (!mounted) return;
+    login(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+  }
 
-    Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+  void login({
+    required final String email,
+    required final String password,
+  }) async {
+    error = null;
+    loading = true;
+
+    setState(() {});
+
+    try {
+      await Future.delayed(const Duration(seconds: 2));
+
+      await ref.read(loginProvider({
+        "username": email,
+        "password": password,
+      }).future);
+
+      if (!mounted) return;
+
+      Navigator.of(context).pushNamed(AppRoutes.home);
+    } on Exception catch (error) {
+      this.error = error;
+      loading = false;
+
+      setState(() {});
+    }
   }
 }

@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 
-/// A custom select menu based on the [DropdownButtonFormField] widget.
-class Select<T> extends StatefulWidget {
+class Select<E> extends StatelessWidget {
   const Select({
     super.key,
     required this.items,
@@ -13,43 +12,25 @@ class Select<T> extends StatefulWidget {
     this.validator,
   });
 
-  final List<T> items;
-
-  final T? value;
-
-  /// The text to display when no value has been selected.
+  final List<E> items;
+  final E? value;
   final String placeholder;
-
-  /// The generator for the item labels.
-  final String Function(T) labelBuilder;
-
-  final void Function(T?)? onChanged;
-
-  final void Function(T?)? onSaved;
-
-  final String? Function(T?)? validator;
+  final String Function(E) labelBuilder;
+  final void Function(E?)? onChanged, onSaved;
+  final String? Function(E?)? validator;
 
   @override
-  SelectState<T> createState() => SelectState();
-}
-
-class SelectState<T> extends State<Select<T>> {
-  @override
-  Widget build(BuildContext context) => DropdownButtonFormField(
-        items: widget.items
-            .map((item) => DropdownMenuItem(
-                  value: item,
-                  child: Text(widget.labelBuilder(item)),
-                ))
-            .toList(),
-        value: widget.value,
-        onChanged: widget.onChanged,
-        onSaved: widget.onSaved,
+  Widget build(final BuildContext context) => DropdownButtonFormField(
+        items: [
+          for (final E item in items)
+            DropdownMenuItem(value: item, child: Text(labelBuilder(item))),
+        ],
+        value: value,
+        onChanged: onChanged,
+        onSaved: onSaved,
         iconSize: 0,
         borderRadius: BorderRadius.circular(25),
-        decoration: InputDecoration(
-          labelText: widget.placeholder,
-        ),
-        validator: widget.validator,
+        decoration: InputDecoration(labelText: placeholder),
+        validator: validator,
       );
 }

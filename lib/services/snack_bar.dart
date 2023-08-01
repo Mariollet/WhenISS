@@ -1,11 +1,13 @@
-import "package:context_holder/context_holder.dart";
 import "package:flutter/material.dart";
+import "package:keole/services/index.dart";
 
-void showSnackBar(String message) {
-  final SnackBar snackBar = SnackBar(
-    content: Text(message),
-    duration: const Duration(seconds: 6),
-  );
-
-  ScaffoldMessenger.of(ContextHolder.currentContext).showSnackBar(snackBar);
-}
+void showSnackBar(final String message) =>
+    ScaffoldMessenger.of(currentContext).showSnackBar(
+      SnackBar(
+        content: Text(message, style: AppTextStyles.snackBar),
+        backgroundColor: AppColors.snackBarBackground,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 5),
+      ),
+    );

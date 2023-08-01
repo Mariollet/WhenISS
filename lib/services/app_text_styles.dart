@@ -1,40 +1,62 @@
 import "package:flutter/material.dart";
-import "package:flutter_dotenv/flutter_dotenv.dart";
-import "package:keole/services/app_colors.dart";
+import "package:keole/services/index.dart";
+
+const String fontFamily = "Jost";
 
 abstract class AppTextStyles {
-  static String fontFamily = dotenv.env["APP_FONT_FAMILY"]!;
-
   static const TextStyle h1 = TextStyle(
+    fontFamily: fontFamily,
     fontSize: 28,
     fontWeight: FontWeight.w600,
   );
 
   static const TextStyle p = TextStyle(
+    fontFamily: fontFamily,
     fontSize: 17,
     fontWeight: FontWeight.w400,
   );
 
-  static TextStyle button = TextStyle(
-    fontSize: 18,
+  static const TextStyle button = TextStyle(
     fontFamily: fontFamily,
+    fontSize: 18,
   );
 
-  static TextStyle link = TextStyle(
-    fontSize: 14,
+  static const TextStyle link = TextStyle(
     fontFamily: fontFamily,
+    fontSize: 14,
   );
 
   static const TextStyle textInputLabel = TextStyle(
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w500,
   );
 
   static const TextStyle formError = TextStyle(
+    fontFamily: fontFamily,
     color: AppColors.error,
   );
 
+  static const TextStyle notFoundTitle = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 80,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const TextStyle notFoundDescription = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle snackBar = TextStyle(
+    fontFamily: fontFamily,
+    color: AppColors.snackBar,
+    fontSize: 12,
+  );
+
   static const TextStyle copyright = TextStyle(
-    color: AppColors.muted,
+    fontFamily: fontFamily,
+    color: AppColors.lightGrey,
     fontSize: 12,
   );
 }

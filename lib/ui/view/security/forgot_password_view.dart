@@ -1,41 +1,41 @@
-import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/services/app_text_styles.dart";
-import "package:keole/ui/shared/button.dart";
-import "package:keole/ui/shared/custom_scaffold.dart";
-import "package:keole/ui/shared/form_error.dart";
-import "package:keole/ui/shared/text_input.dart";
-import "package:keole/ui/view_model/login_view_model.dart";
+import "package:flutter/material.dart";
+import "package:keole/env.dart";
+import "package:keole/services/index.dart";
+import "package:keole/ui/shared/index.dart";
+import "package:keole/ui/view_model/index.dart";
 
 class ForgotPasswordView extends ConsumerStatefulWidget {
   const ForgotPasswordView({super.key});
 
   @override
-  ForgotPasswordState createState() => ForgotPasswordState();
+  ConsumerState<ForgotPasswordView> createState() => _ForgotPasswordViewState();
 }
 
-class ForgotPasswordState extends ConsumerState<ForgotPasswordView> {
-  final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey();
-  final TextEditingController emailController = TextEditingController();
-  Map<String, dynamic>? forgotPasswordResponse;
+class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
+  final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
+  final TextEditingController emailController =
+      TextEditingController(text: Environment.appDebugEmail);
+  Exception? error;
   bool loading = false;
 
   @override
-  Widget build(BuildContext context) => CustomScaffold(
-        isModal: true,
+  Widget build(final BuildContext context) => AppScaffold(
+        appBar: true,
+        bottomBar: true,
         body: SizedBox(
           width: 300,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Mot de passe oublié ?",
+              Text(
+                localizations.forgotPasswordTitle,
                 style: AppTextStyles.h1,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
-              const Text(
-                "Si votre e-mail est reconnu, un lien pour renouveler votre mot de passe vous sera envoyé.",
+              Text(
+                localizations.forgotPasswordDescription,
                 style: AppTextStyles.p,
                 textAlign: TextAlign.center,
               ),
@@ -45,29 +45,32 @@ class ForgotPasswordState extends ConsumerState<ForgotPasswordView> {
                 child: TextInput(
                   controller: emailController,
                   validator: emailValidator,
-                  placeholder: "E-mail",
+                  placeholder: localizations.placeholderEmail,
                   keyboardType: TextInputType.emailAddress,
-                  disabled: loading,
+                  onSubmitted: (_) => submit(),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Link(
+                  onPressed: () => Navigator.of(context).pushNamed(
+                    AppRoutes.login,
+                  ),
+                  child: Text(
+                    localizations.forgotPasswordLogin,
+                    style: AppTextStyles.link,
+                  ),
                 ),
               ),
               const SizedBox(height: 15),
-              if (forgotPasswordResponse?["message"] != null)
-                FormError(forgotPasswordResponse!["message"]),
+              FormError(error),
               const SizedBox(height: 15),
               Button(
-                width: 300,
-                text: "Envoyer",
+                size: ButtonSize.m,
+                text: localizations.commonSend,
                 loading: loading,
-                onPressed: () {
-                  if (!forgotPasswordFormKey.currentState!.validate()) return;
-
-                  forgotPasswordResponse = null;
-                  loading = true;
-
-                  setState(() {});
-
-                  sendResetPasswordRequest(emailController.text);
-                },
+                onPressed: submit,
               ),
             ],
           ),
@@ -80,14 +83,33 @@ class ForgotPasswordState extends ConsumerState<ForgotPasswordView> {
     super.dispose();
   }
 
-  void sendResetPasswordRequest(String email) async {
-    forgotPasswordResponse =
-        await ref.read(sendResetPasswordRequestProvider(email));
-    loading = false;
+  void submit() {
+    if (!forgotPasswordFormKey.currentState!.validate()) return;
 
-    if (!forgotPasswordResponse!["success"]) return setState(() {});
-    if (!mounted) return;
+    sendResetPasswordRequest(
+      email: emailController.text,
+    );
+  }
 
-    Navigator.of(context).pop();
+  void sendResetPasswordRequest({required final String email}) async {
+    error = null;
+    loading = true;
+
+    setState(() {});
+
+    try {
+      await ref.read(resetPasswordProvider(email).future);
+
+      showSnackBar(localizations.snackBarForgotPassword);
+
+      if (!mounted) return;
+
+      Navigator.of(context).pushNamed(AppRoutes.login);
+    } on Exception catch (error) {
+      this.error = error;
+      loading = false;
+
+      setState(() {});
+    }
   }
 }

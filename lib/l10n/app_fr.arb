@@ -1,0 +1,39 @@
+{
+	"@_CIVILITY": {},
+	"civilityMr": "monsieur",
+	"civilityMrs": "madame",
+	"civilityNone": "ne se prononce pas",
+	"@_COMMON": {},
+	"commonLogIn": "Se connecter",
+	"commonSend": "Envoyer",
+	"@_ERROR": {},
+	"errorUnreachableServer": "Le serveur est inaccessible. Veuillez rééssayer dans quelques instants.",
+	"errorExpiredSession": "Votre session est expirée. Veuillez vous reconnecter.",
+	"@_PLACEHOLDER": {},
+	"placeholderEmail": "E-mail",
+	"placeholderPassword": "Mot de passe",
+	"@_SNACK_BAR": {},
+	"snackBarForgotPassword": "Un e-mail vous a été envoyé pour réinitialiser votre mot de passe.",
+	"@_LOGIN": {},
+	"loginTitle": "Connectez-vous à votre espace personnel",
+	"loginDescription": "Saisissez votre e-mail et votre\nmot de passe pour accéder à\nl'application.",
+	"loginForgotPassword": "Mot de passe oublié ?",
+	"@_FORGOT_PASSWORD": {},
+	"forgotPasswordTitle": "Mot de passe oublié ?",
+	"forgotPasswordDescription": "Si cette adresse existe, un lien pour renouveler votre mot de passe vous sera envoyé.",
+	"forgotPasswordLogin": "Retour à la connexion",
+	"@_HOME": {},
+	"homeHello": "Bonjour, {name}",
+	"@homeHello": {
+		"placeholders": {
+			"name": {
+				"type": "String"
+			}
+		}
+	},
+	"homeDescription": "Vous êtes actuellement connecté(e).",
+	"homeLogout": "Se déconnecter",
+	"@_NOT_FOUND": {},
+	"notFoundDescription": "Cette page n'existe pas.",
+	"notFoundReturn": "Revenir à l'accueil"
+}

@@ -1,0 +1,59 @@
+# This is a basic workflow to help you deploy your Flutter app to your web server
+name: Build of the web app and deployment on the Web server
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on pull request closed events only for the master branch
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+
+jobs:
+  build:
+    name: Build and deploy to web server
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      # Configure and build the app runtime environment
+      - name: Setup app
+        uses: ./.github/actions/setup-env
+      # Creating a .env.local file with github secrets in the main workflow for security reasons
+      - name: Generate .env.local file
+        run: |
+          echo "APP_BASE_URL=${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}" >> .env.local
+          echo "APP_DEBUG_EMAIL=dev@keole.net" >> .env.local
+          echo "APP_DEBUG_PASSWORD=password" >> .env.local
+          echo "APP_DEBUG=false" >> .env.local
+          echo "STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}" >> .env.local
+      # Generate all dependencies for the app to run
+      - name: Generate dependencies
+        uses: ./.github/actions/generate-dependencies
+      # Build the web app
+      - name: Build web app
+        run: flutter build web --release
+      # Deploy to a web server using ssh-scp-deploy
+      - name: Deploy to web server
+        uses: mdallasanta/ssh-scp-deploy@v1.2.0
+        with:
+          local: "./build/web/version.json"
+          remote: "~/app"
+          host: ${{ secrets.REMOTE_HOST }}
+          user: ${{ secrets.REMOTE_USER }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          # key: ${{ secrets.REMOTE_SSH_KEY }}
+          # pre_upload: echo "This will be executed before the upload!"
+          # post_upload: echo "This will be executed after the upload!"
+          ssh_options: -o StrictHostKeyChecking=no
+          scp_options: -v
+      # Deploy to a web server using ssh-action
+      # - uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.REMOTE_HOST }}
+      #     username: ${{ secrets.REMOTE_USER }}
+      #     password: ${{ secrets.REMOTE_PASSWORD }}
+      #     # key: ${{ secrets.SSH_KEY }}
+      #     script: git pull

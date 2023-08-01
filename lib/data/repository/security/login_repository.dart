@@ -1,5 +1,3 @@
-import "dart:convert";
-
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:keole/data/api.dart";
 import "package:keole/data/models/index.dart";
@@ -11,7 +9,7 @@ final postLoginRepository = FutureProvider.autoDispose
     .family<void, Map<String, dynamic>>((ref, credentials) async {
   final response = await Api.post(
     ApiRoutes.login,
-    body: jsonEncode(credentials),
+    body: credentials,
   );
 
   if (response is Exception) throw response;

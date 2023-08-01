@@ -1,0 +1,16 @@
+name: Setup
+description: "Configure and build the app runtime environment"
+runs:
+  using: "composite"
+  steps:
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "16.x"
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Get dependencies
+        shell: bash
+        run: dart pub get

@@ -1,0 +1,17 @@
+name: Setup
+description: "Generate all dependencies for the app to run"
+runs:
+  using: "composite"
+  steps:
+    # If using a envied package, uncomment this to generate .env.dart
+    # - name: Generate .env.dart file
+    #   shell: bash
+    #   run: dart pub run build_runner build --delete-conflicting-outputs
+    # If using a localization package, uncomment this to generate translations
+    - name: Generate localization files
+      shell: bash
+      run: flutter gen-l10n
+    # Format the application code with Dart guidelines
+    - name: Format application
+      shell: bash
+      run: dart format ./lib

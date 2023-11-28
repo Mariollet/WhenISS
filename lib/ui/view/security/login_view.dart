@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/env.dart";
-import "package:keole/services/index.dart";
-import "package:keole/ui/shared/index.dart";
-import "package:keole/ui/view_model/index.dart";
+import "package:studiokg/env.dart";
+import "package:studiokg/services/index.dart";
+import "package:studiokg/ui/shared/index.dart";
+import "package:studiokg/ui/view_model/index.dart";
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});

@@ -1,9 +1,9 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/data/api.dart";
-import "package:keole/data/models/index.dart";
-import "package:keole/data/repository/index.dart";
-import "package:keole/services/index.dart";
-import "package:keole/ui/view_model/index.dart";
+import "package:studiokg/data/api.dart";
+import "package:studiokg/data/models/index.dart";
+import "package:studiokg/data/repository/index.dart";
+import "package:studiokg/services/index.dart";
+import "package:studiokg/ui/view_model/index.dart";
 
 final postLoginRepository = FutureProvider.autoDispose
     .family<void, Map<String, dynamic>>((ref, credentials) async {

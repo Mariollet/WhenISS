@@ -1,7 +1,7 @@
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
-name: keole
+name: studiokg
 description: Keole starter kit for Flutter projects.
 
 # Remove this line if you wish to publish to pub.dev

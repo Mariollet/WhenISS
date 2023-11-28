@@ -1,4 +1,4 @@
-import "package:keole/data/models/index.dart";
+import "package:studiokg/data/models/index.dart";
 
 class User {
   User({

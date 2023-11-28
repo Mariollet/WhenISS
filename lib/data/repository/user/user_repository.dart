@@ -1,7 +1,7 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/data/api.dart";
-import "package:keole/data/models/index.dart";
-import "package:keole/services/index.dart";
+import "package:studiokg/data/api.dart";
+import "package:studiokg/data/models/index.dart";
+import "package:studiokg/services/index.dart";
 
 final getUserRepository = FutureProvider<User>(
   (_) async {

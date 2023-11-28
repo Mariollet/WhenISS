@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
-import "package:keole/services/index.dart";
+import "package:studiokg/services/app_colors.dart";
+import "package:studiokg/services/index.dart";
 
 const String fontFamily = "Jost";
 
@@ -58,5 +59,21 @@ abstract class AppTextStyles {
     fontFamily: fontFamily,
     color: AppColors.lightGrey,
     fontSize: 12,
+  );
+
+  static const TextStyle bold = TextStyle(
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle bolder = TextStyle(
+    fontWeight: FontWeight.w600,
+  );
+
+  static const TextStyle bigbolder = TextStyle(
+    fontWeight: FontWeight.w700,
+  );
+
+  static const TextStyle extraBold = TextStyle(
+    fontWeight: FontWeight.w900,
   );
 }

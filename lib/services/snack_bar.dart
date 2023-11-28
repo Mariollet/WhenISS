@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:keole/services/index.dart";
+import "package:studiokg/services/index.dart";
 
 void showSnackBar(final String message) =>
     ScaffoldMessenger.of(currentContext).showSnackBar(

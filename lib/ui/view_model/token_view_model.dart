@@ -1,5 +1,5 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:keole/data/repository/index.dart";
+import "package:studiokg/data/repository/index.dart";
 
 final readTokenProvider = FutureProvider.autoDispose<bool>(
   (ref) => ref.watch(readTokenRepository.future),

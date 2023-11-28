@@ -1,4 +1,4 @@
-import "package:keole/extensions/index.dart";
+import "package:studiokg/extensions/index.dart";
 
 class Phone {
   const Phone({required this.number});

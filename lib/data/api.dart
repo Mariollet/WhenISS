@@ -4,8 +4,8 @@ import "dart:io";
 
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:http/http.dart";
-import "package:keole/env.dart";
-import "package:keole/services/index.dart";
+import "package:studiokg/env.dart";
+import "package:studiokg/services/index.dart";
 
 abstract class Api {
   static const String baseUrl = Environment.appBaseUrl;

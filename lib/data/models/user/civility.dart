@@ -1,4 +1,4 @@
-import "package:keole/services/index.dart";
+import "package:studiokg/services/index.dart";
 
 enum Civility {
   mr(name: "Monsieur"),

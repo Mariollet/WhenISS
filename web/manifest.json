@@ -1,6 +1,6 @@
 {
-    "name": "studiokg",
-    "short_name": "studiokg",
+    "name": "fl_starter",
+    "short_name": "fl_starter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",

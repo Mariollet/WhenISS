@@ -1,4 +1,4 @@
-import "package:studiokg/extensions/index.dart";
+import "package:fl_starter/extensions/index.dart";
 
 class Phone {
   const Phone({required this.number});

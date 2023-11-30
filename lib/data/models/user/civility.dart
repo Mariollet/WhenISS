@@ -1,4 +1,4 @@
-import "package:studiokg/services/index.dart";
+import "package:fl_starter/services/index.dart";
 
 enum Civility {
   mr(name: "Monsieur"),

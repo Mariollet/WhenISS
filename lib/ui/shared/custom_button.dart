@@ -1,7 +1,7 @@
 import "package:flutter/cupertino.dart";
-import "package:studiokg/services/app_colors.dart";
-import "package:studiokg/services/app_text_styles.dart";
-import "package:studiokg/ui/shared/loader.dart";
+import "package:fl_starter/services/app_colors.dart";
+import "package:fl_starter/services/app_text_styles.dart";
+import "package:fl_starter/ui/shared/loader.dart";
 
 const double fixedHeight = 56;
 

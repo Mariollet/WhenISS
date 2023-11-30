@@ -1,4 +1,4 @@
-import "package:studiokg/services/app_text_styles.dart";
+import "package:fl_starter/services/app_text_styles.dart";
 import "package:flutter/material.dart";
 
 class CustomRichText extends StatelessWidget {

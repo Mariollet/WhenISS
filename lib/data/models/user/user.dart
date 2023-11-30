@@ -1,4 +1,4 @@
-import "package:studiokg/data/models/index.dart";
+import "package:fl_starter/data/models/index.dart";
 
 class User {
   User({

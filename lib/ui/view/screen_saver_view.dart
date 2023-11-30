@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:studiokg/services/app_images.dart";
-import "package:studiokg/services/app_text_styles.dart";
-import "package:studiokg/ui/shared/app_scaffold.dart";
+import "package:fl_starter/services/app_images.dart";
+import "package:fl_starter/services/app_text_styles.dart";
+import "package:fl_starter/ui/shared/app_scaffold.dart";
 
 class ScreenSaverView extends StatelessWidget {
   const ScreenSaverView({

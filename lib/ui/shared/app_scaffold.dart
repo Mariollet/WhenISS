@@ -1,11 +1,11 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:studiokg/services/index.dart";
-import "package:studiokg/services/screen_saver.dart";
-import "package:studiokg/ui/shared/custom_button.dart";
-import "package:studiokg/ui/shared/custom_rich_text.dart";
-import "package:studiokg/ui/shared/index.dart";
+import "package:fl_starter/services/index.dart";
+import "package:fl_starter/services/screen_saver.dart";
+import "package:fl_starter/ui/shared/custom_button.dart";
+import "package:fl_starter/ui/shared/custom_rich_text.dart";
+import "package:fl_starter/ui/shared/index.dart";
 
 class AppScaffold extends ConsumerStatefulWidget {
   const AppScaffold({

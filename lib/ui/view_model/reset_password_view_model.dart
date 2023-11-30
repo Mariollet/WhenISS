@@ -1,5 +1,5 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:studiokg/data/repository/index.dart";
+import "package:fl_starter/data/repository/index.dart";
 
 final resetPasswordProvider =
     FutureProvider.autoDispose.family<dynamic, String>(

@@ -1,5 +1,5 @@
 import "package:flutter/cupertino.dart";
-import "package:studiokg/services/index.dart";
+import "package:fl_starter/services/index.dart";
 
 class FormError extends StatelessWidget {
   const FormError(this.error, {super.key});

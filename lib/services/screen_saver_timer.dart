@@ -8,7 +8,7 @@ class ScreenSaverTimer extends ChangeNotifier {
   bool alreadyShowed = false;
 
   void startScreensaverTimer(BuildContext context) {
-    const screensaverDuration = Duration(seconds: 3);
+    const screensaverDuration = Duration(minutes: 1);
 
     if (alreadyShowed) {
       return;

@@ -1,4 +1,3 @@
-import 'package:fl_starter/services/screen_saver_timer.dart';
 import "package:fl_starter/ui/view_model/screen_saver_view_model.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";

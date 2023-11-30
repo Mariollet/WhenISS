@@ -22,6 +22,8 @@ abstract class Api {
     if (method != _ApiMethod.get) body = jsonEncode(body);
     if (authorizationHeader) token = await secureStorage.read(key: "token");
 
+    // TODO: Fix token invalidation
+
     final Uri url = Uri.https(baseUrl, endpoint);
     final Map<String, String> headers = {
       if (authorizationHeader) HttpHeaders.authorizationHeader: "Bearer $token",

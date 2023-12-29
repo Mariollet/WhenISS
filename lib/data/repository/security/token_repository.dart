@@ -1,10 +1,17 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:jwt_decoder/jwt_decoder.dart";
 import "package:studiokg/data/api.dart";
+import "package:studiokg/data/models/user/user.dart";
+import "package:studiokg/data/repository/user/user_repository.dart";
 import "package:studiokg/ui/view_model/index.dart";
 
 final readTokenRepository = FutureProvider.autoDispose<bool>(
   (ref) async {
+    try {
+      await Api.secureStorage.read(key: "jwt");
+    } catch (e) {
+      await ref.read(deleteTokenRepository.future);
+    }
     final token = await Api.secureStorage.read(key: "jwt");
 
     bool isLogged;
@@ -19,6 +26,21 @@ final readTokenRepository = FutureProvider.autoDispose<bool>(
       if (!isLogged) await ref.read(logoutProvider.future);
     } else {
       isLogged = false;
+    }
+
+    final User? user = ref.read(userProvider);
+
+    if (user == null) {
+      try {
+        final User? connectedUser = await ref.read(getUserRepository.future);
+
+        ref.read(userProvider.notifier).state = connectedUser;
+      } catch (e) {
+        ref.read(userProvider.notifier).state = null;
+
+        isLogged = false;
+        return isLogged;
+      }
     }
 
     return isLogged;

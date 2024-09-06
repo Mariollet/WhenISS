@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:studiokg/ui/view/index.dart";
-import "package:studiokg/ui/view_model/index.dart";
+import "package:fl_starter/ui/view/index.dart";
+import "package:fl_starter/ui/view_model/index.dart";
 
 abstract class AppRoutes {
   static const String home = '/';

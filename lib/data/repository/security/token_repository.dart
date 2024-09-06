@@ -1,9 +1,7 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:jwt_decoder/jwt_decoder.dart";
-import "package:studiokg/data/api.dart";
-import "package:studiokg/data/models/user/user.dart";
-import "package:studiokg/data/repository/user/user_repository.dart";
-import "package:studiokg/ui/view_model/index.dart";
+import "package:fl_starter/data/api.dart";
+import "package:fl_starter/ui/view_model/index.dart";
 
 final readTokenRepository = FutureProvider.autoDispose<bool>(
   (ref) async {

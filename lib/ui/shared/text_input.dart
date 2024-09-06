@@ -1,8 +1,8 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
-import "package:studiokg/extensions/index.dart";
-import "package:studiokg/services/index.dart";
+import "package:fl_starter/extensions/index.dart";
+import "package:fl_starter/services/index.dart";
 
 String? emailValidator(final String? value) {
   if (value!.isEmpty) return "Ce champ est requis.";

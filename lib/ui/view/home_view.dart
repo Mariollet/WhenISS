@@ -1,10 +1,10 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:studiokg/data/models/index.dart";
-import "package:studiokg/services/index.dart";
-import "package:studiokg/ui/shared/index.dart";
-import "package:studiokg/ui/view_model/index.dart";
+import "package:fl_starter/data/models/index.dart";
+import "package:fl_starter/services/index.dart";
+import "package:fl_starter/ui/shared/index.dart";
+import "package:fl_starter/ui/view_model/index.dart";
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

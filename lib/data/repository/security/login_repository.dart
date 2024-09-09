@@ -11,9 +11,10 @@ final postLoginRepository = FutureProvider.autoDispose
   final response = await Api.post(
     ApiRoutes.login,
     body: credentials,
+    authorizationHeader: false,
   );
 
-  if (response is Exception && Environment.appDebug == false) throw response;
+  if (response is Exception || response["code"] == 401) throw Exception(response["message"]);
 
   final String jwt = Environment.appDebug == false ? response["token"] : "JW7D38U670K3N";
   await ref.read(writeTokenProvider(jwt).future);

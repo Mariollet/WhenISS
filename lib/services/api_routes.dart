@@ -4,6 +4,6 @@ abstract class ApiRoutes {
   static const String forgotPassword = "/api/security/forgot-password";
 
   // User
-  static const String getUser = "/api/profile";
+  static const String getUser = "/api/member";
   static const String patchUser = "/api/profile/patch";
 }

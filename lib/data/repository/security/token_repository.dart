@@ -19,6 +19,9 @@ final readTokenRepository = FutureProvider.autoDispose<bool>(
     if (token != null) {
       try {
         isLogged = !JwtDecoder.isExpired(token);
+        if (isLogged) {
+          await Api.secureStorage.write(key: "jwt", value: token);
+        }
       } on FormatException {
         isLogged = false;
       }
@@ -30,10 +33,10 @@ final readTokenRepository = FutureProvider.autoDispose<bool>(
 
     final User? user = ref.read(userProvider);
 
-    if (user == null) {
+    if (user == null && token != null) {
       try {
         final User? connectedUser = await ref.read(getUserRepository.future);
-
+        ref.invalidate(userProvider);
         ref.read(userProvider.notifier).state = connectedUser;
       } catch (e) {
         ref.read(userProvider.notifier).state = null;

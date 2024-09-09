@@ -20,7 +20,7 @@ abstract class Api {
     Object? body,
   }) async {
     if (method != _ApiMethod.get) body = jsonEncode(body);
-    if (authorizationHeader) token = await secureStorage.read(key: "token");
+    if (authorizationHeader) token = await Api.secureStorage.read(key: "jwt");
 
     final Uri url = Uri.https(baseUrl, endpoint);
     final Map<String, String> headers = {

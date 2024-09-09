@@ -27,22 +27,26 @@ class HomeView extends StatelessWidget {
                     throw Exception(localizations.errorExpiredSession);
                   }
 
-                  return Text(
-                    localizations.homeHello(name),
-                    style: AppTextStyles.h1,
-                    textAlign: TextAlign.center,
+                  return Column(
+                    children: [
+                      Text(
+                        localizations.homeHello(name),
+                        style: AppTextStyles.h1,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 30),
+                      Text(
+                        localizations.homeDescription,
+                        style: AppTextStyles.p,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   );
                 } on Exception catch (error) {
                   return FormError(error);
                 }
               },
               child: const Loader(),
-            ),
-            const SizedBox(height: 30),
-            Text(
-              localizations.homeDescription,
-              style: AppTextStyles.p,
-              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 60),
             Consumer(

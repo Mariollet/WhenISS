@@ -10,9 +10,9 @@ enum Civility {
   final String name;
 
   factory Civility.parse(final String civility) => switch (civility) {
-        "Monsieur" => mr,
-        "Madame" => mrs,
-        "Ne se prononce pas" => none,
+        "male" => mr,
+        "female" => mrs,
+        "none" => none,
         _ => throw const FormatException("Invalid civility"),
       };
 

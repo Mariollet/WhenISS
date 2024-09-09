@@ -14,7 +14,9 @@ final postLoginRepository = FutureProvider.autoDispose
     authorizationHeader: false,
   );
 
-  if (response is Exception || response["code"] == 401) throw Exception(response["message"]);
+  if (response is Exception || response["code"] == 401) {
+    throw Exception(response["message"]);
+  }
 
   final String jwt = Environment.appDebug == false ? response["token"] : "JW7D38U670K3N";
   await ref.read(writeTokenProvider(jwt).future);

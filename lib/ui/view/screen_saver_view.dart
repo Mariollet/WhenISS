@@ -32,7 +32,7 @@ class ScreenSaverView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(AppImages.logo),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 42),
                     const Text("StudioKG", style: AppTextStyles.h1),
                   ],
                 ),

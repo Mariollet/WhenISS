@@ -31,12 +31,14 @@ abstract class AppRoutes {
     String? finalRoute = route;
     bool rewriteUrl = false;
 
+    // If user is not connected and tries to access a private page, redirect to login
     if (!isLogged && privateRoutes.contains(route)) {
       finalRoute = login;
       rewriteUrl = true;
     }
 
-    if (isLogged && publicRoutes.contains(route)) {
+    // If user is connected and tries to access the login page, redirect to home
+    if (isLogged && route == login) {
       finalRoute = home;
       rewriteUrl = true;
     }

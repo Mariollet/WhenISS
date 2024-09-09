@@ -23,7 +23,7 @@ final getUserRepository = FutureProvider<User>(
 
     if (response is Exception) throw response;
 
-    return User.fromJson(response);
+    return User.fromJson(response["member"]);
   },
 );
 

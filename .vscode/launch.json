@@ -6,12 +6,12 @@
   "configurations": [
 
     {
-      "name": "fl_starter",
+      "name": "Run",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "fl_starter (web-renderer html)",
+      "name": "Run (web-renderer html)",
       "request": "launch",
       "type": "dart",
       "args": [
@@ -22,13 +22,13 @@
       ]
     },
     {
-      "name": "fl_starter (profile mode)",
+      "name": "Run (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "fl_starter (release mode)",
+      "name": "Run (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"

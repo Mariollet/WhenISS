@@ -33,6 +33,7 @@ dependencies:
   package_info_plus: any
   url_launcher: any
   flutter_launcher_icons: any
+  # TODO: test awesome_snackbar_content
 
 dev_dependencies:
   flutter_test:

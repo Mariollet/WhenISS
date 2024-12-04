@@ -13,11 +13,11 @@ final getUserRepository = FutureProvider<User>(
             "first_name": "John",
             "last_name": "Doe",
             "email": "John@Doe.com",
-            "address": {
-              "street": "1 rue des John",
-              "zip_code": "12345",
-              "city": "Johnstown",
-            },
+            // "address": {
+            //   "street": "1 rue des John",
+            //   "zip_code": "12345",
+            //   "city": "Johnstown",
+            // },
           }
         : await Api.get(ApiRoutes.getUser);
 

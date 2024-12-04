@@ -1,3 +1,5 @@
+import "package:fl_starter/data/models/user/user.dart";
+import "package:fl_starter/data/repository/user/user_repository.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:jwt_decoder/jwt_decoder.dart";
 import "package:fl_starter/data/api.dart";

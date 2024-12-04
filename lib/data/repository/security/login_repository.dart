@@ -1,3 +1,4 @@
+import "package:fl_starter/env.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:fl_starter/data/api.dart";
 import "package:fl_starter/data/models/index.dart";
@@ -12,9 +13,9 @@ final postLoginRepository = FutureProvider.autoDispose
     body: credentials,
   );
 
-  if (response is Exception) throw response;
+  if (response is Exception && Environment.appDebug == false) throw response;
 
-  final String jwt = response["token"];
+  final String jwt = Environment.appDebug == false ? response["token"] : "JW7D38U670K3N";
   await ref.read(writeTokenProvider(jwt).future);
 
   final User user = await ref.read(getUserRepository.future);

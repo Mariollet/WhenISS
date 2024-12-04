@@ -14,10 +14,10 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  final TextEditingController emailController =
-          TextEditingController(text: Environment.appDebugEmail),
-      passwordController =
-          TextEditingController(text: Environment.appDebugPassword);
+  final TextEditingController emailController = TextEditingController(
+      text: Environment.appDebug ? Environment.appDebugEmail : ''),
+      passwordController = TextEditingController(
+      text: Environment.appDebug ? Environment.appDebugPassword : '');
   Exception? error;
   bool loading = false;
 
@@ -116,8 +116,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
     setState(() {});
 
     try {
-      await Future.delayed(const Duration(seconds: 2));
-
       await ref.read(loginProvider({
         "username": email,
         "password": password,

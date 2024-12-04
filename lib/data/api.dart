@@ -32,6 +32,9 @@ abstract class Api {
     final Response response;
 
     try {
+      if (Environment.appDebug) {
+        return true;
+      }
       switch (method) {
         case _ApiMethod.get:
           response = await client.get(url, headers: headers);

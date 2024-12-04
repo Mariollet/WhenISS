@@ -12,6 +12,12 @@ abstract class BaseEnvironment {
 
   @EnviedField(varName: "APP_HOME")
   static const String appHome = _BaseEnvironment.appHome;
+
+  @EnviedField(varName: "APP_BASE_URL")
+  static const String appBaseUrl = _BaseEnvironment.appBaseUrl;
+
+  @EnviedField(varName: "APP_DEBUG")
+  static const bool appDebug = _BaseEnvironment.appDebug;
 }
 
 @Envied(path: ".env.local")
@@ -22,6 +28,9 @@ abstract class Environment {
 
   @EnviedField(varName: "APP_BASE_URL")
   static const String appBaseUrl = _Environment.appBaseUrl;
+
+  @EnviedField(varName: "APP_DEBUG")
+  static const bool appDebug = _Environment.appDebug;
 
   @EnviedField(varName: "APP_DEBUG_EMAIL")
   static const String appDebugEmail = _Environment.appDebugEmail;

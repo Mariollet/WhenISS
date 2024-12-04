@@ -8,16 +8,18 @@ final getUserRepository = FutureProvider<User>(
   (_) async {
     final response = Environment.appDebug == true
         ? {
-            "id": 1,
-            "gender": "Monsieur",
-            "first_name": "John",
-            "last_name": "Doe",
-            "email": "John@Doe.com",
-            // "address": {
-            //   "street": "1 rue des John",
-            //   "zip_code": "12345",
-            //   "city": "Johnstown",
-            // },
+            "member": {
+              "id": 1,
+              "gender": "none",
+              "first_name": "John",
+              "last_name": "Doe",
+              "email": "John@Doe.com",
+              // "address": {
+              //   "street": "1 rue des John",
+              //   "zip_code": "12345",
+              //   "city": "Johnstown",
+              // },
+            }
           }
         : await Api.get(ApiRoutes.getUser);
 

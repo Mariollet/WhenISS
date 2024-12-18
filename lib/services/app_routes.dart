@@ -34,22 +34,22 @@ abstract class AppRoutes {
     final RouteSettings settings,
     final WidgetRef ref,
   ) {
-    final bool isLogged = ref.read(isLoggedProvider);
+    // final bool isLogged = ref.read(isLoggedProvider);
     final String? route = settings.name;
     String? finalRoute = route;
     bool rewriteUrl = false;
 
-    // If user is not connected and tries to access a private page, redirect to login
-    if (!isLogged && privateRoutes.contains(route)) {
-      finalRoute = login;
-      rewriteUrl = true;
-    }
+    // // If user is not connected and tries to access a private page, redirect to login
+    // if (!isLogged && privateRoutes.contains(route)) {
+    //   finalRoute = login;
+    //   rewriteUrl = true;
+    // }
 
-    // If user is connected and tries to access the login page, redirect to home
-    if (isLogged && route == login) {
-      finalRoute = home;
-      rewriteUrl = true;
-    }
+    // // If user is connected and tries to access the login page, redirect to home
+    // if (isLogged && route == login) {
+    //   finalRoute = home;
+    //   rewriteUrl = true;
+    // }
 
     return createPageRoute(
       finalRoute,
@@ -62,23 +62,23 @@ abstract class AppRoutes {
     final String? initialRoute,
     final WidgetRef ref,
   ) {
-    final bool isLogged = ref.read(isLoggedProvider);
+    // final bool isLogged = ref.read(isLoggedProvider);
 
-    if (!isLogged && initialRoute == forgotPassword) {
-      return [
-        createPageRoute(login, rewriteUrl: true),
-        // The following rewriteUrl is not required
-        createPageRoute(forgotPassword, rewriteUrl: true),
-      ];
-    }
+    // if (!isLogged && initialRoute == forgotPassword) {
+    //   return [
+    //     createPageRoute(login, rewriteUrl: true),
+    //     // The following rewriteUrl is not required
+    //     createPageRoute(forgotPassword, rewriteUrl: true),
+    //   ];
+    // }
 
-    if (!isLogged && privateRoutes.contains(initialRoute)) {
-      return [createPageRoute(login, rewriteUrl: true)];
-    }
+    // if (!isLogged && privateRoutes.contains(initialRoute)) {
+    //   return [createPageRoute(login, rewriteUrl: true)];
+    // }
 
-    if (isLogged && publicRoutes.contains(initialRoute)) {
-      return [createPageRoute(home, rewriteUrl: true)];
-    }
+    // if (isLogged && publicRoutes.contains(initialRoute)) {
+    //   return [createPageRoute(home, rewriteUrl: true)];
+    // }
 
     return [createPageRoute(initialRoute)];
   }

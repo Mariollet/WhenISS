@@ -19,7 +19,7 @@ class MapView extends StatelessWidget {
   Widget build(final BuildContext context) {
     return AppScaffold(
       appBar: true,
-      bottomBar: CustomNavigationBar(),
+      bottomBar: NavBottomBar(tabIndex: 1),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

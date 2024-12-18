@@ -36,7 +36,7 @@ class _ISSViewState extends State<ISSView> {
   Widget build(final BuildContext context) {
     return AppScaffold(
       appBar: true,
-      bottomBar: CustomNavigationBar(),
+      bottomBar: NavBottomBar(tabIndex: 2),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

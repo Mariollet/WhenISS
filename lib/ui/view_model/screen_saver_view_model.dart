@@ -1,4 +1,4 @@
-import 'package:fl_starter/services/screen_saver_timer.dart';
+import 'package:wheniss/services/screen_saver_timer.dart';
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 final screenSaverTimerProvider =

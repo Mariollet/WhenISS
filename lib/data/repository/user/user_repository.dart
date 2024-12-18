@@ -1,8 +1,8 @@
-import "package:fl_starter/env.dart";
+import "package:wheniss/env.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:fl_starter/data/api.dart";
-import "package:fl_starter/data/models/index.dart";
-import "package:fl_starter/services/index.dart";
+import "package:wheniss/data/api.dart";
+import "package:wheniss/data/models/index.dart";
+import "package:wheniss/services/index.dart";
 
 final getUserRepository = FutureProvider<User>(
   (_) async {

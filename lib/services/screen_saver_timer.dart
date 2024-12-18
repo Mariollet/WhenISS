@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:fl_starter/ui/view/screen_saver_view.dart';
+import 'package:wheniss/ui/view/screen_saver_view.dart';
 import 'package:flutter/material.dart';
 
 class ScreenSaverTimer extends ChangeNotifier {

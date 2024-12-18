@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import "package:fl_starter/services/app_colors.dart";
-import "package:fl_starter/services/index.dart";
+import "package:wheniss/services/app_colors.dart";
+import "package:wheniss/services/index.dart";
 
 const String fontFamily = "Jost";
 

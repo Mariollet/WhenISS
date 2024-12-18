@@ -1,9 +1,10 @@
-import "package:fl_starter/data/models/user/user.dart";
-import "package:fl_starter/data/repository/user/user_repository.dart";
+import "package:wheniss/data/models/user/user.dart";
+import "package:wheniss/data/repository/user/user_repository.dart";
+import "package:wheniss/ui/view_model/user_view_model%20copy.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:jwt_decoder/jwt_decoder.dart";
-import "package:fl_starter/data/api.dart";
-import "package:fl_starter/ui/view_model/index.dart";
+import "package:wheniss/data/api.dart";
+import "package:wheniss/ui/view_model/index.dart";
 
 final readTokenRepository = FutureProvider.autoDispose<bool>(
   (ref) async {

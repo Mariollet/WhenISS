@@ -1,4 +1,4 @@
-import "package:fl_starter/data/models/index.dart";
+import "package:wheniss/data/models/index.dart";
 
 class User {
   User({

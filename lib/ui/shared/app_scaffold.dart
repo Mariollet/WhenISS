@@ -1,8 +1,8 @@
-import "package:fl_starter/ui/view_model/screen_saver_view_model.dart";
+import "package:wheniss/ui/view_model/screen_saver_view_model.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:fl_starter/services/index.dart";
-import "package:fl_starter/ui/shared/index.dart";
+import "package:wheniss/services/index.dart";
+import "package:wheniss/ui/shared/index.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 class AppScaffold extends StatelessWidget {

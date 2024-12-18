@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:fl_starter/env.dart";
-import "package:fl_starter/services/index.dart";
+import "package:wheniss/env.dart";
+import "package:wheniss/services/index.dart";
 
 class App extends ConsumerWidget {
   const App({super.key});

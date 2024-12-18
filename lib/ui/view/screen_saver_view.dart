@@ -1,8 +1,8 @@
-import "package:fl_starter/ui/view_model/screen_saver_view_model.dart";
+import "package:wheniss/ui/view_model/screen_saver_view_model.dart";
 import "package:flutter/material.dart";
-import "package:fl_starter/services/app_images.dart";
-import "package:fl_starter/services/app_text_styles.dart";
-import "package:fl_starter/ui/shared/app_scaffold.dart";
+import "package:wheniss/services/app_images.dart";
+import "package:wheniss/services/app_text_styles.dart";
+import "package:wheniss/ui/shared/app_scaffold.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 class ScreenSaverView extends StatelessWidget {

@@ -1,8 +1,8 @@
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
-name: fl_starter
-description: Keole starter kit for Flutter projects.
+name: wheniss
+description: wheniss current location tracking app
 
 # Remove this line if you wish to publish to pub.dev
 publish_to: none
@@ -11,7 +11,7 @@ publish_to: none
 # https://developer.android.com/studio/publish/versioning
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -33,6 +33,9 @@ dependencies:
   package_info_plus: any
   url_launcher: any
   flutter_launcher_icons: any
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  flutter_3d_controller: ^2.0.2
   # TODO: test awesome_snackbar_content
 
 dev_dependencies:
@@ -44,9 +47,9 @@ dev_dependencies:
   flutter_lints: any
 
 flutter_launcher_icons:
-  android: false
+  android: true
   ios: false
-  image_path: "assets/images/icon.png"
+  image_path: "assets/images/logo-iss.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
@@ -64,6 +67,7 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
   assets:
     - assets/images/
+    - assets/glb/
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

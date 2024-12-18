@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:fl_starter/services/index.dart";
+import "package:wheniss/services/index.dart";
 
 void showSnackBar(final String message) =>
     ScaffoldMessenger.of(currentContext).showSnackBar(

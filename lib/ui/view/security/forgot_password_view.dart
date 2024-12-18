@@ -1,9 +1,9 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter/material.dart";
-import "package:fl_starter/env.dart";
-import "package:fl_starter/services/index.dart";
-import "package:fl_starter/ui/shared/index.dart";
-import "package:fl_starter/ui/view_model/index.dart";
+import "package:wheniss/env.dart";
+import "package:wheniss/services/index.dart";
+import "package:wheniss/ui/shared/index.dart";
+import "package:wheniss/ui/view_model/index.dart";
 
 class ForgotPasswordView extends ConsumerStatefulWidget {
   const ForgotPasswordView({super.key});

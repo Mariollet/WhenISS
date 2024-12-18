@@ -1,6 +1,6 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:fl_starter/data/api.dart";
-import "package:fl_starter/services/index.dart";
+import "package:wheniss/data/api.dart";
+import "package:wheniss/services/index.dart";
 
 final postResetPasswordRepository =
     FutureProvider.autoDispose.family<void, String>(

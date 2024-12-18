@@ -24,7 +24,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
   @override
   Widget build(final BuildContext context) => AppScaffold(
         appBar: true,
-        bottomBar: true,
+        bottomBar: VersionBottomBar(),
         body: SizedBox(
           width: 300,
           child: Column(

@@ -1,12 +1,16 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:wheniss/ui/view/home_view.dart";
 import "package:wheniss/ui/view/index.dart";
+import "package:wheniss/ui/view/iss_view.dart";
 import "package:wheniss/ui/view_model/index.dart";
 
 abstract class AppRoutes {
   static const String home = '/';
   static const String login = "/login";
   static const String forgotPassword = "/forgot-password";
+  static const String map = "/map";
+  static const String iss = "/iss";
 
   static const List<String> publicRoutes = [
     login,
@@ -14,12 +18,16 @@ abstract class AppRoutes {
   ];
   static const List<String> privateRoutes = [
     home,
+    map,
+    iss,
   ];
 
   static const Map<String, Widget> routes = {
     home: HomeView(),
     login: LoginView(),
     forgotPassword: ForgotPasswordView(),
+    map: MapView(),
+    iss: ISSView(),
   };
 
   static Route<dynamic>? onGenerateRoute(

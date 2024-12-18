@@ -8,7 +8,7 @@ class NotFoundView extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => AppScaffold(
         appBar: false,
-        bottomBar: true,
+        bottomBar: VersionBottomBar(),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

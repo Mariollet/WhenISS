@@ -13,7 +13,6 @@ class ScreenSaverView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => AppScaffold(
         appBar: false,
-        bottomBar: false,
         isModal: false,
         body: Consumer(
           builder: (final BuildContext context, final WidgetRef ref,

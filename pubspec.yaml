@@ -36,6 +36,7 @@ dependencies:
   flutter_map: ^7.0.2
   latlong2: ^0.9.1
   flutter_3d_controller: ^2.0.2
+  persistent_bottom_nav_bar: ^6.2.1
   # TODO: test awesome_snackbar_content
 
 dev_dependencies:

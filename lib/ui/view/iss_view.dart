@@ -36,15 +36,14 @@ class _ISSViewState extends State<ISSView> {
   Widget build(final BuildContext context) {
     return AppScaffold(
       appBar: true,
-      bottomBar: NavBottomBar(tabIndex: 2),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Consumer(
             builder: (_, final WidgetRef ref, final Widget? child) {
               return Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.94,
                 decoration: BoxDecoration(
                   color: Colors.black,
                 ),
@@ -89,6 +88,7 @@ class _ISSViewState extends State<ISSView> {
             },
             child: const Loader(),
           ),
+          NavBottomBar(tabIndex: 1),
         ],
       ),
     );

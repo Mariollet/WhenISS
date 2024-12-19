@@ -10,20 +10,27 @@ class HomeView extends StatelessWidget {
   Widget build(final BuildContext context) {
     return AppScaffold(
       appBar: true,
-      bottomBar: NavBottomBar(tabIndex: 0),
+      // bottomBar: NavBottomBar(tabIndex: 0),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Consumer(
             builder: (_, final WidgetRef ref, final Widget? child) {
-              return Center(
-                child: Text(
-                  "Home View",
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: AppColors.black,
+              return Column(
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        "Home View",
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: AppColors.black,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
+                  NavBottomBar(tabIndex: 0)
+                ],
               );
             },
           ),

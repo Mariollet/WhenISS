@@ -17,9 +17,10 @@ class MapView extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
+  final MapController mapController = MapController();
     return AppScaffold(
       appBar: true,
-      bottomBar: NavBottomBar(tabIndex: 1),
+      // bottomBar: NavBottomBar(tabIndex: 1),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -27,105 +28,110 @@ class MapView extends StatelessWidget {
             builder: (_, final WidgetRef ref, final Widget? child) {
               final IssLocation? issLocation = ref.watch(issLocationProvider);
 
-              Timer.periodic(Duration(seconds: 5),
-                  (Timer t) => ref.refresh(issLocationRepository));
+              if (issLocation == null) {
+                ref.read(issLocationRepository);
+              }
 
-              if (issLocation != null) {
-                return SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    child: Stack(
+              Timer.periodic(Duration(seconds: 10), (Timer t) {
+                ref.refresh(issLocationRepository);
+              });
+
+              return SizedBox(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.94,
+                child: issLocation == null ? child : Stack(
+                  children: [
+                    FlutterMap(
+                      mapController: mapController,
+                      options: MapOptions(
+                        initialCenter: LatLng(
+                          issLocation.latitude,
+                          issLocation.longitude,
+                        ), // Center the map over Montpellier
+                        initialZoom: 4,
+                      ),
                       children: [
-                        FlutterMap(
-                          options: MapOptions(
-                            initialCenter: LatLng(
-                              43.62505,
-                              3.862038,
-                            ), // Center the map over Montpellier
-                            initialZoom: 4,
-                          ),
-                          children: [
-                            TileLayer(
-                              // Display map tiles from any source
-                              urlTemplate:
-                                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png', // OSMF's Tile Server
-                              userAgentPackageName: 'com.example.app',
-                              // And many more recommended properties!
-                            ),
-                            CircleLayer(
-                              circles: [
-                                CircleMarker(
-                                  point: LatLng(
-                                    issLocation.latitude,
-                                    issLocation.longitude,
-                                  ),
-                                  color: AppColors.primary.withOpacity(0.1),
-                                  borderStrokeWidth: 1,
-                                  borderColor: AppColors.primary,
-                                  radius: 600000,
-                                  useRadiusInMeter: true,
-                                ),
-                              ],
-                            ),
-                            MarkerLayer(
-                              markers: [
-                                Marker(
-                                  point: LatLng(
-                                    issLocation.latitude,
-                                    issLocation.longitude,
-                                  ),
-                                  width: 128,
-                                  height: 128,
-                                  child: Image.asset(
-                                    "images/iss/iss.png",
-                                    width: 128,
-                                    height: 128,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            RichAttributionWidget(
-                              // Include a stylish prebuilt attribution widget that meets all requirments
-                              attributions: [
-                                TextSourceAttribution(
-                                  'OpenStreetMap contributors',
-                                  onTap: () => launchUrl(Uri.parse(
-                                    'https://openstreetmap.org/copyright',
-                                  )), // (external)
-                                ),
-                                // Also add images...
-                              ],
+                        TileLayer(
+                          // Display map tiles from any source
+                          urlTemplate:
+                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png', // OSMF's Tile Server
+                          userAgentPackageName: 'com.example.app',
+                          // And many more recommended properties!
+                        ),
+                        ...[
+                        CircleLayer(
+                          circles: [
+                            CircleMarker(
+                              point: LatLng(
+                                issLocation.latitude,
+                                issLocation.longitude,
+                              ),
+                              color: AppColors.primary.withOpacity(0.1),
+                              borderStrokeWidth: 1,
+                              borderColor: AppColors.primary,
+                              radius: 600000,
+                              useRadiusInMeter: true,
                             ),
                           ],
                         ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "ISS Location | Latitude: ${issLocation.latitude} | Longitude: ${issLocation.longitude}",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textScaler: TextScaler.linear(0.75),
-                                ),
-                              ],
+                        MarkerLayer(
+                          markers: [
+                            Marker(
+                              point: LatLng(
+                                issLocation.latitude,
+                                issLocation.longitude,
+                              ),
+                              width: 128,
+                              height: 128,
+                              child: Image.asset(
+                                "assets/images/iss/iss.png",
+                                width: 128,
+                                height: 128,
+                              ),
                             ),
-                          ),
+                          ],
+                        ),
+                        RichAttributionWidget(
+                          // Include a stylish prebuilt attribution widget that meets all requirments
+                          attributions: [
+                            TextSourceAttribution(
+                              'OpenStreetMap contributors',
+                              onTap: () => launchUrl(Uri.parse(
+                                'https://openstreetmap.org/copyright',
+                              )), // (external)
+                            ),
+                            // Also add images...
+                          ],
                         ),
                       ],
-                    ));
-              } else {
-                ref.read(issLocationRepository);
-                return child!;
-              }
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "ISS Location | Latitude: ${issLocation.latitude} | Longitude: ${issLocation.longitude}",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textScaler: TextScaler.linear(0.6),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
             },
-            child: const Loader(),
+            child: const Loader(color: AppColors.primary, radius: 32),
           ),
+          NavBottomBar(tabIndex: 0),
           //     Button(
           //   size: ButtonSize.m,
           //   text: localizations.homeLogout,

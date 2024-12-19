@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:wheniss/env.dart";
 import "package:wheniss/ui/view/home_view.dart";
 import "package:wheniss/ui/view/index.dart";
 import "package:wheniss/ui/view/iss_view.dart";
@@ -79,6 +80,10 @@ abstract class AppRoutes {
     // if (isLogged && publicRoutes.contains(initialRoute)) {
     //   return [createPageRoute(home, rewriteUrl: true)];
     // }
+
+    if (initialRoute != null) {
+      return [createPageRoute(Environment.appHome)];
+    }
 
     return [createPageRoute(initialRoute)];
   }

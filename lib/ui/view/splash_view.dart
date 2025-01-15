@@ -10,7 +10,7 @@ class SplashView extends StatelessWidget {
           color: AppColors.white,
           image: DecorationImage(
             image: AssetImage(AppImages.logoIss),
-            scale: 3,
+            scale: 4,
           ),
         ),
       );

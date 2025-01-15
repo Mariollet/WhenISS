@@ -27,6 +27,11 @@ class ScreenSaverTimer extends ChangeNotifier {
     });
   }
 
+  void resetScreensaverTimer() {
+    _timer?.cancel();
+    unlock();
+  }
+
   void lock() {
     alreadyShowed = true;
   }

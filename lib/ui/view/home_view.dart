@@ -10,7 +10,7 @@ class HomeView extends StatelessWidget {
   Widget build(final BuildContext context) {
     return AppScaffold(
       appBar: true,
-      // bottomBar: NavBottomBar(tabIndex: 0),
+      tabIndex: 0,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

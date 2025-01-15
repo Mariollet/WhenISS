@@ -11,7 +11,7 @@ publish_to: none
 # https://developer.android.com/studio/publish/versioning
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.1+1
+version: 1.1.2+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -32,11 +32,12 @@ dependencies:
   jwt_decoder: any
   package_info_plus: any
   url_launcher: any
-  flutter_launcher_icons: any
+  flutter_launcher_icons: ^0.14.2
   flutter_map: ^7.0.2
   latlong2: ^0.9.1
   flutter_3d_controller: ^2.0.2
-  google_nav_bar: ^5.0.7
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.10.0
   # TODO: test awesome_snackbar_content
 
 dev_dependencies:
@@ -46,17 +47,6 @@ dev_dependencies:
   build_runner: any
   envied_generator: any
   flutter_lints: any
-
-flutter_launcher_icons:
-  android: true
-  ios: false
-  image_path: "assets/images/logo-iss.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
-  web:
-    generate: true
-    image_path: "assets/images/icon.png"
-    background_color: "#ffffff" # hexcode
-    theme_color: "#ffffff" # hexcode
 
 flutter:
   generate: true

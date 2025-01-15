@@ -4,7 +4,7 @@ import "package:flutter_map/flutter_map.dart";
 import "package:latlong2/latlong.dart";
 import "package:url_launcher/url_launcher.dart";
 import "package:wheniss/data/models/iss_location.dart";
-import "package:wheniss/data/repository/home/iss_repository.dart";
+import "package:wheniss/data/repository/iss/iss_repository.dart";
 import "package:wheniss/services/app_colors.dart";
 import "package:wheniss/ui/shared/app_scaffold.dart";
 import "package:wheniss/ui/shared/loader.dart";
@@ -17,29 +17,26 @@ class MapView extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-  final MapController mapController = MapController();
+    final MapController mapController = MapController();
     return AppScaffold(
-      appBar: true,
-      // bottomBar: NavBottomBar(tabIndex: 1),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Consumer(
-            builder: (_, final WidgetRef ref, final Widget? child) {
-              final IssLocation? issLocation = ref.watch(issLocationProvider);
+      appBar: false,
+      tabIndex: 1,
+      body: Consumer(
+        builder: (_, final WidgetRef ref, final Widget? child) {
+          final IssLocation? issLocation = ref.watch(issLocationProvider);
 
-              if (issLocation == null) {
-                ref.read(issLocationRepository);
-              }
+          if (issLocation == null) {
+            ref.read(issLocationRepository);
+          }
 
-              Timer.periodic(Duration(seconds: 10), (Timer t) {
-                ref.refresh(issLocationRepository);
-              });
+          Timer.periodic(Duration(seconds: 10), (Timer t) {
+            // ignore: unused_result
+            ref.refresh(issLocationRepository);
+          });
 
-              return SizedBox(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.94,
-                child: issLocation == null ? child : Stack(
+          return issLocation == null
+              ? child!
+              : Stack(
                   children: [
                     FlutterMap(
                       mapController: mapController,
@@ -55,55 +52,55 @@ class MapView extends StatelessWidget {
                           // Display map tiles from any source
                           urlTemplate:
                               'https://tile.openstreetmap.org/{z}/{x}/{y}.png', // OSMF's Tile Server
-                          userAgentPackageName: 'com.example.app',
+                          userAgentPackageName: 'com.somatech.app',
                           // And many more recommended properties!
                         ),
                         ...[
-                        CircleLayer(
-                          circles: [
-                            CircleMarker(
-                              point: LatLng(
-                                issLocation.latitude,
-                                issLocation.longitude,
+                          CircleLayer(
+                            circles: [
+                              CircleMarker(
+                                point: LatLng(
+                                  issLocation.latitude,
+                                  issLocation.longitude,
+                                ),
+                                color: AppColors.primary.withOpacity(0.1),
+                                borderStrokeWidth: 1,
+                                borderColor: AppColors.primary,
+                                radius: 1200000,
+                                useRadiusInMeter: true,
                               ),
-                              color: AppColors.primary.withOpacity(0.1),
-                              borderStrokeWidth: 1,
-                              borderColor: AppColors.primary,
-                              radius: 600000,
-                              useRadiusInMeter: true,
-                            ),
-                          ],
-                        ),
-                        MarkerLayer(
-                          markers: [
-                            Marker(
-                              point: LatLng(
-                                issLocation.latitude,
-                                issLocation.longitude,
+                            ],
+                          ),
+                          MarkerLayer(
+                            markers: [
+                              Marker(
+                                point: LatLng(
+                                  issLocation.latitude,
+                                  issLocation.longitude,
+                                ),
+                                width: 64,
+                                height: 64,
+                                child: Image.asset(
+                                  "assets/images/logo-iss.png",
+                                  width: 128,
+                                  height: 128,
+                                ),
                               ),
-                              width: 128,
-                              height: 128,
-                              child: Image.asset(
-                                "assets/images/iss/iss.png",
-                                width: 128,
-                                height: 128,
+                            ],
+                          ),
+                          RichAttributionWidget(
+                            // Include a stylish prebuilt attribution widget that meets all requirments
+                            attributions: [
+                              TextSourceAttribution(
+                                'OpenStreetMap contributors',
+                                onTap: () => launchUrl(Uri.parse(
+                                  'https://openstreetmap.org/copyright',
+                                )), // (external)
                               ),
-                            ),
-                          ],
-                        ),
-                        RichAttributionWidget(
-                          // Include a stylish prebuilt attribution widget that meets all requirments
-                          attributions: [
-                            TextSourceAttribution(
-                              'OpenStreetMap contributors',
-                              onTap: () => launchUrl(Uri.parse(
-                                'https://openstreetmap.org/copyright',
-                              )), // (external)
-                            ),
-                            // Also add images...
-                          ],
-                        ),
-                      ],
+                              // Also add images...
+                            ],
+                          ),
+                        ],
                       ],
                     ),
                     Align(
@@ -126,23 +123,9 @@ class MapView extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-              );
-            },
-            child: const Loader(color: AppColors.primary, radius: 32),
-          ),
-          NavBottomBar(tabIndex: 0),
-          //     Button(
-          //   size: ButtonSize.m,
-          //   text: localizations.homeLogout,
-          //   onPressed: () => ref.read(logoutProvider.future).then(
-          //         (_) => Navigator.of(context).pushNamedAndRemoveUntil(
-          //           AppRoutes.login,
-          //           (_) => false,
-          //         ),
-          //       ),
-          // ),
-        ],
+                );
+        },
+        child: const Loader(color: AppColors.primary, radius: 32),
       ),
     );
   }

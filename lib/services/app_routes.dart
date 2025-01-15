@@ -3,7 +3,8 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:wheniss/env.dart";
 import "package:wheniss/ui/view/home_view.dart";
 import "package:wheniss/ui/view/index.dart";
-import "package:wheniss/ui/view/iss_view.dart";
+import "package:wheniss/ui/view/iss_model_view.dart";
+import "package:wheniss/ui/view/iss_visibility_view.dart";
 import "package:wheniss/ui/view_model/index.dart";
 
 abstract class AppRoutes {
@@ -11,7 +12,8 @@ abstract class AppRoutes {
   static const String login = "/login";
   static const String forgotPassword = "/forgot-password";
   static const String map = "/map";
-  static const String iss = "/iss";
+  static const String visibility = "/visibility";
+  static const String model = "/model";
 
   static const List<String> publicRoutes = [
     login,
@@ -20,7 +22,8 @@ abstract class AppRoutes {
   static const List<String> privateRoutes = [
     home,
     map,
-    iss,
+    visibility,
+    model,
   ];
 
   static const Map<String, Widget> routes = {
@@ -28,7 +31,8 @@ abstract class AppRoutes {
     login: LoginView(),
     forgotPassword: ForgotPasswordView(),
     map: MapView(),
-    iss: ISSView(),
+    visibility: ISSVisibilityView(),
+    model: ISSModelView(),
   };
 
   static Route<dynamic>? onGenerateRoute(

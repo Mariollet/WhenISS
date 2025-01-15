@@ -7,8 +7,11 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Container(
         decoration: const BoxDecoration(
-          color: AppColors.black,
-          image: DecorationImage(image: AssetImage(AppImages.icon)),
+          color: AppColors.white,
+          image: DecorationImage(
+            image: AssetImage(AppImages.logoIss),
+            scale: 3,
+          ),
         ),
       );
 }

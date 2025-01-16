@@ -215,7 +215,7 @@ class ISSVisibilityView extends StatelessWidget {
 
     return AppScaffold(
       appBar: false,
-      tabIndex: 0,
+      tabIndex: 1,
       padding: const EdgeInsets.all(4),
       body: Consumer(
         builder: (_, final WidgetRef ref, final Widget? child) {

@@ -68,20 +68,20 @@ class AppScaffold extends StatelessWidget {
                       padding: padding,
                       child: Center(
                         child: GestureDetector(
-                          onTap: () {
-                            screenSaverTimer.startScreensaverTimer(context);
-                          },
-                          onPanDown: (_) {
-                            screenSaverTimer.startScreensaverTimer(context);
-                          },
-                          onScaleStart: (_) {
-                            screenSaverTimer.startScreensaverTimer(context);
-                          },
+                            onTap: () {
+                              screenSaverTimer.startScreensaverTimer(context);
+                            },
+                            onPanDown: (_) {
+                              screenSaverTimer.startScreensaverTimer(context);
+                            },
+                            onScaleStart: (_) {
+                              screenSaverTimer.startScreensaverTimer(context);
+                            },
                             child: body),
                       ),
                     ),
                   ),
-                  NavBottomBar(tabIndex: tabIndex),
+                  if (tabIndex != null) NavBottomBar(tabIndex: tabIndex),
                 ],
               );
             },
@@ -125,21 +125,21 @@ class NavBottomBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              key: const Key('visibility'),
-              icon: Icon(
-                Icons.watch_later_outlined,
-                color: tabIndex == 0 ? AppColors.primary : Colors.grey[600],
-              ),
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(AppRoutes.visibility),
-            ),
-            IconButton(
               key: const Key('map'),
               icon: Icon(
                 Icons.map_outlined,
-                color: tabIndex == 1 ? AppColors.primary : Colors.grey[600],
+                color: tabIndex == 0 ? AppColors.primary : Colors.grey[600],
               ),
               onPressed: () => Navigator.of(context).pushNamed(AppRoutes.map),
+            ),
+            IconButton(
+              key: const Key('visibility'),
+              icon: Icon(
+                Icons.watch_later_outlined,
+                color: tabIndex == 1 ? AppColors.primary : Colors.grey[600],
+              ),
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(AppRoutes.visibility),
             ),
             IconButton(
               key: const Key('iss'),

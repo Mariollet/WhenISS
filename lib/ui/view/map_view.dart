@@ -20,7 +20,7 @@ class MapView extends StatelessWidget {
     final MapController mapController = MapController();
     return AppScaffold(
       appBar: false,
-      tabIndex: 1,
+      tabIndex: 0,
       body: Consumer(
         builder: (_, final WidgetRef ref, final Widget? child) {
           final IssLocation? issLocation = ref.watch(issLocationProvider);

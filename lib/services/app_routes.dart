@@ -5,12 +5,14 @@ import "package:wheniss/ui/view/home_view.dart";
 import "package:wheniss/ui/view/index.dart";
 import "package:wheniss/ui/view/iss_model_view.dart";
 import "package:wheniss/ui/view/iss_visibility_view.dart";
+import "package:wheniss/ui/view/on_boarding_view.dart";
 import "package:wheniss/ui/view_model/index.dart";
 
 abstract class AppRoutes {
   static const String home = '/';
   static const String login = "/login";
-  static const String forgotPassword = "/forgot-password";
+  static const String forgotPassword = "/forgotPassword";
+  static const String onBoarding = "/onBoarding";
   static const String map = "/map";
   static const String visibility = "/visibility";
   static const String model = "/model";
@@ -20,6 +22,7 @@ abstract class AppRoutes {
     forgotPassword,
   ];
   static const List<String> privateRoutes = [
+    onBoarding,
     home,
     map,
     visibility,
@@ -30,6 +33,7 @@ abstract class AppRoutes {
     home: HomeView(),
     login: LoginView(),
     forgotPassword: ForgotPasswordView(),
+    onBoarding: OnBoardingView(),
     map: MapView(),
     visibility: ISSVisibilityView(),
     model: ISSModelView(),

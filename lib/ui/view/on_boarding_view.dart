@@ -33,7 +33,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     const List<List<String>> stepperTitles = [
       ["Map", "Localisation de l'ISS"],
       ["Visibilité", "Notifications sur l'ISS"],
-      ["Model", "Visualisation de l'ISS"],
+      ["Modèle", "Visualisation de l'ISS"],
     ];
     const List<IconData> stepperIcons = [
       Icons.map_outlined,

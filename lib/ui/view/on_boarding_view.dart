@@ -28,11 +28,11 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     const List<String> stepperTexts = [
       "Retrouvez la position actuelle de l'ISS en temps réel sur une carte interactive.",
       "Recevez des notifications lorsque l'ISS est visible depuis votre position.",
-      "Visualisez la station spatiale internationale en 3D !"
+      "Visualisez la station spatiale internationale en 3D depuis votre canapé !",
     ];
     const List<List<String>> stepperTitles = [
       ["Map", "Localisation de l'ISS"],
-      ["Visibilité", "Notifications"],
+      ["Visibilité", "Notifications sur l'ISS"],
       ["Model", "Visualisation de l'ISS"],
     ];
     const List<IconData> stepperIcons = [
